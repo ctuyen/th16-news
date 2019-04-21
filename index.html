@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Tech Mag</title>
+<title>cabbageNews</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Tech Mag template project">
@@ -90,13 +90,58 @@
 							<!-- Navigation -->
 							<nav class="main_nav">
 								<ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">
-									<li><a href="index.html">home</a></li>
-									<li><a href="#">tech</a></li>
-									<li><a href="#">innovation</a></li>
-									<li><a href="#">videos</a></li>
-									<li><a href="#">world</a></li>
-									<li><a href="contact.html">contact</a></li>
-								</ul>
+							      	<li class="nav-item active">
+							        	<a class="nav-link" href="category.html">thế giới<span class="sr-only">(current)</span></a>
+							      	</li>
+
+							      	<li class="nav-item">
+							        	<a class="nav-link" href="category.html">sức khỏe</a>
+							      	</li>
+							      	<li class="nav-item">
+							        	<a class="nav-link" href="category.html">công nghệ</a>
+							      	</li>							      	
+							      	<li class="nav-item dropdown">
+							        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          		kinh doanh
+							        	</a>
+							        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							         	 	<a class="dropdown-item" href="category.html">kinh doanh</a>	
+							          		<div class="dropdown-divider"></div>
+							          		<a class="dropdown-item" href="category.html">Nông sản</a>
+							          		<a class="dropdown-item" href="category.html">Hải sản</a>
+							        	</div>
+							      	</li>
+							      	<li class="nav-item dropdown">
+							        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          		Thể thao
+							        	</a>
+							        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							         	 	<a class="dropdown-item" href="category.html">Thể thao</a>	
+							          		<div class="dropdown-divider"></div>
+							          		<a class="dropdown-item" href="category.html">trong nước</a>
+							          		<a class="dropdown-item" href="category.html">ngoài nước</a>
+							        	</div>
+							      	</li>
+							      	<li class="nav-item dropdown">
+							        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							          		du lịch
+							        	</a>
+							        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							         	 	<a class="dropdown-item" href="category.html">du lịch</a>	
+							          		<div class="dropdown-divider"></div>
+							          		<a class="dropdown-item" href="category.html">trong nước</a>
+							          		<a class="dropdown-item" href="category.html">ngoài nước</a>
+							        	</div>
+							      	</li>									      
+							    </ul>
+								<!-- <ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">
+									<li><a href="index.html">thế giới</li>
+									<li><a href="#">kinh doanh</a></li>
+									<li><a href="#">thể thao</a></li>
+									<li><a href="#">sức khỏe</a></li>
+									<li><a href="#">du lịch</a></li>
+									<li><a href="contact.html">công nghệ</a></li>
+								</ul> -->
 							</nav>
 
 							<!-- Search -->
@@ -165,8 +210,8 @@
 					<div class="background_image" style="background-image:url(images/home_slider.jpg)"></div>
 					<div class="home_slider_content text-center">
 						<div class="home_slider_content_inner" data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
-							<div class="home_category"><a href="category.html">technology</a></div>
-							<div class="home_title">Building the Future</div>
+							<div class="home_category"><a href="category.html">Công nghệ</a></div>
+							<div class="home_title">một vài công nghệ mới</div>
 							<div class="home_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae sapien porttitor, dignissim quam sit amet, aliquam lorem. Fusce id ligula non risus mollis consectetur</div>
 							<div class="home_button trans_200"><a href="#">read more</a></div>
 						</div>
@@ -206,37 +251,60 @@
 
 	<!-- Intro -->
 
-	<div class="intro">
+	<!-- <div class="intro">
 		<div class="container">
-			<div class="row">
-
-				<!-- Intro Item -->
+			<div class="row row-no-gutters">
+				 
 				<div class="col-md-4 intro_col">
 					<div class="intro_item">
 						<img src="images/intro_1.jpg" alt="">
-						<div class="intro_content trans_200"><a href="category.html">technology</a></div>
+						<div class="intro_content trans_200"><a href="category.html">thế giới</a></div>
 					</div>
 				</div>
 
-				<!-- Intro Item -->
+				 
 				<div class="col-md-4 intro_col">
 					<div class="intro_item">
 						<img src="images/intro_2.jpg" alt="">
-						<div class="intro_content trans_200"><a href="category.html">videos</a></div>
+						<div class="intro_content trans_200"><a href="category.html">Sức khỏe</a></div>
 					</div>
 				</div>
 
-				<!-- Intro Item -->
+				 
 				<div class="col-md-4 intro_col">
 					<div class="intro_item">
 						<img src="images/intro_3.jpg" alt="">
-						<div class="intro_content trans_200"><a href="category.html">featured</a></div>
+						<div class="intro_content trans_200"><a href="category.html">công nghệ</a></div>
+					</div>
+				</div>
+
+				 
+				<div class="col-md-4 intro_col">
+					<div class="intro_item">
+						<img src="images/intro_1.jpg" alt="">
+						<div class="intro_content trans_200"><a href="category.html">kinh doanh</a></div>
+					</div>
+				</div>
+
+				 
+				<div class="col-md-4 intro_col">
+					<div class="intro_item">
+						<img src="images/intro_2.jpg" alt="">
+						<div class="intro_content trans_200"><a href="category.html">thể thao</a></div>
+					</div>
+				</div>
+
+				 
+				<div class="col-md-4 intro_col">
+					<div class="intro_item">
+						<img src="images/intro_3.jpg" alt="">
+						<div class="intro_content trans_200"><a href="category.html">du lịch</a></div>
 					</div>
 				</div>
 
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Content Container -->
 
@@ -278,6 +346,16 @@
 										<div class="post_image"><img src="images/post_1.jpg" alt="https://unsplash.com/@cgower"></div>
 										<div class="post_content">
 											<div class="post_category cat_technology"><a href="category.html">technology</a></div>
+											<div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+												<div class="tag"><a href="category.html">công nghệ</a></div>
+												<div class="tag"><a href="category.html">design</a></div>
+												<div class="tag"><a href="category.html">travel</a></div>
+												<div class="tag"><a href="category.html">video</a></div>
+												<div class="tag"><a href="category.html">party</a></div>
+												<div class="tag"><a href="category.html">music</a></div>
+												<div class="tag"><a href="category.html">world</a></div>
+												<div class="tag"><a href="category.html">adventure</a></div>
+											</div>
 											<div class="post_title"><a href="single.html">The new Apple release ceremony</a></div>
 											<div class="post_info d-flex flex-row align-items-center justify-content-start">
 												<div class="post_author d-flex flex-row align-items-center justify-content-start">
