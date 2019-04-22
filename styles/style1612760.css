@@ -1,0 +1,19 @@
+.myA {
+	margin-top: 15px;
+	/*background-color: red;	*/
+}
+.myA .tag a{
+	padding-right: 15px;
+	padding-left: 15px;
+	line-height: 20px;
+	font-size: 10px;
+}
+.myA .tag{
+	height: 20px;
+}
+.bgC{
+	background-color: rgba(1,0,0,50%);
+}
+.bgC>div{
+	padding: 20px;
+}
