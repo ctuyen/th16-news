@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="./styles/themes/dark.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
-  <link rel="stylesheet" href="./styles/bootstrap-4.1.2/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -31,15 +30,21 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+  <title>Text editer</title>
   <style>
 
     body {
       text-align: center;
     }
 
-    section {
-      width: 81%;
+    form {
+      width: 80%;
       margin: auto;
+      text-align: left;
+    }
+    section {
+      width: 100%;
+      margin: 0px;
       text-align: left;
     }
 
@@ -47,90 +52,82 @@
 </head>
 
 <body>
-    <header class="header">
-
-        <!-- Header bar
-        <div class="header_bar">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="header_bar_content d-flex flex-row align-items-center justify-content-start">
-                  <div class="sub_button text-center"><a href="#">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div>
-                  <div class="header_social ml-auto">
-                    <ul class="d-flex flex-row align-items-center justify-content-start">									
-                      <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>									
-                    </ul>
+  <div class="container-fluid">
+      <header class="header">
+          <!-- Header Content -->
+          <div class="header_content_container">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div class="header_content d-flex flex-row align-items-center justfy-content-start">
+                    <div class="logo_container">
+                      <a href="index.html">
+                        <div class="logo"><span>Tech</span>mag</div>
+                        <div class="logo_sub">Innovation & Technology Magazine</div>
+                      </a>
+                    </div>
+                    <div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
+                      <a href="#">
+                        <div class="background_image" style="background-image:url(images/extra.jpg)"></div>
+                        <div class="header_extra_content">
+                          <div class="header_extra_title">save 50%</div>
+                          <div class="header_extra_subtitle">Buy now in stores</div>
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> -->
-    
-        <!-- Header Content -->
-        <div class="header_content_container">
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <div class="header_content d-flex flex-row align-items-center justfy-content-start">
-                  <div class="logo_container">
-                    <a href="index.html">
-                      <div class="logo"><span>Tech</span>mag</div>
-                      <div class="logo_sub">Innovation & Technology Magazine</div>
-                    </a>
-                  </div>
-                  <div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
-                    <a href="#">
-                      <div class="background_image" style="background-image:url(images/extra.jpg)"></div>
-                      <div class="header_extra_content">
-                        <div class="header_extra_title">save 50%</div>
-                        <div class="header_extra_subtitle">Buy now in stores</div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </header>
-  
-
-  <h1>Viết bài mới</h1>
-  <label for="title">Tiêu đề</label><br>
-  <input id="title" type="text" placeholder="Nhập tiêu đề của bài viết">
-  <br>
-  <label for="summary">Tóm tắt</label><br>
-  <input id="summary" type="text" placeholder="Tóm tắt nội dung bài viết">
-
-  <section id="editor">
-    <div id='edit' style="margin-top: 30px;">
-      
+    <div>
+        <h1 style="margin: 20px 0px">VIẾT BÀI MỚI</h1>
+        <form>
+            <div>
+              <label for="title">Tiêu đề</label>
+              <input type="text" class="form-control" id="title" placeholder="Nhập tiêu đề của bài viết">
+            </div>
+            <div class="form-group">
+              <label for="summary">Tóm tắt</label>
+              <textarea class="form-control" rows="3" id="summary" placeholder="Tóm tắt nội dung bài viết"></textarea>
+            </div>
+            <div>
+                <section id="editor">
+                    <div id='edit' style="margin-top: 30px;">
+                      
+                    </div>
+                  </section>
+            </div>
+            <div>
+                <label for="category-list">Chọn chuyên mục cho bài viết</label>
+                <select id="category-list" class="form-control">
+                  <option value="chuyên đề java">Chuyên đề Java</option>
+                  <option value="csdl web">CSDL Web</option>
+                  <option value="trí tuệ nhân tạo">Trí tuệ nhân tạo</option>
+                  <option value="công nghệ phần mềm">Công nghệ phần mềm</option>
+                  <option value="lập trình windows">Lập trình Windows</option>
+                  <option value="cấu trúc dữ liệu">Cấu trúc dữ liệu</option>
+                  <option value="lập trình hướng đối tượng">Lập trình hướng đối tượng</option>
+                </select>
+            </div>
+            <div>
+                <label for="tag-list">Chọn thẻ cho bài viết</label>
+                <select id="tag-list" class="form-control" multiple>
+                    <option value="chuyên đề java">Chuyên đề Java</option>
+                    <option value="csdl web">CSDL Web</option>
+                    <option value="trí tuệ nhân tạo">Trí tuệ nhân tạo</option>
+                    <option value="công nghệ phần mềm">Công nghệ phần mềm</option>
+                    <option value="lập trình windows">Lập trình Windows</option>
+                    <option value="cấu trúc dữ liệu">Cấu trúc dữ liệu</option>
+                    <option value="lập trình hướng đối tượng">Lập trình hướng đối tượng</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success" style="margin: 30px 0px">Submit</button>
+        </form>
     </div>
-  </section>
-  <label for="category-list">Chọn chuyên mục cho bài viết</label>
-  <select id="category-list">
-      <option value="chuyên đề java">Chuyên đề Java</option>
-      <option value="csdl web">CSDL Web</option>
-      <option value="trí tuệ nhân tạo">Trí tuệ nhân tạo</option>
-      <option value="công nghệ phần mềm">Công nghệ phần mềm</option>
-      <option value="lập trình windows">Lập trình Windows</option>
-      <option value="cấu trúc dữ liệu">Cấu trúc dữ liệu</option>
-      <option value="lập trình hướng đối tượng">Lập trình hướng đối tượng</option>
-  </select>
-  <br>
-  <label for="tag-list">Chọn thẻ cho bài viết</label>
-  <select id="tag-list" multiple>
-      <option value="chuyên đề java">Chuyên đề Java</option>
-      <option value="csdl web">CSDL Web</option>
-      <option value="trí tuệ nhân tạo">Trí tuệ nhân tạo</option>
-      <option value="công nghệ phần mềm">Công nghệ phần mềm</option>
-      <option value="lập trình windows">Lập trình Windows</option>
-      <option value="cấu trúc dữ liệu">Cấu trúc dữ liệu</option>
-      <option value="lập trình hướng đối tượng">Lập trình hướng đối tượng</option>
-  </select>
-  <input type="submit">
+  </div>
+    
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
