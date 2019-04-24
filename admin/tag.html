@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="../styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="./admin.css">
+</head>
+
+<body>
+    <div class="super">
+        <div class="menu-left">
+            <div class="menu-item"><a href="./category.html">Chuyên mục</a></div>
+            <div class="menu-item selected"><a href="./tag.html">Thẻ</a></div>
+            <div class="menu-item"><a href="./post.html">Bài viết</a></div>
+            <div class="menu-item"><a href="./user.html">Người dùng</a></div>
+        </div>
+        <div class="right">
+            <header class="header">
+
+                <!-- Header Content -->
+                <div class="header_content_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="header_content d-flex flex-row align-items-center justfy-content-start">
+                                    <div class="logo_container">
+                                        <a href="#">
+                                            <div class="logo"><span>Tech</span>mag</div>
+                                            <div class="logo_sub">Innovation & Technology Magazine</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="container-main">
+                <div class="admin-label">Quản lý thẻ</div>
+                <div class="edit">
+                    <div class="add-category">
+                        <h4>Thêm thẻ</h4>
+                        <form action="">
+                            <div class="form-item">
+                                <label for="name">Tên</label>
+                                <input id="name" type="text">
+                            </div>
+                            <div class="form-item">
+                                <input class="submit" type="submit" value="Thêm thẻ">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="categories">
+                        <h4>Thẻ</h4>
+                        <div class="details">
+                            <table>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>Tên</th>
+                                    <th>Tác vụ</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="name1"></td>
+                                    <td>Thời sự</td>
+                                    <td>
+                                        <div class="btn action">Chỉnh sửa</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="name2"></td>
+                                    <td>Công nghệ</td>
+                                    <td>
+                                        <div class="btn action">Chỉnh sửa</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="name3"></td>
+                                    <td>Giải trí</td>
+                                    <td>
+                                        <div class="btn action">Chỉnh sửa</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="btn">Xóa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
