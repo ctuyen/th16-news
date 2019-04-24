@@ -17,7 +17,7 @@
 .bgC>div{
 	padding: 20px;
 }
-.modal-header, .close {
+/* .modal-header, .close {
 	background-color: #5cb85c;
 	color:white !important;
 	text-align: center;
@@ -25,4 +25,29 @@
 }
 .modal-footer {
 	background-color: #f9f9f9;
+} */
+
+
+
+.mother_Div{
+	max-width: 100%;
+	min-width: 75%;
+}
+
+#colorlib-aside {
+    padding-top: 110px;
+    padding-bottom: 40px;
+    padding-left: 3em;
+    padding-right: 3em;
+    width: 20%;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: #F7F9F9 !important;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
 }
