@@ -306,18 +306,27 @@ section
 {
 	background: #61e49b !important;
 }
-.cat_video
+.cat_economy
 {
 	background: #ff4b75 !important;
 }
-.cat_party
+.cat_sport
 {
 	background: #f8a64f !important;
 }
+.cat_travel{
+	background: darkslategray !important;
+}
+.cat_health{
+	background: darkkhaki !important;
+}
 .cat_technology a,
+
 .cat_world a,
-.cat_video a,
-.cat_party a
+.cat_economy a,
+.cat_sport a,
+.cat_travel a,
+.cat_health 
 {
 	color: #FFFFFF !important;
 }
