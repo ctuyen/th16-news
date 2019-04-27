@@ -51,3 +51,26 @@
     -o-transition: 0.5s;
     transition: 0.5s;
 }
+#sidebar-scroll{
+	height: 500px;
+	overflow-y: scroll;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+  }
