@@ -10,7 +10,7 @@ var imgs = ["images/post_1.jpg", "images/author_1.jpg"];
 $(document).ready(function(){
     $(".post01").html(`<div class="post_image"><a href="single.html"><img src="`+imgs[0]+`" alt="ảnh nền"></a></div>
     <div class="post_content">
-        <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div>
+        <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div> <span style="float: right"><img src="images/premium.png" alt=""></span>
         <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
             <div class="tag"><a href="category.html">`+tags[0]+`</a></div>
             <div class="tag"><a href="category.html">`+tags[1]+`</a></div>
@@ -38,6 +38,7 @@ $(document).ready(function(){
     $(".post02").html(`<div class="post_image"><a href="single.html"><img src="`+imgs[0]+`" alt="ảnh nền"></a></div>
     <div class="post_content">
         <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div>
+        <span style="float: right"><img src="images/premium.png" alt=""></span>
         <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
             <div class="tag"><a href="category.html">`+tags[0]+`</a></div>
             <div class="tag"><a href="category.html">`+tags[1]+`</a></div>
