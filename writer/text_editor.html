@@ -3,14 +3,20 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="../styles/style1612771.css">
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
   <title>Text editer</title>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
+  <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+  <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+  <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
+  <link rel="stylesheet" type="text/css" href="../styles/main_styles.css">
+  <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
+  <link rel="stylesheet" type="text/css" href="../styles/style1612771.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+
   <style>
     body {
       text-align: center;
@@ -28,15 +34,15 @@
   <div class="container-fluid">
     <header class="header">
       <!-- Header Content -->
-      <div class="header_content_container">
+      <div id="header" class="header_content_container">
         <div class="container">
           <div class="row">
             <div class="col">
               <div class="header_content d-flex flex-row align-items-center justfy-content-start">
                 <div class="logo_container">
-                  <a href="../index.html">
-                    <div class="logo"><span>Tech</span>mag</div>
-                    <div class="logo_sub">Innovation & Technology Magazine</div>
+                  <a href="index.html">
+                    <div class="logo"><span>Salad</span>NEWS</div>
+                    <div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam</div>
                   </a>
                 </div>
               </div>
@@ -59,7 +65,7 @@
         </div>
         <div class="margin-bottom">
           <label for="editor">Chi tiết bài viết</label>
-          <textarea id="summernote" name="editordata"></textarea>
+          <div id="summernote"></div>
         </div>
         <div class="margin-bottom">
           <label for="category-list">Chọn chuyên mục cho bài viết</label>
@@ -94,13 +100,15 @@
   </div>
 
   <script type="text/javascript" src="../js/script1612771.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
-  
+  <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+
   <script>
-    $(document).ready(function() {
-  $('#summernote').summernote();
-  });
-  </script>
+      $('#summernote').summernote({
+        placeholder: 'Hello stand alone ui',
+        tabsize: 2,
+        height: 100
+      });
+    </script>
 </body>
 
 </html>
