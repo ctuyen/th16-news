@@ -15,15 +15,15 @@ $(document).ready(function(){
 <div class="col-lg-7">
   <div class="post_content">
     <div class="btn-accept-deny">
-      <div class="post_category cat_world"><a href="category.html">`+ cat +`</a></div>
+      <div class="post_category cat_world"><a href="../category.html">`+ cat +`</a></div>
     </div>
     <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-      <div class="tag"><a href="category.html">`+ tags[0]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[1]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[2]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[3]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[0]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[1]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[2]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[3]+`</a></div>
     </div>
-    <div class="post_title"><a href="single.html">`+ tilte +`</a></div>
+    <div class="post_title"><a href="../single.html">`+ tilte +`</a></div>
     <div class="post_info d-flex flex-row align-items-center justify-content-start">
       <div class="post_author d-flex flex-row align-items-center justify-content-start">
         <div>
@@ -126,6 +126,6 @@ $(document).ready(function(){
     '<span class="icon text-white-50">                                                                                  '+
     '  <i class="fas fa-edit"></i>                                                                                      '+
     '</span>                                                                                                            '+
-    '<span class="text">Chỉnh sửa</span>                                                                                '+
+    '<span class="text"><a href="text_editor.html" style="color:white" >Chỉnh sửa</a></span>                                                                                '+
 	'</button>');
 });
