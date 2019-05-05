@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin</title>
-    <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
@@ -35,7 +40,7 @@
                                 <div class="header_content d-flex flex-row align-items-center justfy-content-start">
                                     <div class="logo_container">
                                         <a href="#">
-                                            <div class="logo"><span>Tech</span>mag</div>
+                                            <div class="logo"><span>Salad</span>News</div>
                                             <div class="logo_sub">Innovation & Technology Magazine</div>
                                         </a>
                                     </div>
@@ -49,8 +54,9 @@
             <div class="container-main">
                 <div class="admin-label">Quản lý người dùng</div>
                 <div class="edit">
+                    <h2 class="divider gradient">Thêm người dùng</h2>
+
                     <div class="add-category">
-                        <h4>Thêm người dùng</h4>
                         <form action="">
                             <div class="form-item">
                                 <label for="name">Tên</label>
@@ -75,8 +81,9 @@
                         </form>
                     </div>
 
+                    <h2 class="divider gradient">Danh sách nhân viên</h2>
+
                     <div class="categories">
-                        <h4>Danh sách nhân viên</h4>
                         <div class="details">
                             <table>
                                 <tr>
@@ -92,7 +99,8 @@
                                     <td>abc@gmail.com</td>
                                     <td>Admin</td>
                                     <td>
-                                        <div class="btn action">Chỉnh sửa</div>
+                                        <div class="btn btn-primary action" data-toggle="modal"
+                                            data-target="#staffModal">Chỉnh sửa</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -101,7 +109,8 @@
                                     <td>hgfd@gmail.com</td>
                                     <td>Phóng viên</td>
                                     <td>
-                                        <div class="btn action">Chỉnh sửa</div>
+                                        <div class="btn btn-primary action" data-toggle="modal"
+                                            data-target="#staffModal">Chỉnh sửa</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -110,16 +119,19 @@
                                     <td>fdsa@gmail.com</td>
                                     <td>Biên tập viên</td>
                                     <td>
-                                        <div class="btn action">Chỉnh sửa</div>
+                                        <div class="btn btn-primary action" data-toggle="modal"
+                                            data-target="#staffModal">Chỉnh sửa</div>
                                     </td>
                                 </tr>
                             </table>
-                            <div class="btn">Xóa</div>
+                            <!-- Button modal trigger -->
+                            <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
                         </div>
                     </div>
 
+                    <h2 class="divider gradient">Chuyên mục của BTV</h2>
+
                     <div class="categories">
-                        <h4>Chỉ định chuyên mục cho BTV</h4>
                         <div class="details">
                             <table>
                                 <tr>
@@ -135,7 +147,8 @@
                                     <td>abc@gmail.com</td>
                                     <td>Thời sự</td>
                                     <td>
-                                        <div class="btn action">Chỉnh sửa</div>
+                                        <div class="btn btn-primary action" data-toggle="modal"
+                                            data-target="#editorModal">Chỉnh sửa</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -144,7 +157,8 @@
                                     <td>hgfd@gmail.com</td>
                                     <td>Kinh tế</td>
                                     <td>
-                                        <div class="btn action">Chỉnh sửa</div>
+                                        <div class="btn btn-primary action" data-toggle="modal"
+                                            data-target="#editorModal">Chỉnh sửa</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -153,16 +167,19 @@
                                     <td>fdsa@gmail.com</td>
                                     <td>Giải trí</td>
                                     <td>
-                                        <div class="btn action">Chỉnh sửa</div>
+                                        <div class="btn btn-primary action" data-toggle="modal"
+                                            data-target="#editorModal">Chỉnh sửa</div>
                                     </td>
                                 </tr>
                             </table>
-                            <div class="btn">Xóa</div>
+                            <!-- Button modal trigger -->
+                            <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
                         </div>
                     </div>
 
+                    <h2 class="divider gradient">Danh sách độc giả</h2>
+
                     <div class="categories">
-                        <h4>Danh sách độc giả</h4>
                         <div class="details">
                             <table>
                                 <tr>
@@ -199,8 +216,123 @@
                                         <div class="btn action">Gia hạn</div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="name1"></td>
+                                    <td>Nguyễn Văn D</td>
+                                    <td>ytrwe@gmail.com</td>
+                                    <td>1/4/2019</td>
+                                    <td>
+                                        <div class="btn action">Gia hạn</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="name1"></td>
+                                    <td>Trần Kim E</td>
+                                    <td>fdegd@gmail.com</td>
+                                    <td>3/5/2019</td>
+                                    <td>
+                                        <div class="btn action">Gia hạn</div>
+                                    </td>
+                                </tr>
                             </table>
-                            <div class="btn">Xóa</div>
+                            <!-- Button modal trigger -->
+                            <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn xóa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="staffModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="">
+                                        <div class="form-item">
+                                            <label for="name">Tên</label>
+                                            <input id="name" type="text">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="name">Email</label>
+                                            <input id="name" type="email">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="parent">Vai trò</label>
+                                            <select name="parent" id="parent" class="parent">
+                                                <option value="-1">Độc giả</option>
+                                                <option value="46">Phóng viên</option>
+                                                <option value="3">Biên tập viên</option>
+                                                <option value="3">Admin</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="editorModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="">
+                                        <div class="form-item">
+                                            <label for="name">Tên</label>
+                                            <input id="name" type="text">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="name">Email</label>
+                                            <input id="name" type="email">
+                                        </div>
+                                        <div class="form-item">
+                                            <label for="parent">Chuyên mục</label>
+                                            <select name="parent" id="parent" class="parent">
+                                                <option value="1">Thời sự</option>
+                                                <option value="2">Kinh tế</option>
+                                                <option value="3">Giải trí</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -69,9 +69,9 @@
 }
 
 .add-category {
+    margin-bottom: 36px;
     display: flex;
     flex-flow: column nowrap;
-    border-bottom: 1px solid #bbb;
     padding-bottom: 16px;
 }
 
@@ -82,10 +82,6 @@ label {
     height: fit-content;
     margin-right: 20px;
     margin-top: 16px;
-}
-
-h4 {
-    margin-bottom: 24px;
 }
 
 .form-item input {
@@ -110,8 +106,7 @@ h4 {
 
 /* categories */
 .categories {
-    margin: 40px 0;
-    border-bottom: 1px solid #bbb;
+    margin-bottom: 36px;
     padding-bottom: 16px;
 }
 
@@ -122,9 +117,8 @@ h4 {
 
 .btn {
     margin-top: 16px;
-    padding: 6px 8px 0 8px;
     height: 30px;
-    width: fit-content;
+    width: 90px;
     background-color: rgb(34, 37, 185);
     color: white;
     border-radius: 5px;
@@ -148,4 +142,91 @@ h4 {
     padding-left: 15px;
     line-height: 22px;
     font-size: 11px;
+}
+
+.divider {
+    display: flex;
+}
+
+.divider:before,
+.divider:after {
+    content: "";
+    flex: 1;
+}
+
+.line {
+    align-items: center;
+    margin: 1em -1em;
+}
+
+.line:before,
+.line:after {
+    height: 1px;
+    margin: 0 1em;
+}
+
+.one-line:before,
+.one-line:after {
+    background: black;
+}
+
+.razor:before,
+.razor:after {
+    box-shadow: 0 0.5px 0 black;
+}
+
+.double-razor:before,
+.double-razor:after {
+    height: 3px;
+    box-shadow: 0 -0.5px 0 black, 0 0.5px 0 black;
+    border-width: 0;
+}
+
+.glow:before,
+.glow:after {
+    height: 6px;
+    -webkit-filter: blur(5px);
+    border-radius: 5px;
+}
+
+.glow:before {
+    background: linear-gradient(to right, blue, hotpink);
+}
+
+.glow:after {
+    background: linear-gradient(to left, blue, hotpink);
+}
+
+.gradient {
+    align-items: stretch;
+    margin: 1em 0;
+    height: 2em;
+    line-height: 2em;
+    color: white;
+    background: black;
+}
+
+.gradient:before {
+    background: linear-gradient(to right, white, black);
+}
+
+.gradient:after {
+    background: linear-gradient(to left, white, black);
+}
+
+.donotcross {
+    overflow: hidden;
+    align-items: center;
+    background: #ffd500;
+    color: black;
+    height: 2em;
+    line-height: 2em;
+}
+
+.donotcross:before,
+.donotcross:after {
+    background: white;
+    padding: 50px 0;
+    height: 0;
+    transform: rotate(45deg);
 }
