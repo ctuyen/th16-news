@@ -74,7 +74,7 @@ $(document).ready(function(){
                         <div><div class="post_author_image"><img src="`+imgs[1]+`" alt=""></div></div>
                         <div class="post_author_name"><a href="#">`+name+`</a></div>
                     </div>
-                    <div class="post_date"><a href="#">`+name+`</a></div>
+                    <div class="post_date"><a href="#">`+date+`</a></div>
                     <div class="post_comments ml-auto"><a href="#">`+comment+` bình luận</a></div>
                 </div>
                 <div class="post_text">
