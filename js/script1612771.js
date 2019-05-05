@@ -7,6 +7,8 @@ var nameAuthor = 'Trường Nguyễn'
 var imgs = ["images/post_1.jpg", "images/author_1.jpg"];
 var alt ='Đây là ảnh thiết bị apple'
 
+
+
 $(document).ready(function(){
   $(".post").append(`<div class="col-lg-5">
   <div class="post_image"><img src="../`+ imgs[0] +`" alt="`+ alt +`">
@@ -47,15 +49,15 @@ $(document).ready(function(){
 <div class="col-lg-7">
   <div class="post_content">
     <div>
-      <div class="post_category cat_world"><a href="category.html">`+ cat +`</a></div>
+      <div class="post_category cat_world"><a href="../category.html">`+ cat +`</a></div>
     </div>
     <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-      <div class="tag"><a href="category.html">`+ tags[0]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[1]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[2]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[3]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[0]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[1]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[2]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[3]+`</a></div>
     </div>
-    <div class="post_title"><a href="single.html">`+ tilte +`</a></div>
+    <div class="post_title"><a href="../single.html">`+ tilte +`</a></div>
     <div class="post_info d-flex flex-row align-items-center justify-content-start">
       <div class="post_author d-flex flex-row align-items-center justify-content-start">
         <div>
@@ -79,15 +81,15 @@ $(document).ready(function(){
 <div class="col-lg-7">
   <div class="post_content">
     <div class="btn-edit">
-      <div class="post_category cat_world"><a href="category.html">`+ cat +`</a></div>
+      <div class="post_category cat_world"><a href="../category.html">`+ cat +`</a></div>
     </div>
     <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-      <div class="tag"><a href="category.html">`+ tags[0]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[1]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[2]+`</a></div>
-      <div class="tag"><a href="category.html">`+ tags[3]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[0]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[1]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[2]+`</a></div>
+      <div class="tag"><a href="../category.html">`+ tags[3]+`</a></div>
     </div>
-    <div class="post_title"><a href="single.html">`+ tilte +`</a></div>
+    <div class="post_title"><a href="../single.html">`+ tilte +`</a></div>
     <div class="post_info d-flex flex-row align-items-center justify-content-start">
       <div class="post_author d-flex flex-row align-items-center justify-content-start">
         <div>

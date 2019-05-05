@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Text editer</title>
+  <title>Text editor</title>
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
 
   <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
@@ -64,15 +64,15 @@
         </div>
       </div>
       <div class="col-9">
-        <form>
+        <form name="formNewPost">
           <div class="margin-bottom">
             <label for="title">Tiêu đề</label>
-            <input type="text" class="form-control black_text" id="title" placeholder="Nhập tiêu đề của bài viết">
+            <input name="title" type="text" class="form-control black_text" id="title" placeholder="Nhập tiêu đề của bài viết" required>
           </div>
           <div class="form-group margin-bottom">
             <label for="summary">Tóm tắt</label>
-            <textarea class="form-control black_text" rows="3" id="summary"
-              placeholder="Tóm tắt nội dung bài viết"></textarea>
+            <textarea name="summary" class="form-control black_text" rows="3" id="summary"
+              placeholder="Tóm tắt nội dung bài viết" required></textarea>
           </div>
           <div class="margin-bottom">
             <label for="editor">Chi tiết bài viết</label>
@@ -94,7 +94,7 @@
           </div>
           <div class="margin-bottom">
             <label for="tag-list">Chọn thẻ cho bài viết</label>
-            <select id="tag-list" class="form-control black_text" multiple>
+            <select id="tag-list" class="form-control black_text" multiple required>
               <option value="technology">technology</option>
               <option value="design">design</option>
               <option value="travel">travel</option>
