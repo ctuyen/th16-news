@@ -5,12 +5,12 @@ var date = '29 th3 2019';
 var comment = 3;
 var tomTat = 'Gia đình em gồm bốn người: bố mẹ em, chị gái em và em. Bố em đã ngoài năm mươi là một kỹ sư chế tạo máy, hiện đang công tác ở thành phố Hồ Chí Minh. Mẹ em là một bác sĩ nha khoa công tác ở bệnh viện tỉnh Bến Tre. Chị gái em hiện là sinh viên năm thứ ba ngành quản trị kinh doanh. Còn em, đứa con út trong gia đình đang học lớp Hai trường thị xã.';
 var name = 'Trường Nguyễn'
-var imgs = ["images/post_1.jpg", "images/author_1.jpg"];
+var imgs = ["images/post_1.jpg", "images/author_1.jpg","https://img.icons8.com/color/48/000000/best-seller.png"];
 
 $(document).ready(function(){
     $(".post01").html(`<div class="post_image"><a href="single.html"><img src="`+imgs[0]+`" alt="ảnh nền"></a></div>
     <div class="post_content">
-        <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div> <span style="float: right"><img src="images/premium.png" alt=""></span>
+        <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div> <span style="float: right"><img src="`+imgs[2]+`" alt=""></span>
         <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
             <div class="tag"><a href="category.html">`+tags[0]+`</a></div>
             <div class="tag"><a href="category.html">`+tags[1]+`</a></div>
@@ -38,7 +38,7 @@ $(document).ready(function(){
     $(".post02").html(`<div class="post_image"><a href="single.html"><img src="`+imgs[0]+`" alt="ảnh nền"></a></div>
     <div class="post_content">
         <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div>
-        <span style="float: right"><img src="images/premium.png" alt=""></span>
+        <span style="float: right"><img src="`+imgs[2]+`"></span>
         <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
             <div class="tag"><a href="category.html">`+tags[0]+`</a></div>
             <div class="tag"><a href="category.html">`+tags[1]+`</a></div>
