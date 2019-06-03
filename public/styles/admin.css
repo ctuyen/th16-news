@@ -1,0 +1,232 @@
+.super {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.right {
+    margin-left: 300px;
+}
+
+.container-main {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 32px 75px;
+}
+
+.admin-label {
+    width: 15vw;
+    margin-bottom: 32px;
+    border-bottom: 3px solid rgb(73, 81, 158);
+}
+
+.manage {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-left {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 220px;
+    margin-top: 150px;
+    margin-left: 30px;
+    height: 60vh;
+    position: fixed;
+    z-index: 1;
+    padding-right: 32px;
+    border-right: 2px solid #bbb;
+}
+
+.menu-item {
+    align-content: center;
+    color: rgb(34, 37, 185);
+    border-bottom: 1px solid #bbb;
+    margin: 8px 0;
+    text-align: center;
+    border-radius: 5px;
+    width: 200px;
+}
+
+
+.menu-item a {
+    display: block;
+    color: rgb(34, 37, 185);
+    width: 100%;
+    height: 100%;
+    padding: 12px 0;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.selected a {
+    background-color: rgb(34, 37, 185);
+    color: white;
+}
+
+.edit {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.add-category {
+    margin-bottom: 36px;
+    display: flex;
+    flex-flow: column nowrap;
+    padding-bottom: 16px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    height: fit-content;
+    margin-right: 20px;
+    margin-top: 16px;
+}
+
+.form-item input {
+    height: 30px;
+    width: 435px;
+}
+.form-item input.submit {
+    margin-top: 16px;
+    padding: 4px 8px 1px 8px;
+    height: 30px;
+    width: fit-content;
+    background-color: rgb(34, 37, 185);
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.form-item select.parent {
+    width: 435px;
+    height: 30px;
+}
+
+/* categories */
+.categories {
+    margin-bottom: 36px;
+    padding-bottom: 16px;
+}
+
+.categories th,td{
+    padding: 8px 16px;
+    text-align: left;
+}
+
+.btn {
+    margin-top: 16px;
+    height: 30px;
+    width: 90px;
+    background-color: rgb(34, 37, 185);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+}
+.action {
+    margin-top: 0;
+}
+
+.tags_content {
+    margin-top: 16px;
+}
+.tag {
+    height: 22px;
+    margin-right: 10px;
+    line-height: 22px;
+}
+.tag a {
+    padding-right: 15px;
+    padding-left: 15px;
+    line-height: 22px;
+    font-size: 11px;
+}
+
+.divider {
+    display: flex;
+}
+
+.divider:before,
+.divider:after {
+    content: "";
+    flex: 1;
+}
+
+.line {
+    align-items: center;
+    margin: 1em -1em;
+}
+
+.line:before,
+.line:after {
+    height: 1px;
+    margin: 0 1em;
+}
+
+.one-line:before,
+.one-line:after {
+    background: black;
+}
+
+.razor:before,
+.razor:after {
+    box-shadow: 0 0.5px 0 black;
+}
+
+.double-razor:before,
+.double-razor:after {
+    height: 3px;
+    box-shadow: 0 -0.5px 0 black, 0 0.5px 0 black;
+    border-width: 0;
+}
+
+.glow:before,
+.glow:after {
+    height: 6px;
+    -webkit-filter: blur(5px);
+    border-radius: 5px;
+}
+
+.glow:before {
+    background: linear-gradient(to right, blue, hotpink);
+}
+
+.glow:after {
+    background: linear-gradient(to left, blue, hotpink);
+}
+
+.gradient {
+    align-items: stretch;
+    margin: 1em 0;
+    height: 2em;
+    line-height: 2em;
+    color: white;
+    background: black;
+}
+
+.gradient:before {
+    background: linear-gradient(to right, white, black);
+}
+
+.gradient:after {
+    background: linear-gradient(to left, white, black);
+}
+
+.donotcross {
+    overflow: hidden;
+    align-items: center;
+    background: #ffd500;
+    color: black;
+    height: 2em;
+    line-height: 2em;
+}
+
+.donotcross:before,
+.donotcross:after {
+    background: white;
+    padding: 50px 0;
+    height: 0;
+    transform: rotate(45deg);
+}

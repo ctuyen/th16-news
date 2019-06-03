@@ -1,0 +1,133 @@
+<div class="super">
+  <div class="menu-left">
+    <div class="menu-item"><a href="./category">Chuyên mục</a></div>
+    <div class="menu-item selected"><a href="./tag">Thẻ</a></div>
+    <div class="menu-item"><a href="./post">Bài viết</a></div>
+    <div class="menu-item"><a href="./user">Người dùng</a></div>
+  </div>
+  <div class="right">
+    <header class="header">
+
+      <!-- Header Content -->
+      <div class="header_content_container">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_content d-flex flex-row align-items-center justfy-content-start">
+                <div class="logo_container">
+                  <a href="#">
+                    <div class="logo"><span>Salad</span>news</div>
+                    <div class="logo_sub">Innovation & Technology Magazine</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-main">
+      <div class="admin-label">Quản lý thẻ</div>
+      <div class="edit">
+        <h2 class="divider gradient">Thêm thẻ</h2>
+
+        <div class="add-category">
+          <form action="">
+            <div class="form-item">
+              <label for="name">Tên thẻ</label>
+              <input id="name" type="text">
+            </div>
+            <div class="form-item">
+              <input class="submit" type="submit" value="Thêm thẻ">
+            </div>
+          </form>
+        </div>
+
+        <h2 class="divider gradient">Thẻ hiện tại</h2>
+
+        <div class="categories">
+          <div class="details">
+            <table>
+              <tr>
+                <th>&nbsp;</th>
+                <th>Tên</th>
+                <th>Tác vụ</th>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="name1"></td>
+                <td>Thời sự</td>
+                <td>
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="name2"></td>
+                <td>Công nghệ</td>
+                <td>
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="name3"></td>
+                <td>Giải trí</td>
+                <td>
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
+                </td>
+              </tr>
+            </table>
+            <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã
+                  chọn?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thẻ
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="">
+                  <div class="form-item">
+                    <label for="name">Tên thẻ</label>
+                    <input id="name" type="text">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="super">
+  <div class="menu-left">
+    <div class="menu-item selected"><a href="./category">Chuyên mục</a></div>
+    <div class="menu-item"><a href="./tag">Thẻ</a></div>
+    <div class="menu-item"><a href="./post">Bài viết</a></div>
+    <div class="menu-item"><a href="./user">Người dùng</a></div>
+  </div>
+  <div class="right">
+    <header class="header">
+
+      <!-- Header Content -->
+      <div class="header_content_container">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_content d-flex flex-row align-items-center justfy-content-start">
+                <div class="logo_container">
+                  <a href="#">
+                    <div class="logo"><span>Salad</span>News</div>
+                    <div class="logo_sub">Innovation & Technology Magazine</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container-main">
+      <div class="admin-label">Quản lý chuyên mục</div>
+
+      <div class="edit">
+        <h2 class="divider gradient">Thêm chuyên mục</h2>
+
+        <div class="add-category">
+          <form action="">
+            <div class="form-item">
+              <label for="name">Tên</label>
+              <input id="name" type="text">
+            </div>
+            <div class="form-item">
+              <label for="parent">Chuyên mục cha</label>
+              <select name="parent" id="parent" class="parent">
+                <option value="-1">Trống</option>
+                <option value="46">Thời sự</option>
+                <option value="3">Công nghệ</option>
+                <option value="3">Giải trí</option>
+              </select>
+            </div>
+            <div class="form-item">
+              <label for="describe">Chi tiết</label>
+              <textarea name="describe" id="" cols="70" rows="3"></textarea>
+            </div>
+            <div class="form-item">
+              <input class="submit" type="submit" value="Add category">
+            </div>
+          </form>
+        </div>
+
+        <h2 class="divider gradient">Các chuyên mục</h2>
+
+        <div class="categories">
+          <div class="details">
+            <table>
+              <tr>
+                <th>&nbsp;</th>
+                <th>Tên</th>
+                <th>Chi tiết</th>
+                <th>Lượt xem</th>
+                <th>Tác vụ</th>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="name1"></td>
+                <td>Thời sự</td>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima
+                  officia,
+                  libero laudantium quis iure id possimus nisi nam sequi eum quia voluptatum
+                  rem
+                  debitis illo magnam! Minima, perspiciatis cum.</td>
+                <td>12</td>
+                <td>
+                  <!-- Button modal trigger -->
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
+                    Chỉnh sửa</div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="name2"></td>
+                <td>Công nghệ</td>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic earum
+                  recusandae soluta
+                  iusto minus eum. Nisi possimus praesentium porro ad mollitia ipsum facere
+                  dolor
+                  nostrum. Perferendis odio cum dignissimos officia.</td>
+                <td>22</td>
+                <td>
+                  <!-- Button modal trigger -->
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
+                    Chỉnh sửa</div>
+                </td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" name="name3"></td>
+                <td>Giải trí</td>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima
+                  officia,
+                  libero laudantium quis iure id possimus nisi nam sequi eum quia voluptatum
+                  rem
+                  debitis illo magnam! Minima, perspiciatis cum.</td>
+                <td>34</td>
+                <td>
+                  <!-- Button modal trigger -->
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
+                    Chỉnh sửa</div>
+                </td>
+              </tr>
+            </table>
+            <!-- Button modal trigger -->
+            <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="">
+                    <div class="form-item">
+                      <label for="name">Tên</label>
+                      <input id="name" type="text">
+                    </div>
+                    <div class="form-item">
+                      <label for="name">Chi tiết</label>
+                      <input id="name" type="email">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
