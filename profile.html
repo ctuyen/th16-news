@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+	<title>saladNews</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Tech Mag template project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap-4.1.2/bootstrap.min.css">
+	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+	<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+	<link rel="stylesheet" type="text/css" href="styles/style1612760.css">
+	<link rel="icon" href="images/newspaper.png">
+
+</head>
+
+<body>
+
+	<div class="super_container">
+
+		<!-- Header -->
+
+		<header class="header">
+
+			<!-- Header Content -->
+			<div class="header_nav_container" id="header">
+				<div class="header_bar">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div
+									class="header_bar_content d-flex flex-row align-items-center justify-content-start">
+									<div class="logo_container">
+										<a href="index.html">
+											<div class="logo"><span>Salad</span>NEWS</div>
+											<div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam
+											</div>
+										</a>
+									</div>
+									<!-- <div class="sub_button text-center" ><a href="#">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div> -->
+
+								</div>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+
+
+		</header>
+
+		<!--CONTENT-->
+		<div class="container emp-profile">
+			<form method="post">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="profile-img">
+							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+								alt="" />
+
+							<!-- Trigger the modal with a button -->
+							<button style="width: 100px; margin-top: 8px" type="button" class="btn btn-dark" data-toggle="modal"
+								data-target="#imgModal">Thay ảnh</button>
+
+							<div class="modal fade " id="imgModal" tabindex="-1" role="dialog"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Save">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label>Upload Image</label>
+												<div class="input-group">
+													<span class="input-group-btn">
+														<span class="btn btn-default btn-file">
+															Browse… <input type="file" id="imgInp">
+														</span>
+													</span>
+													<input type="text" class="form-control" readonly>
+												</div>
+												<img id='img-upload'/>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="submit" class="btn btn-success"
+												data-dismiss="modal">Save</button>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-md-6">
+						<div class="profile-head">
+							<h5>
+								Name Is Chả
+							</h5>
+							<h6>
+								Administrator
+							</h6>
+							<p class="proile-rating" style="color: orange">PREMIUM: <span style="color: darkblue"> 6
+									ngày</span></p>
+							</p>
+							<ul class="nav nav-tabs" id="myTab" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+										aria-controls="home" aria-selected="true">Thông tin</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+										aria-controls="profile" aria-selected="false">Chuyên môn</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button style="width: 200px" type="button" class="btn btn-success"
+							data-toggle="modal" data-target="#profileModal" data-whatever="Hừm hừm">
+							Chỉnh sửa thông tin
+						</button>						
+						<a href="./request-premium.html"><button style="width: 200px;margin-top: 10px;"  type="button" class="btn btn-success">
+							Gia hạn premium
+						</button></a>
+						<button type="button" style="width: 200px;margin-top: 10px;" class="btn btn-dark" data-toggle="modal"
+							data-target="#passModal">
+							Đổi password
+						</button>
+
+						<div class="modal fade " id="profileModal" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Save">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Bút danh (Tên
+													khác):</label>
+												<input type="text" class="form-control" id="recipient-name"
+													placeholder="Nhập vào bút danh của bạn">
+											</div>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Họ tên:</label>
+												<input type="text" class="form-control" id="recipient-name"
+													placeholder="Nhập vào họ tên của bạn">
+											</div>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Email:</label>
+												<input type="email" class="form-control" id="recipient-name"
+													placeholder="Nhập vào Email của bạn" validate>
+											</div>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Số điện
+													thoại:</label>
+												<input type="number" class="form-control" id="recipient-name"
+													placeholder="Nhập vào số điện thoại của bạn">
+											</div>
+
+											<div class="form-group">
+												<label for="message-text" class="col-form-label">Giới thiệu bản
+													thân:</label>
+												<textarea class="form-control" id="message-text"
+													placeholder="Nhập vào giới thiệu bản thân"></textarea>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-success" data-dismiss="modal">Save</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal fade " id="passModal" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Đổi password</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Save">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<form>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Mật khẩu hiện
+													tại:</label>
+												<input type="password" class="form-control" id="recipient-name"
+													placeholder="Nhập vào mật khẩu hiện tại của bạn">
+											</div>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Mật khẩu mới:</label>
+												<input type="password" class="form-control" id="recipient-name"
+													placeholder="Nhập vào mật khẩu mới">
+											</div>
+											<div class="form-group">
+												<label for="recipient-name" class="col-form-label">Xác nhận mật khẩu
+													mới:</label>
+												<input type="password" class="form-control" id="recipient-name"
+													placeholder="Nhập lại mật khẩu mới" validate>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-success" data-dismiss="modal">Save</button>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="profile-work">
+							<p>Liên kết</p>
+							<a href="writer/list_post.html">Quản lý bài - viết bài</a><br />
+							<a href="editor/list_post.html">Quản lý chuyên mục</a><br />
+							<a href="admin/category.html">Administrator</a>
+
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="tab-content profile-tab" id="myTabContent">
+							<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+								<div class="row">
+									<div class="col-md-6">
+										<label>Bút danh (Tên khác): </label>
+									</div>
+									<div class="col-md-6">
+										<p>abc123456</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label>Tên: </label>
+									</div>
+									<div class="col-md-6">
+										<p>Name Is Chả</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label>Email: </label>
+									</div>
+									<div class="col-md-6">
+										<p>kshitighelani@gmail.com</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label>SĐT</label>
+									</div>
+									<div class="col-md-6">
+										<p>0123 456 789</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label>Quyền hạng:</label>
+									</div>
+									<div class="col-md-6">
+										<p>administrator</p>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+								<div class="row">
+									<div class="col-md-6">
+										<label>Số bài đã đăng</label>
+									</div>
+									<div class="col-md-6">
+										<p>20 bài</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<label>Số bài được xuất bản</label>
+									</div>
+									<div class="col-md-6">
+										<p>11 bài</p>
+									</div>
+								</div>
+								<br>
+								<br>
+								<br>
+								<br>
+								<br>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<label>Giới thiệu bản thân: </label><br />
+									<p>
+										Là cô gái hay mộng mơ
+										Xinh đẹp như tiên giáng trần
+										Người đã khiến tôi thẫn thờ
+										Cho ngày qua tôi thẫn thờ
+										Cho tôi nhung nhớ bao nhiêu
+										Muốn nói với em bao điều rằng tôi đã thương em nhiều
+										Yêu em từ lâu em biết chăng
+										Chẳng giống mấy cô người mẫu
+										Em đẹp xinh cô gái Việt
+										Chẳng son phấn tô sắc màu
+										Em giản dị theo cách riêng
+										Chỉ cao 1m52
+										Nhưng sao đáng yêu dịu dàng đôi môi thắm duyên nụ cười
+										Cho tôi say tôi mơ từng đêm nhớ mong
+										Thôi thì là duyên nếu người thuận thì tôi
+										Sang thưa chuyện mẹ cha, xin được nên vợ chồng
+										Thương em để lâu hóa thêm âu sầu
+										Nay nói ra cho hết đau đầu
+										Rồi ta sẽ thật hạnh phúc
+										Bên nhau bên nhau chẳng rời
+										Cùng nhau sống chung mái nhà
+										Ta say bên nhau suốt đời
+										Cho nhau chén nước chén cơm
+										Cho nhau chút duyên chút tình nụ cười tươi nở trên môi
+										Đa đa đa đá đa đa đa đà</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		</form>
+	</div>
+
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="footer_social">
+			<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<ul class="footer_social_list d-flex flex-row align-items-center justify-content-center">
+							<li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer_content">
+			<!-- Image credit: https://unsplash.com/@badashphotos -->
+			<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/footer.jpg"
+				data-speed="0.8"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col text-center">
+						<div class="logo_container">
+							<a href="#">
+								<div class="logo"><span>Salad</span>NEWS</div>
+								<div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam</div>
+							</a>
+						</div>
+						<div class="footer_nav_container text-center">
+							<nav class="footer_nav">
+								<ul
+									class="footer_nav_list d-flex flex-md-row flex-column align-items-center justify-content-start">
+									<li><a href="index.html">Trang chủ</a></li>
+									<li><a href="contact.html">Liên hệ</a></li>
+									<li><a href="about.html">Về chúng tôi</a></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="copyright">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+							template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	</div>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="styles/bootstrap-4.1.2/popper.js"></script>
+	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+	<script src="plugins/greensock/TweenMax.min.js"></script>
+	<script src="plugins/greensock/TimelineMax.min.js"></script>
+	<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
+	<script src="plugins/greensock/animation.gsap.min.js"></script>
+	<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
+	<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+	<script src="plugins/easing/easing.js"></script>
+	<script src="plugins/parallax-js-master/parallax.min.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/js1612760.js"></script>
+	<script src="js/modal1612760.js"></script>
+</body>
+
+</html>

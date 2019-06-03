@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Text editor</title>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+
+  <link rel="stylesheet" type="text/css" href="../styles/bootstrap-4.1.2/bootstrap.min.css">
+  <link href="../plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+  <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+  <link rel="stylesheet" type="text/css" href="../plugins/OwlCarousel2-2.2.1/animate.css">
+  <link rel="stylesheet" type="text/css" href="../styles/main_styles.css">
+  <link rel="stylesheet" type="text/css" href="../styles/responsive.css">
+  <link rel="stylesheet" type="text/css" href="../styles/style1612760.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+  <link rel="stylesheet" type="text/css" href="../styles/style1612771.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <header class="header">
+      <!-- Header Content -->
+      <div id="header" class="header_content_container">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_content d-flex flex-row align-items-center justfy-content-start">
+                <div class="logo_container">
+                  <a href="index.html">
+                    <div class="logo"><span>Salad</span>NEWS</div>
+                    <div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="row margin-body">
+      <div class="col-3 ">
+        <div class="fixed_div">
+          <div class="border-bottom">
+            <label for="" class="text-label font-weight-bold">PHÂN HỆ PHÓNG VIÊN</label>
+          </div>
+          <div class="nav flex-column nav-pills border-bottom font-size " id="pills-tab" role="tablist"
+            aria-orientation="vertical">
+            <a class="nav-link" id="approved-tab" href="approved.html">Đã được duyệt & chờ xuất bản</a>
+            <a class="nav-link" id="published-tab" href="published.html">Đã xuất bản</a>
+            <a class="nav-link" id="denied-tab" href="denied.html">Bị từ chối</a>
+            <a class="nav-link" id="pending-tab" href="pending.html">Chưa được duyệt</a>
+          </div>
+          <div class="font-size">
+            <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="text_editor.html">Viết bài mới</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-9">
+        <form name="formNewPost">
+          <div class="margin-bottom">
+            <label for="title">Tiêu đề</label>
+            <input name="title" type="text" class="form-control black_text" id="title" placeholder="Nhập tiêu đề của bài viết" required>
+          </div>
+          <div class="form-group margin-bottom">
+            <label for="summary">Tóm tắt</label>
+            <textarea name="summary" class="form-control black_text" rows="3" id="summary"
+              placeholder="Tóm tắt nội dung bài viết" required></textarea>
+          </div>
+          <div class="margin-bottom">
+            <label for="editor">Chi tiết bài viết</label>
+            <div id="summernote"></div>
+          </div>
+          <div class="margin-bottom">
+            <label for="category-list">Chọn chuyên mục cho bài viết</label>
+            <select id="category-list" class="form-control black_text">
+              <option value="Thế giới">Thế giới</option>
+              <option value="Sức khoẻ">Sức khoẻ</option>
+              <option value="Công nghệ">Công nghệ</option>
+              <option value="Nông Sản">Kinh doanh nông sản</option>
+              <option value="Hải sản">Kinh doanh hải sản</option>
+              <option value="Thể thao trong nước">Thể thao trong nước</option>
+              <option value="Thể thao ngoài nước">Thể thao ngoài nước</option>
+              <option value="Du lịch trong nước">Du lịch trong nước</option>
+              <option value="Du lịch ngoài nước">Du lịch ngoài nước</option>
+            </select>
+          </div>
+          <div class="margin-bottom">
+            <label for="tag-list">Chọn thẻ cho bài viết</label>
+            <select id="tag-list" class="form-control black_text" multiple required>
+              <option value="technology">technology</option>
+              <option value="design">design</option>
+              <option value="travel">travel</option>
+              <option value="video">video</option>
+              <option value="party">party</option>
+              <option value="music">music</option>
+              <option value="world">world</option>
+              <option value="adventure">adventure</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-success margin-bottom">Gửi</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../js/script1612771.js"></script>
+  <script src="../styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+
+  <script>
+    $('#summernote').summernote({
+      placeholder: '',
+      tabsize: 2,
+      height: 100
+    });
+  </script>
+</body>
+
+</html>
