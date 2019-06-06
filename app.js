@@ -49,7 +49,7 @@ app.use((error, req, res, next) => {
 app.use((req, res, next) => {
   res.render("404", { layout: false });
 });
-why
+
 //rrrrun
 app.listen(port, () => {
   console.log(
