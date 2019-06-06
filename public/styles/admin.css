@@ -200,8 +200,8 @@ label {
 .gradient {
     align-items: stretch;
     margin: 1em 0;
-    height: 2em;
-    line-height: 2em;
+    height: 1.2em;
+    line-height: 1.2em;
     color: white;
     background: black;
 }
