@@ -15,7 +15,7 @@ module.exports = {
       connection.query(sql, (error, results, fields) => {
         if (error) reject(error);
         else resolve(results);
-        //console.log(results);
+        console.log(results);
         connection.end();
       });
     });
