@@ -1,4 +1,6 @@
-
+img{
+    max-width: 100%;
+}
 .tag {
     height: 44px;
     background: #ebeded;
