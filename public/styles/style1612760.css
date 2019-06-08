@@ -1,3 +1,13 @@
+
+.tag {
+    height: 44px;
+    background: #ebeded;
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+.tag a{
+    color: #000;
+}
 .btn-file {
     position: relative;
     overflow: hidden;
