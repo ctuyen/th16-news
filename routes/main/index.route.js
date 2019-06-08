@@ -1,14 +1,14 @@
 var express = require("express");
-var db = require("../../utils/db");
+var postmodel = require("../../models/post.model");
 
 var router = express.Router();
 
 router.get("/", (req, res) => {
-  var p = db.load("select * from posts");
+  var p = postmodel.load();
   p.then(data => {
     
     var posts =  data.rows;
-
+    // console.log(posts);
     res.render("main/index", {
       titlePage: "SaladNews - trang tin hàng đầu Việt Nam",
         stylePage: "main_styles",

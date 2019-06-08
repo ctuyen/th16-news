@@ -1,39 +1,51 @@
 let express = require("express");
 let exphbs = require("express-handlebars");
-let bodyParser = require('body-parser');
+let bodyParser = require("body-parser");
 let cookieParser = require("cookie-parser");
 
 const app = express();
 const port = 3000;
 
-const adminRoute = require('./routes/admin/admin.route');
-const authRoute = require('./routes/auth.route');
+const adminRoute = require("./routes/admin/admin.route");
+const authRoute = require("./routes/auth.route");
 
-const authMiddleware = require('./middlewares/auth.middleware')
+const authMiddleware = require("./middlewares/auth.middleware");
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
-app.engine('hbs',exphbs({
-  defaultLayout: 'main.hbs',
-  layoutsDir: 'views/_layouts'
-}));
+app.engine(
+  "hbs",
+  exphbs({
+    defaultLayout: "main.hbs",
+    layoutsDir: "views/_layouts"
+  })
+);
 
 app.set("view engine", "hbs");
 
 app.set("views", "./views");
 
-
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 
 //MAIN----------------------------------------------------
+<<<<<<< HEAD
 app.use('/', require('./routes/main/index.route'));
 
 //main-categories
 app.use('/categories', require('./routes/main/categories.route'));
+=======
+app.use("/", require("./routes/main/index.route"));
+
+//main-categories
+app.use("/categories", require("./routes/main/category.route"));
+
+//posts
+app.use("/posts", require("./routes/main/post.route"));
+>>>>>>> bae59cf30473a9279fc02c1ccf343e821f4b4c9e
 
 //admin---------------------------------------------------
-app.use('/admin', authMiddleware.requireAuth, adminRoute);
+app.use("/admin", authMiddleware.requireAuth, adminRoute);
 app.use("/auth", authRoute);
 //writer--------------------------------------------------
 app.use('/writer', require('./routes/writer/writer.route'));
@@ -42,7 +54,7 @@ app.use('/editor', require('./routes/editor/editor.route'));
 
 
 //--------------------------------------------------------
-//error 
+//error
 app.use((error, req, res, next) => {
   res.render("error", {
     layout: false,
@@ -58,6 +70,6 @@ app.use((req, res, next) => {
 //rrrrun
 app.listen(port, () => {
   console.log(
-    "chạy ngay đi trước khi mọi điều tồi tệ hơn http://localhost:"+port
+    "chạy ngay đi trước khi mọi điều tồi tệ hơn http://localhost:" + port
   );
 });

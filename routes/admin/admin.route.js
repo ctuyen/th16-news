@@ -3,10 +3,8 @@ const express = require('express')
 const controller = require('../../controllers/admin/admin.controller')
 const router = express.Router()
 
-router.get('/', controller.category)
-category = (req,res)=>{
+router.get('/', controller.admin)
 
-};
 router.get('/category', controller.category)
 
 router.get("/post", controller.post);
