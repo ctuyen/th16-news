@@ -40,6 +40,9 @@ app.get("/posts", require("./routes/main/post.route"));
 //admin---------------------------------------------------
 app.use("/admin", authMiddleware.requireAuth, adminRoute);
 app.use("/auth", authRoute);
+//writer--------------------------------------------------
+app.use('/writer', require('./routes/writer/writer.route'));
+// app.use('/writer/textEditor', require('./routes/writer/textEditor.route'));
 
 //--------------------------------------------------------
 //error

@@ -1,0 +1,63 @@
+<div class="col-3 ">
+  <div class="fixed_div">
+    <div class="border-bottom">
+      <label for="" class="text-label font-weight-bold">PHÂN HỆ PHÓNG VIÊN</label>
+    </div>
+    <div class="nav flex-column nav-pills border-bottom font-size " id="pills-tab" role="tablist"
+      aria-orientation="vertical">
+      <a class="nav-link" id="approved-tab" href="approved">Đã được duyệt & chờ xuất bản</a>
+      <a class="nav-link" id="published-tab" href="published">Đã xuất bản</a>
+      <a class="nav-link" id="denied-tab" href="denied">Bị từ chối</a>
+      <a class="nav-link" id="pending-tab" href="pending">Chưa được duyệt</a>
+    </div>
+    <div class="font-size">
+      <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="textEditor">Viết bài mới</a>
+    </div>
+  </div>
+</div>
+<div class="col-9">
+  <form name="formNewPost">
+    <div class="margin-bottom">
+      <label for="title">Tiêu đề</label>
+      <input name="title" type="text" class="form-control black_text" id="title" placeholder="Nhập tiêu đề của bài viết"
+        required>
+    </div>
+    <div class="form-group margin-bottom">
+      <label for="summary">Tóm tắt</label>
+      <textarea name="summary" class="form-control black_text" rows="3" id="summary"
+        placeholder="Tóm tắt nội dung bài viết" required></textarea>
+    </div>
+    <div class="margin-bottom">
+      <label for="editor">Chi tiết bài viết</label>
+      <div id="summernote"></div>
+    </div>
+    <div class="margin-bottom">
+      <label for="category-list">Chọn chuyên mục cho bài viết</label>
+      <select id="category-list" class="form-control black_text">
+        <option value="Thế giới">Thế giới</option>
+        <option value="Sức khoẻ">Sức khoẻ</option>
+        <option value="Công nghệ">Công nghệ</option>
+        <option value="Nông Sản">Kinh doanh nông sản</option>
+        <option value="Hải sản">Kinh doanh hải sản</option>
+        <option value="Thể thao trong nước">Thể thao trong nước</option>
+        <option value="Thể thao ngoài nước">Thể thao ngoài nước</option>
+        <option value="Du lịch trong nước">Du lịch trong nước</option>
+        <option value="Du lịch ngoài nước">Du lịch ngoài nước</option>
+      </select>
+    </div>
+    <div class="margin-bottom">
+      <label for="tag-list">Chọn thẻ cho bài viết</label>
+      <select id="tag-list" class="form-control black_text" multiple required>
+        <option value="technology">technology</option>
+        <option value="design">design</option>
+        <option value="travel">travel</option>
+        <option value="video">video</option>
+        <option value="party">party</option>
+        <option value="music">music</option>
+        <option value="world">world</option>
+        <option value="adventure">adventure</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success margin-bottom">Gửi</button>
+  </form>
+</div>
