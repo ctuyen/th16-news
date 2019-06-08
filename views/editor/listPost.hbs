@@ -1,33 +1,3 @@
-<div class="col-sm-3">
-  <div class="fixed_div">
-    <div class="card shadow">
-      <h5 class="card-header">
-        PHÂN HỆ PHÓNG VIÊN
-      </h5>
-      <div class="list-group list-group-flush">
-        <a href="approved" class="list-group-item list-group-item-action active">
-          Đã duyệt & chờ xuất bản
-          <span class="badge badge-danger float-right">1</span>
-        </a>
-        <a href="published" class="list-group-item list-group-item-action">
-          Đã xuất bản
-          <span class="badge badge-danger float-right">1</span>
-        </a>
-        <a href="denied" class="list-group-item list-group-item-action">
-          Bị từ chối
-          <span class="badge badge-danger float-right">1</span>
-        </a>
-        <a href="pending" class="list-group-item list-group-item-action">
-          Chưa được duyệt
-          <span class="badge badge-danger float-right">1</span>
-        </a>
-      </div>
-    </div>
-    <div class="font-size shadow">
-      <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="textEditor">Viết bài mới</a>
-    </div>
-  </div>
-</div>
 <div class="col-sm-9">
   <div class="content" id="Content">
     <div id="pending">
@@ -43,6 +13,20 @@
             <div class="col-lg-7">
               <div class="post_content">
                 <div>
+                  <div class="pull-right">
+                    <button class="btn btn-success" data-toggle="modal" data-target="#modalAccept">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                      </span>
+                      <span class="text">Duyệt</span>
+                    </button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#modalDeny">
+                      <span class="icon text-white-50">
+                        <i class="fas fa-times"></i>
+                      </span>
+                      <span class="text">Từ chối</span>
+                    </button>
+                  </div>
                   <div class="post_category cat_world"><a href="/categories">Công nghệ</a></div>
                 </div>
                 <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">

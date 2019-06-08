@@ -27,17 +27,19 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(cookieParser());
 
 //MAIN----------------------------------------------------
-app.get('/', require('./routes/main/index.route'));
+app.use('/', require('./routes/main/index.route'));
 
 //main-categories
-app.get('/categories', require('./routes/main/categories.route'));
+app.use('/categories', require('./routes/main/categories.route'));
 
 //admin---------------------------------------------------
 app.use('/admin', authMiddleware.requireAuth, adminRoute);
 app.use("/auth", authRoute);
 //writer--------------------------------------------------
 app.use('/writer', require('./routes/writer/writer.route'));
-// app.use('/writer/textEditor', require('./routes/writer/textEditor.route'));
+//editor--------------------------------------------------
+app.use('/editor', require('./routes/editor/editor.route'));
+
 
 //--------------------------------------------------------
 //error 

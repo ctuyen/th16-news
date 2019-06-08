@@ -1,27 +1,40 @@
-<div class="col-3 ">
+<div class="col-sm-3">
     <div class="fixed_div">
-        <div class="border-bottom">
-            <label for="" class="text-label font-weight-bold">PHÂN HỆ PHÓNG VIÊN</label>
+        <div class="card shadow">
+            <h5 class="card-header">
+                PHÂN HỆ PHÓNG VIÊN
+            </h5>
+            <div class="list-group list-group-flush">
+                <a href="approved" class="list-group-item list-group-item-action">
+                    Đã duyệt & chờ xuất bản
+                    <span class="badge badge-danger float-right">1</span>
+                </a>
+                <a href="published" class="list-group-item list-group-item-action">
+                    Đã xuất bản
+                    <span class="badge badge-danger float-right">1</span>
+                </a>
+                <a href="denied" class="list-group-item list-group-item-action">
+                    Bị từ chối
+                    <span class="badge badge-danger float-right">1</span>
+                </a>
+                <a href="pending" class="list-group-item list-group-item-action active">
+                    Chưa được duyệt
+                    <span class="badge badge-danger float-right">1</span>
+                </a>
+            </div>
         </div>
-        <div class="nav flex-column nav-pills border-bottom font-size " id="pills-tab" role="tablist"
-            aria-orientation="vertical">
-            <a class="nav-link" id="approved-tab" href="approved">Đã được duyệt & chờ xuất bản</a>
-            <a class="nav-link" id="published-tab" href="published">Đã xuất bản</a>
-            <a class="nav-link" id="denied-tab" href="denied">Bị từ chối</a>
-            <a class="nav-link active" id="pending-tab" href="pending">Chưa được duyệt</a>
-        </div>
-        <div class="font-size">
+        <div class="font-size shadow">
             <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="textEditor">Viết bài mới</a>
         </div>
     </div>
 </div>
-<div class="col-9">
+<div class="col-sm-9">
     <div class="content" id="Content">
         <div id="pending">
             <div class="posts">
                 <!-- Post -->
+                {{#each this.posts}}
                 <div class="post_item post_h_large">
-                    {{#each this.posts}}
                     <div class="row">
                         <div class="col-lg-5">
                             <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail">
@@ -61,8 +74,8 @@
                                 </div>
                             </div>
                         </div>
-                        {{/each}}
                     </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

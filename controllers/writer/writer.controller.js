@@ -1,4 +1,4 @@
-var db = require("../../utils/db");
+var postModel = require("../../models/posts.model");
 module.exports = {
   textEditor: (req, res) => {
     res.render("writer/textEditor", {
@@ -8,7 +8,7 @@ module.exports = {
   },
 
   pending: (req, res) => {
-    var p = db.load("select * from posts");
+    var p = postModel.all();
     p.then(data => {
       res.render("writer/pending", {
         layout: "writer.hbs",
@@ -21,23 +21,41 @@ module.exports = {
   },
 
   denied: (req, res) => {
-    res.render("writer/denied", {
-      layout: "writer.hbs",
-      titlePage: "Bài bị từ chối"
+    var p = postModel.all();
+    p.then(data => {
+      res.render("writer/denied", {
+        layout: "writer.hbs",
+        titlePage: "Bài chưa duyệt",
+        posts: data.rows
+      });
+    }).catch(err => {
+      console.log(err);
     });
   },
 
   approved: (req, res) => {
-    res.render("writer/approved", {
-      layout: "writer.hbs",
-      titlePage: "Bài đã duyệt và chờ xuất bản"
+    var p = postModel.all();
+    p.then(data => {
+      res.render("writer/approved", {
+        layout: "writer.hbs",
+        titlePage: "Bài chưa duyệt",
+        posts: data.rows
+      });
+    }).catch(err => {
+      console.log(err);
     });
   },
 
   published: (req, res) => {
-    res.render("writer/published", {
-      layout: "writer.hbs",
-      titlePage: "Bài đã xuất bản"
+    var p = postModel.all();
+    p.then(data => {
+      res.render("writer/published", {
+        layout: "writer.hbs",
+        titlePage: "Bài chưa duyệt",
+        posts: data.rows
+      });
+    }).catch(err => {
+      console.log(err);
     });
   }
 };

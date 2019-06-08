@@ -1,38 +1,73 @@
-<div class="col-3 ">
-    <div class="fixed_div">
-        <div class="border-bottom">
-            <label for="" class="text-label font-weight-bold">PHÂN HỆ PHÓNG VIÊN</label>
-        </div>
-        <div class="nav flex-column nav-pills border-bottom font-size " id="pills-tab" role="tablist"
-            aria-orientation="vertical">
-            <a class="nav-link" id="approved-tab" href="approved">Đã được duyệt & chờ xuất bản</a>
-            <a class="nav-link active" id="published-tab" href="published">Đã xuất bản</a>
-            <a class="nav-link" id="denied-tab" href="denied">Bị từ chối</a>
-            <a class="nav-link" id="pending-tab" href="pending">Chưa được duyệt</a>
-        </div>
-        <div class="font-size">
-            <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="textEditor">Viết
-                bài mới</a>
-        </div>
+<div class="col-sm-3">
+  <div class="fixed_div">
+    <div class="card shadow">
+      <h5 class="card-header">
+        PHÂN HỆ PHÓNG VIÊN
+      </h5>
+      <div class="list-group list-group-flush">
+        <a href="approved" class="list-group-item list-group-item-action">
+          Đã duyệt & chờ xuất bản
+          <span class="badge badge-danger float-right">1</span>
+        </a>
+        <a href="published" class="list-group-item list-group-item-action active">
+          Đã xuất bản
+          <span class="badge badge-danger float-right">1</span>
+        </a>
+        <a href="denied" class="list-group-item list-group-item-action">
+          Bị từ chối
+          <span class="badge badge-danger float-right">1</span>
+        </a>
+        <a href="pending" class="list-group-item list-group-item-action">
+          Chưa được duyệt
+          <span class="badge badge-danger float-right">1</span>
+        </a>
+      </div>
     </div>
+    <div class="font-size shadow">
+      <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="textEditor">Viết bài mới</a>
+    </div>
+  </div>
 </div>
-<div class="col-9">
-    <div class="content" id="Content">
-        <div id="published">
-            <div class="posts">
-                <!-- Post -->
-                <div class="post_item post_h_large">
-                    <div class="row post1">
-
-                    </div>
-                </div>
-                <!-- Post -->
-                <div class="post_item post_h_large">
-                    <div class="row post1">
-
-                    </div>
-                </div>
+<div class="col-sm-9">
+  <div class="content" id="Content">
+    <div id="pending">
+      <div class="posts">
+        <!-- Post -->
+        {{#each this.posts}}
+        <div class="post_item post_h_large">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail">
+              </div>
             </div>
+            <div class="col-lg-7">
+              <div class="post_content">
+                <div>
+                  <div class="post_category cat_world"><a href="/categories">Công nghệ</a></div>
+                </div>
+                <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                  <div class="tag"><a href="../category.html">#smartphone</a></div>
+                </div>
+                <div class="post_title"><a href="/single">{{title}}</a></div>
+                <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                  <div class="post_author d-flex flex-row align-items-center justify-content-start">
+                    <div>
+                      <div class="post_author_image"><img
+                          src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/62044047_625196087977000_549128624108732416_n.jpg?_nc_cat=105&_nc_eui2=AeHGyglMWe9rethO9-kxIlGvxOsZeg4ZDdbh7caG0kLNpFFb1xz8ZnIp3RxFZ1OM0NiD_bQwxVPGCAKSD0bTTMJIOSX6s3uv1GawYsU8KOYsBA&_nc_oc=AQmZ8c7CyGHeyvRXi7xocCkldRVM7_mdx7fyZVt4Uq6_j2NXf_XFnfy7xltZZhOvHxE&_nc_ht=scontent.fsgn5-2.fna&oh=e79046e225eb88ad5e41c578b079329b&oe=5D81056B"
+                          alt=""></div>
+                    </div>
+                    <div class="post_author_name"><a href="#" Truong nguyen</a> </div> </div> <div class="post_date"><a
+                          href="#">Ngày giờ</a></div>
+                  </div>
+                  <div class="post_text">
+                    <p>{{abstract}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
         </div>
+      </div>
     </div>
-</div>
+  </div>
