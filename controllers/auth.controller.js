@@ -41,7 +41,9 @@ module.exports = {
         return
       }
 
-      res.cookie("userId", users.rows[0].id);
+      res.cookie("userId", users.rows[0].id, {
+        signed: true
+      });
       res.redirect("/");
     }).catch(err => {
       console.log(err);

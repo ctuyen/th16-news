@@ -26,7 +26,7 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(cookieParser());
+app.use(cookieParser("ahihi@69oifHFh")); //
 
 //MAIN----------------------------------------------------
 app.use('/', require('./routes/main/index.route'));
