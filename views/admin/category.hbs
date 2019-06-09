@@ -42,15 +42,11 @@
       <div class="form-item">
         <label for="parent">Chuyên mục cha</label>
         <select name="parent" id="parent" class="parent">
-          <option value="-1">Trống</option>
-          <option value="46">Thời sự</option>
-          <option value="3">Công nghệ</option>
-          <option value="3">Giải trí</option>
+          <option value="0">Trống</option>
+          {{#each fatherCates}}
+            <option value="{{this.id}}">{{this.name}}</option>
+          {{/each}}
         </select>
-      </div>
-      <div class="form-item">
-        <label for="describe">Chi tiết</label>
-        <textarea name="describe" id="" cols="70" rows="3"></textarea>
       </div>
       <div class="form-item">
         <input class="submit" type="submit" value="Add category">
@@ -68,33 +64,19 @@
           <th>Tên</th>
           <th>Tác vụ</th>
         </tr>
-        <tr>
-          <td><input type="checkbox" name="name1"></td>
-          <td>Thời sự</td>
-          <td>
-            <!-- Button modal trigger -->
-            <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
-              Chỉnh sửa</div>
-          </td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="name2"></td>
-          <td>Công nghệ</td>
-          <td>
-            <!-- Button modal trigger -->
-            <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
-              Chỉnh sửa</div>
-          </td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" name="name3"></td>
-          <td>Giải trí</td>
-          <td>
-            <!-- Button modal trigger -->
-            <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
-              Chỉnh sửa</div>
-          </td>
-        </tr>
+
+        {{#each categories}}
+          <tr>
+            <td><input type="checkbox" name={{this.id}}></td>
+            <td>{{this.name}}</td>
+            <td>
+              <!-- Button modal trigger -->
+              <div class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
+                Chỉnh sửa
+              </div>
+            </td>
+          </tr>
+        {{/each}}
       </table>
       <!-- Button modal trigger -->
       <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
@@ -135,10 +117,6 @@
               <div class="form-item">
                 <label for="name">Tên</label>
                 <input id="name" type="text">
-              </div>
-              <div class="form-item">
-                <label for="name">Chi tiết</label>
-                <input id="name" type="email">
               </div>
             </form>
           </div>

@@ -32,7 +32,7 @@ module.exports = {
   //   return db.load(sql);
   // },
   loadFather: () => {
-    var sql = "select * from categories where idCategory = null";
+    var sql = "select * from categories where idCategory is null";
     return db.load(sql);
   },
   loadSon: id => {

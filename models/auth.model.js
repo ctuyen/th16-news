@@ -1,6 +1,6 @@
 var db = require('../utils/db');
 
-module.exports={
+module.exports = {
     checkEmail: (email) => {
         var sql =`select * from users where users.email = '${email}'`;
         return db.load(sql);
