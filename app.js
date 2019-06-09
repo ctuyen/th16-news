@@ -29,20 +29,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(cookieParser());
 
 //MAIN----------------------------------------------------
-<<<<<<< HEAD
 app.use('/', require('./routes/main/index.route'));
-
-//main-categories
-app.use('/categories', require('./routes/main/categories.route'));
-=======
-app.use("/", require("./routes/main/index.route"));
 
 //main-categories
 app.use("/categories", require("./routes/main/category.route"));
 
 //posts
 app.use("/posts", require("./routes/main/post.route"));
->>>>>>> bae59cf30473a9279fc02c1ccf343e821f4b4c9e
 
 //admin---------------------------------------------------
 app.use("/admin", authMiddleware.requireAuth, adminRoute);

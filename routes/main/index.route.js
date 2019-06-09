@@ -1,10 +1,10 @@
 var express = require("express");
-var postmodel = require("../../models/post.model");
+var postmodel = require("../../models/posts.model");
 
 var router = express.Router();
 
 router.get("/", (req, res) => {
-  var p = postmodel.load();
+  var p = postmodel.all();
   p.then(data => {
     
     var posts =  data.rows;
