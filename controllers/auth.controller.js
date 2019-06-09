@@ -17,10 +17,6 @@ module.exports = {
   postLogin: (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
-    
-    // //using bcrypt - sync
-    // let salt = bcrypt.genSaltSync(saltRounds);
-    // let hashedPassword = bcrypt.hashSync(password, salt);
 
     var checkEmail = authModel.checkEmail(email);
 
@@ -28,16 +24,17 @@ module.exports = {
       var num = users.rowCount;
       if (num === 0) {
         res.render("auth/login", {
-          errors: ["User does not exists."],
+          errors: ["Người dùng không tồn tại."],
           values: req.body,
           layout: false
         });
         return;
       }
       
+      //just test
       if (!bcrypt.compareSync(password, "$2b$10$EOBbzOfvHlffVfm8LN1Dmunv6nqlrwCMArFadM1swYlDrMln9EMm6")) {
         res.render("auth/login", {
-          errors: ["Wrong password."],
+          errors: ["Nhập sai mật khẩu."],
           values: req.body,
           layout: false
         })
@@ -49,5 +46,38 @@ module.exports = {
     }).catch(err => {
       console.log(err);
     });
+  },
+
+  register: (req, res) => {
+    res.render('auth/register', {
+      layout: false
+    })
+  },
+
+  postRegister: (req, res) => {
+    let email = req.body.email
+    let password = req.body.password
+    let fullName = `${req.body.firstName} ${req.body.lastName}`;
+
+    var checkEmail = authModel.checkEmail(email);
+
+    checkEmail
+      .then(users => {
+        var num = users.rowCount;
+        if (num > 0) {
+          res.render("auth/register", {
+            errors: ["Địa chỉ mail đã tồn tại. Thử đăng nhập!"],
+            layout: false
+          });
+          return;
+        }
+
+        res.redirect("/auth/login");
+      })
+      .catch(err => {
+        throw err
+      });
+    
+    //continue 
   }
 };

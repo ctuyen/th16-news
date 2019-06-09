@@ -1,3 +1,5 @@
+var authModel = require('../models/auth.model')
+
 module.exports.requireAuth = function (req, res, next) {
   if (!req.cookies.userId) {
     res.redirect('/auth/login')
@@ -5,7 +7,7 @@ module.exports.requireAuth = function (req, res, next) {
   }
 
   //tim xem user co trong db hay khong
-  // ...
+  var
 
   next()
 }

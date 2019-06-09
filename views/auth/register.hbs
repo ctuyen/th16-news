@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Đăng nhập</title>
+
+
+  <!-- Custom fonts for this template-->
+  <link href="/styles/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="/styles/sb-admin-2.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="/styles/bootstrap-4.1.2/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+  <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+  <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css">
+  <link rel="stylesheet" type="text/css" href="/styles/main_styles.css">
+  <link rel="stylesheet" type="text/css" href="/styles/responsive.css">
+  <link rel="stylesheet" type="text/css" href="/styles/style1612760.css">
+  <link rel="stylesheet" type="text/css" href="/styles/style1612771.css">
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <script src="/js/check-reenterpass.js" type="text/javascript" defer></script>
+
+</head>
+
+<body>
+  <!-- Header -->
+
+  <header class="header">
+    <!-- Header Content -->
+    <div class="header_nav_container" id="header">
+      <div class="header_bar">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="header_bar_content d-flex flex-row align-items-center justify-content-start">
+                <div class="logo_container">
+                  <a href="index.html">
+                    <div class="logo"><span>Salad</span>NEWS</div>
+                    <div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Tạo tài khoản mới!</h1>
+              </div>
+
+              {{#if errors}}
+                {{#each errors}}
+                  <div class="alert alert-danger">{{this}}</div>
+                {{/each}}
+              {{/if}}
+
+              <form class="user" action="/auth/register" method="POST">
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" name="lastName" class="form-control form-control-user" id="exampleFirstName" placeholder="Họ"
+                      required>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="text" name="firstName" class="form-control form-control-user" id="exampleLastName" placeholder="Tên"
+                      required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
+                    placeholder="Địa chỉ Email" required>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="password" name="password" id="password" class="form-control form-control-user" id="exampleInputPassword"
+                      placeholder="Mật khẩu" minlength="6" onkeyup="check_pass()" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-user" id="exampleRepeatPassword"
+                      placeholder="Nhập lại mật khẩu" onkeyup="check_pass()" required>
+                  </div>
+                </div>
+                <button type="submit" id="submit" class="btn btn-primary btn-user btn-block">Đăng ký tài khoản</button>
+
+                <hr>
+                <a href="#" class="btn btn-google btn-user btn-block">
+                  Đăng ký tài khoản Google
+                </a>
+                <a href="#" class="btn btn-facebook btn-user btn-block">
+                  Đăng ký tài khoản Facebook
+                </a>
+              </form>
+              <hr>
+              <div class="text-center">
+                <a class="small" href="/auth/forgot-password">Quên mật khẩu?</a>
+              </div>
+              <div class="text-center">
+                <a class="small" href="/auth/login">Bạn đã có một tài khoản? Đăng nhập ngay!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
