@@ -1,7 +1,6 @@
 var authModel = require('../models/auth.model')
 
 module.exports.requireAuth = (req, res, next) => {
-  console.log(req.signedCookies)
   if (!req.signedCookies.userId) {
     res.redirect('/auth/login')
     return
@@ -11,7 +10,6 @@ module.exports.requireAuth = (req, res, next) => {
   var checkId = authModel.checkId(req.signedCookies.userId);
   checkId
     .then(user => {
-      console.log(user.rowCount)
       if (user.rowCount === 0) {
         res.redirect("/auth/login");
         return;

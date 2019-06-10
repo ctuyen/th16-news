@@ -21,8 +21,7 @@ module.exports = {
     var checkEmail = authModel.checkEmail(email);
 
     checkEmail.then(users => {
-      var num = users.rowCount;
-      if (num === 0) {
+      if (users.rowCount === 0) {
         res.render("auth/login", {
           errors: ["Người dùng không tồn tại."],
           values: req.body,
@@ -42,7 +41,9 @@ module.exports = {
       }
 
       res.cookie("userId", users.rows[0].id, {
-        signed: true
+        signed: true,
+        expires: 0,
+        httpOnly: true
       });
       res.redirect("/");
     }).catch(err => {
@@ -65,8 +66,7 @@ module.exports = {
 
     checkEmail
       .then(users => {
-        var num = users.rowCount;
-        if (num > 0) {
+        if (users.rowCount > 0) {
           res.render("auth/register", {
             errors: ["Địa chỉ mail đã tồn tại. Thử đăng nhập!"],
             layout: false
@@ -81,5 +81,39 @@ module.exports = {
       });
     
     //continue 
+  },
+
+  forgotpass: (req, res) => {
+    res.render('auth/forgot-password', {
+      layout: false
+    })
+  },
+
+  postForgotpass: (req, res) => {
+    let email = req.body.email
+
+    var checkEmail = authModel.checkEmail(email);
+
+    checkEmail
+      .then(users => {
+        if (users.rowCount == 0) {
+          res.render("auth/forgot-password", {
+            layout: false,
+            notices: ["Địa chỉ mail chưa được đăng kí. Đăng kí ngay!"]
+          });
+        }
+        else {
+          res.render("auth/forgot-password", {
+            layout: false,
+            notices: ["Một mail xác nhận đã được gửi vào hộp thư của bạn. Kiểm tra ngay!"]
+          });
+        }
+
+        // res.redirect("/auth/login");
+      })
+      .catch(err => {
+        throw err
+      });
+
   }
 };

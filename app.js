@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 let express = require("express");
 let exphbs = require("express-handlebars");
 let bodyParser = require("body-parser");
@@ -26,7 +28,7 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(cookieParser("ahihi@69oifHFh")); //
+app.use(cookieParser(process.env.SESSION_SECRET)); // SESSION_SECRET variable in .env
 
 //MAIN----------------------------------------------------
 app.use('/', require('./routes/main/index.route'));
