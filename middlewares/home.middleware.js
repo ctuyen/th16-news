@@ -1,14 +1,31 @@
-var categoriesModel = require('../models/categories.model');
-var express = require('express');
-var router = express.Router();
+var categoriesModel = require("../models/categories.model");
 
-router.get('/',(req,res)=>{
-    var p = categoriesModel.load();
-    p.then(data=>{
-        var rows = data.rows;
-        var
-    }).catch(err=>{console.log(err);})
-})
+module.exports = (req, res, next) => {
+  categoriesModel.all().then(data => {
+    var cats = data.rows;
 
+    var listCat = [];
+    cats.forEach(cat => {
+      if (cat.idcategory == null) {
+        var temp = [cat];
+        listCat.push(temp);
+      }
+    });
 
-module.exports= router;
+    cats.forEach(cat => {
+      if (cat.idcategory != null) {
+        listCat.forEach(list => {
+          if (cat.idcategory == list[0].id) {
+            list.push(cat);
+          }
+        });
+      }
+    });
+    for (const list of listCat) {
+      if (list.length == 1) list.isSingle = true;
+    }
+    res.locals.lObjCategories = listCat;
+    // console.log(listCat);
+    next();
+  });
+};

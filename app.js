@@ -28,6 +28,9 @@ app.set("views", "./views");
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser("ahihi@69oifHFh")); //
 
+//load categories mdw-------------------------------------
+app.use(require('./middlewares/home.middleware'));
+
 //MAIN----------------------------------------------------
 app.use('/', require('./routes/main/index.route'));
 

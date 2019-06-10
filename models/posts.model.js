@@ -1,27 +1,42 @@
-var db = require('../utils/db');
+var db = require("../utils/db");
 
 module.exports = {
-    all: ()=>{
-        return db.load('select * from posts');
-    },
+  all: () => {
+    return db.load("select * from posts");
+  },
 
-    allByCat: id =>{
-        return db.load(`select * from posts where idCategory = ${id}`);
-    },
+  allByCat: id => {
+    return db.load(`select * from posts where idCategory = ${id}`);
+  },
 
-    single: id =>{
-        return db.load(`select * from posts where id = ${id}`);
-    },
+  single: id => {
+    return db.load(`select * from posts where id = ${id}`);
+  },
 
-    add: entity =>{
-        return db.add('posts',entity);
-    },
+  singleWithDetal: id => {
+    var sql = `select p.id, p.title, p.summary, p.content, p.urlthumbnail, p.view, p.writingdate, p.publicationdate, u.fullname as writer, p.idcategory, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.id = ${id} and p.idwriter=u.id and p.idcategory=c.id`;
+    return db.load(sql);
+  },
 
-    update: entity =>{
-        return db.update('posts','id', entity);
-    },
+  add: entity => {
+    return db.add("posts", entity);
+  },
 
-    delete: id =>{
-        return db.delete('posts','id', id);
-    },
+  update: entity => {
+    return db.update("posts", "id", entity);
+  },
+
+  delete: id => {
+    return db.delete("posts", "id", id);
+  },
+
+  loadTag: id => {
+    var sql = `select t.name as tagname from tag as t, tagpost as tp where t.id = tp.idtag and tp.idpost=${id}`;
+    return db.load(sql);
+  },
+  
+  loadComment: id => {
+    var sql = `select fullname, urlavatar, commentdate, content from comment as cm, users as u where cm.iduser = u.id and cm.idpost = ${id}`;
+    return db.load(sql);
+  }
 };
