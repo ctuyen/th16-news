@@ -38,5 +38,10 @@ module.exports = {
   loadComment: id => {
     var sql = `select fullname, urlavatar, commentdate, content from comment as cm, users as u where cm.iduser = u.id and cm.idpost = ${id}`;
     return db.load(sql);
+  },
+
+  allWithStatus: status => {
+    var sql = `select * from posts where status = '${status}'`;
+    return db.load(sql);
   }
 };

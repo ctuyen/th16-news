@@ -33,125 +33,41 @@
     <div class="tab-content" id="v-pills-tabContent">
       <div class="tab-pane fade show active" id="approved" role="tabpanel" aria-labelledby="v-pills-home-tab">
         <div class="posts">
-          <!-- Post -->
-          <div class="post_item post_h_large">
-            <diviii class="row">
-              <div class="col-lg-5">
-                <div class="post_image"><img src="/images/post_h_1.jpg" alt="https://unsplash.com/@jmckinven">
-                </div>
-              </div>
-              <div class="col-lg-7">
-                <div class="post_content">
-                  <div class="post_category cat_technology"><a href="../category.html">technology</a></div>
-                  <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                    <div class="tag"><a href="../category.html">#công nghệ</a></div>
-                    <div class="tag"><a href="../category.html">#design</a></div>
-                    <div class="tag"><a href="../category.html">#travel</a></div>
-                    <div class="tag"><a href="../category.html">#video</a></div>
+          {{#each draftPosts}}
+            <!-- Post -->
+            <div class="post_item post_h_large">
+              <diviii class="row">
+                <div class="col-lg-5">
+                  <div class="post_image"><img src="{{this.urlthumbnail}}" alt="post_image">
                   </div>
-                  <div class="post_title"><a href="single.html">The new Apple release
-                      ceremony</a></div>
-                  <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                    <div class="post_author d-flex flex-row align-items-center justify-content-start">
-                      <div>
-                        <div class="post_author_image"><img src="/images/author_1.jpg" alt=""></div>
-                      </div>
-                      <div class="post_author_name"><a href="#">Michael Smith</a>
-                      </div>
+                </div>
+                <div class="col-lg-7">
+                  <div class="post_content">
+                    <div class="post_category cat_technology"><a href="../category.html">{{this.category}}</a></div>
+                    <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                      {{#each tags}}
+                        <div class="tag"><a href="#">#{{this}}</a></div>
+                      {{/each}}
                     </div>
-                    <div class="post_date"><a href="#">29 April 2018</a></div>
-                  </div>
-                  <div class="post_text">
-                    <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet
-                      tempor cursus. Nullam
-                      vestibulum convallis risus vel condimentum. Nullam auctor lorem
-                      in libero luctus, vel volutpat
-                      quam tincidunt.</p>
-                  </div>
-                </div>
-                <div class="btn">Xuất bản</div>
-              </div>
-          </div>
-          <!-- Post -->
-          <div class="post_item post_h_large">
-            <div class="row">
-              <div class="col-lg-5">
-                <div class="post_image"><img src="/images/post_h_1.jpg" alt="https://unsplash.com/@jmckinven">
-                </div>
-              </div>
-              <div class="col-lg-7">
-                <div class="post_content">
-                  <div class="post_category cat_technology"><a href="../category.html">technology</a></div>
-                  <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                    <div class="tag"><a href="../category.html">#công nghệ</a></div>
-                    <div class="tag"><a href="../category.html">#design</a></div>
-                    <div class="tag"><a href="../category.html">#travel</a></div>
-                    <div class="tag"><a href="../category.html">#video</a></div>
-                  </div>
-                  <div class="post_title"><a href="single.html">The new Apple release
-                      ceremony</a></div>
-                  <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                    <div class="post_author d-flex flex-row align-items-center justify-content-start">
-                      <div>
-                        <div class="post_author_image"><img src="/images/author_1.jpg" alt=""></div>
+                    <div class="post_title"><a href="single.html">{{this.title}}</a></div>
+                    <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                      <div class="post_author d-flex flex-row align-items-center justify-content-start">
+                        <div>
+                          <div class="post_author_image"><img src="{{this.urlAvatar}}" alt="author_avatar" width="16"></div>
+                        </div>
+                        <div class="post_author_name"><a href="#">{{this.writer}}</a>
+                        </div>
                       </div>
-                      <div class="post_author_name"><a href="#">Michael Smith</a>
-                      </div>
+                      <div class="post_date"><a href="#">{{this.date}}</a></div>
                     </div>
-                    <div class="post_date"><a href="#">29 April 2018</a></div>
+                    <div class="post_text">
+                      <p>{{this.summary}}</p>
+                    </div>
                   </div>
-                  <div class="post_text">
-                    <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet
-                      tempor cursus. Nullam
-                      vestibulum convallis risus vel condimentum. Nullam auctor lorem
-                      in libero luctus, vel volutpat
-                      quam tincidunt.</p>
-                  </div>
+                  <div class="btn">Xuất bản</div>
                 </div>
-                <div class="btn">Xuất bản</div>
-              </div>
             </div>
-          </div>
-          <!-- Post -->
-          <div class="post_item post_h_large">
-            <div class="row">
-              <div class="col-lg-5">
-                <div class="post_image"><img src="/images/post_h_1.jpg" alt="https://unsplash.com/@jmckinven">
-                </div>
-              </div>
-              <div class="col-lg-7">
-                <div class="post_content">
-                  <div class="post_category cat_technology"><a href="../category.html">technology</a></div>
-                  <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                    <div class="tag"><a href="../category.html">#công nghệ</a></div>
-                    <div class="tag"><a href="../category.html">#design</a></div>
-                    <div class="tag"><a href="../category.html">#travel</a></div>
-                    <div class="tag"><a href="../category.html">#video</a></div>
-                  </div>
-                  <div class="post_title"><a href="single.html">The new Apple release
-                      ceremony</a></div>
-                  <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                    <div class="post_author d-flex flex-row align-items-center justify-content-start">
-                      <div>
-                        <div class="post_author_image"><img src="/images/author_1.jpg" alt=""></div>
-                      </div>
-                      <div class="post_author_name"><a href="#">Michael Smith</a>
-                      </div>
-                    </div>
-                    <div class="post_date"><a href="#">29 April 2018</a></div>
-                  </div>
-                  <div class="post_text">
-                    <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet
-                      tempor cursus. Nullam
-                      vestibulum convallis risus vel condimentum. Nullam auctor lorem
-                      in libero luctus, vel volutpat
-                      quam tincidunt.</p>
-                  </div>
-                </div>
-                <div class="btn">Xuất bản</div>
-              </div>
-            </div>
-          </div>
+          {{/each}}
         </div>
 
       </div>

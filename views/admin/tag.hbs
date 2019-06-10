@@ -54,48 +54,16 @@
             <th>Tên</th>
             <th>Tác vụ</th>
           </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Thời sự</td>
-            <td>
-              <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name2"></td>
-            <td>Công nghệ</td>
-            <td>
-              <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name3"></td>
-            <td>Giải trí</td>
-            <td>
-              <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Thời sự</td>
-            <td>
-              <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name2"></td>
-            <td>Công nghệ</td>
-            <td>
-              <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name3"></td>
-            <td>Giải trí</td>
-            <td>
-              <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
-            </td>
-          </tr>
+
+          {{#each tags}}
+            <tr>
+              <td><input type="checkbox" name="{{this.id}}"></td>
+              <td>{{this.name}}</td>
+              <td>
+                <div class="btn btn-primary" data-toggle="modal" data-target="#tagModal">Chỉnh sửa</div>
+              </td>
+            </tr>
+          {{/each}}
         </table>
         <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
       </div>
