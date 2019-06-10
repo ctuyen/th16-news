@@ -74,7 +74,7 @@
 									<!-- <div class="sub_button text-center" ><a href="javascript:;">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div> -->
 									<div class="header_social ml-auto">
 
-										<div class="sub_button text-center"><a href="login.html">{{user.fullname}}</a>
+										<div class="sub_button text-center"><a href="login.html">đăng nhập</a>
 											<div class="d-flex flex-row align-items-start justify-content-start">
 												<div></div>
 												<div></div>
@@ -137,56 +137,34 @@
 									<nav class="main_nav">
 										<ul
 											class="main_nav_list d-flex flex-row align-items-center justify-content-start">
+											{{#each categories}}
+											{{#if isSingle}}
 											<li class="nav-item active">
-												<a class="nav-link" href="/categories">thế giới</a>
+												<a class="nav-link" href="/categories/{{0.id}}">{{0.name}}</a>
 											</li>
+											{{else}}
+											<li class="nav-item dropdown">
+												<a class="nav-link dropdown-toggle" href="javascript:;"
+													id="navbarDropdown" role="button" data-toggle="dropdown"
+													aria-haspopup="true" aria-expanded="false">
+													{{0.name}}
+												</a>
+												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+													<a class="dropdown-item" href="/categories/{{0.id}}">{{0.name}}</a>
+													<div class="dropdown-divider"></div>
+													{{#each this}}
+														{{#if @index}}
+															<a class="dropdown-item" href="/categories/{{id}}">{{name}}</a>			
+														{{/if}}																								
+													{{/each}}
+												</div>
+											</li>
+											{{/if}}
+											{{/each}}
 
-											<li class="nav-item">
-												<a class="nav-link" href="/categories">sức khỏe</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="/categories">công nghệ</a>
-											</li>
 
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle" href="javascript:;"
-													id="navbarDropdown" role="button" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													kinh doanh
-												</a>
-												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="/categories">kinh doanh</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="/categories">Nông sản</a>
-													<a class="dropdown-item" href="/categories">Hải sản</a>
-												</div>
-											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle" href="javascript:;"
-													id="navbarDropdown" role="button" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													Thể thao
-												</a>
-												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="/categories">Thể thao</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="/categories">trong nước</a>
-													<a class="dropdown-item" href="/categories">ngoài nước</a>
-												</div>
-											</li>
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle" href="javascript:;"
-													id="navbarDropdown" role="button" data-toggle="dropdown"
-													aria-haspopup="true" aria-expanded="false">
-													du lịch
-												</a>
-												<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="/categories">du lịch</a>
-													<div class="dropdown-divider"></div>
-													<a class="dropdown-item" href="/categories">trong nước</a>
-													<a class="dropdown-item" href="/categories">ngoài nước</a>
-												</div>
-											</li>
+
+
 										</ul>
 										<!-- <ul class="main_nav_list d-flex flex-row align-items-center justify-content-start">
 										<li><a href="/">thế giới</li>
@@ -270,7 +248,7 @@
 
 
 		<!-- Content Container -->
-		
+
 		{{{body}}}
 
 		<!-- Footer -->

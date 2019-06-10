@@ -4,23 +4,47 @@ var postmodel = require("../../models/posts.model");
 var router = express.Router();
 
 // router.get("/", (req, res) => {
-//   res.render("main/post", {
-//     titlePage: "SaladNews - danh mục",
-//     stylePage: "category",
-//     stylePageResponsive: "category_responsive"
-//   });
-// });
+//   var cats = res.locals.lObjCategories;
 
+//   var p = postmodel.singleWithDetal(1);
+//   p.then(data => {
+//     var post = data.rows[0];
+//     console.log(post);
+//     res.end("hum");
+//   }).catch(err => {
+//     console.log(err);
+//   })
+// });
 router.get("/", (req, res) => {
-  var p = postmodel.single(1);
+  var cats = res.locals.lObjCategories;
+
+  var p = postmodel.singleWithDetal(1);
   p.then(data => {
     var post = data.rows[0];
-    // console.log(post);
-    res.render("main/post", {
-      titlePage: `SaladNews - post`,
-      stylePage: "single",
-      stylePageResponsive: "single_responsive",
-      post
+
+    var p1 = postmodel.loadTag(post.id);
+    p1.then(data1 => {
+      var tags = data1.rows;
+
+      var p2 = postmodel.loadComment(post.id);
+      p2.then(data2 => {
+        var comments = data2.rows;
+        // console.log(comments);
+        // });
+        res.render("main/post", {
+          titlePage: `SaladNews - ${post.title}`,
+          stylePage: "single",
+          stylePageResponsive: "single_responsive",
+          post,
+          tags,
+          comments,
+          categories: cats
+        });
+      }).catch(err => {
+        console.log(err);
+      });
+    }).catch(err => {
+      console.log(err);
     });
   }).catch(err => {
     console.log(err);
@@ -28,15 +52,41 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:idPost", (req, res) => {
-
+  var cats = res.locals.lObjCategories;
   var idPost = req.params.idPost;
-  var p = postmodel.single(idPost);
+  var p = postmodel.singleWithDetal(idPost);
   p.then(data => {
     var post = data.rows[0];
-    res.render("main/post", {
-      titlePage: `SaladNews - ${idPost}`,
-      stylePage: "single",
-      stylePageResponsive: "single_responsive"
+    // console.log(post);
+    // var category
+    // console.log(post);
+    // for (const c in res.locals.lcCategories) {
+    //   if(c.id == post.idcategory)
+
+    // }
+    var p1 = postmodel.loadTag(post.id);
+    p1.then(data1 => {
+      var tags = data1.rows;
+
+      var p2 = postmodel.loadComment(post.id);
+      p2.then(data2 => {
+        var comments = data2.rows;
+        // console.log(comments);
+        // });
+        res.render("main/post", {
+          titlePage: `SaladNews - ${post.title}`,
+          stylePage: "single",
+          stylePageResponsive: "single_responsive",
+          post,
+          tags,
+          comments,
+          categories: cats
+        });
+      }).catch(err => {
+        console.log(err);
+      });
+    }).catch(err => {
+      console.log(err);
     });
   }).catch(err => {
     console.log(err);
