@@ -11,8 +11,8 @@ module.exports = {
         return db.load(sql);
     },
 
-    checkPassword: (email, password) => {
-        var sql =`select * from users where users.email = '${email}' and password = '${password}'`;
+    getPassword: (email) => {
+        var sql =`select password from users where users.email = '${email}'`;
         return db.load(sql);    
     }
 }

@@ -105,6 +105,11 @@ table {
 
 .form-item select.parent {
     width: 435px;
+    height: 32px;
+}
+
+.form-item select.larger {
+    width: 435px;
     height: 60px;
 }
 

@@ -1,4 +1,5 @@
 var authModel = require("../models/auth.model");
+var userModel = require('../models/users.model')
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -21,7 +22,7 @@ module.exports = {
     var checkEmail = authModel.checkEmail(email);
 
     checkEmail.then(users => {
-      if (users.rowCount === 0) {
+      if (users.rowCount == 0) {
         res.render("auth/login", {
           errors: ["Người dùng không tồn tại."],
           values: req.body,
@@ -29,25 +30,31 @@ module.exports = {
         });
         return;
       }
-      
-      //just test
-      if (!bcrypt.compareSync(password, "$2b$10$EOBbzOfvHlffVfm8LN1Dmunv6nqlrwCMArFadM1swYlDrMln9EMm6")) {
-        res.render("auth/login", {
-          errors: ["Nhập sai mật khẩu."],
-          values: req.body,
-          layout: false
-        })
-        return
-      }
 
-      res.cookie("userId", users.rows[0].id, {
-        signed: true,
-        expires: 0,
-        httpOnly: true
-      });
-      res.redirect("/");
-    }).catch(err => {
-      console.log(err);
+      authModel.getPassword(email)
+        .then(hashedPassword => {
+          if (!bcrypt.compareSync(password, hashedPassword.rows[0].password)) {
+            res.render("auth/login", {
+              errors: ["Nhập sai mật khẩu."],
+              values: req.body,
+              layout: false
+            })
+            return
+          }
+
+          res.cookie("userId", users.rows[0].id, {
+            signed: true,
+            expires: 0,
+            httpOnly: true
+          });
+          res.redirect("/");
+        })
+        .catch(err => {
+          throw err
+        })
+    })
+    .catch(err => {
+      throw err
     });
   },
 
@@ -58,11 +65,13 @@ module.exports = {
   },
 
   postRegister: (req, res) => {
-    let email = req.body.email
-    let password = req.body.password
-    let fullName = `${req.body.firstName} ${req.body.lastName}`;
+    let entity = {}
+    entity.email = req.body.email
+    entity.fullName = `${req.body.firstName} ${req.body.lastName}`
+    entity.position = 'user'
+    entity.urlAvatar = '/images/no_image.png'
 
-    var checkEmail = authModel.checkEmail(email);
+    var checkEmail = authModel.checkEmail(req.body.email);
 
     checkEmail
       .then(users => {
@@ -74,13 +83,21 @@ module.exports = {
           return;
         }
 
-        res.redirect("/auth/login");
+        entity.password = bcrypt.hashSync(req.body.password, saltRounds);
+
+        userModel.add(entity)
+          .then(
+            res.redirect("/auth/login")
+          )
+          .catch(err => {
+            res.redirect("/auth/register");
+            throw err
+          })
       })
       .catch(err => {
         throw err
       });
-    
-    //continue 
+
   },
 
   forgotpass: (req, res) => {
