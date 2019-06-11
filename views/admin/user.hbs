@@ -69,61 +69,20 @@
             <th>Vai trò</th>
             <th>Tác vụ</th>
           </tr>
+
+          {{#each this.data.staffs as |staff|}}
           <tr>
             <td><input type="checkbox" name="name1"></td>
-            <td>Nguyễn Văn A</td>
-            <td>abc@gmail.com</td>
-            <td>Admin</td>
+            <td>{{staff.fullname}}</td>
+            <td>{{staff.email}}</td>
+            <td>{{staff.position}}</td>
             <td>
               <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa</div>
             </td>
           </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Lê Văn B</td>
-            <td>hgfd@gmail.com</td>
-            <td>Phóng viên</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Thị C</td>
-            <td>fdsa@gmail.com</td>
-            <td>Biên tập viên</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Nguyễn Văn A</td>
-            <td>abc@gmail.com</td>
-            <td>Admin</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Lê Văn B</td>
-            <td>hgfd@gmail.com</td>
-            <td>Phóng viên</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Thị C</td>
-            <td>fdsa@gmail.com</td>
-            <td>Biên tập viên</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa</div>
-            </td>
-          </tr>
+          {{/each}}
         </table>
+
         <!-- Button modal trigger -->
         <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
       </div>
@@ -141,33 +100,23 @@
             <th>Chuyên mục</th>
             <th>Tác vụ</th>
           </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Nguyễn Văn A</td>
-            <td>abc@gmail.com</td>
-            <td>Thời sự</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Lê Văn B</td>
-            <td>hgfd@gmail.com</td>
-            <td>Kinh tế</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal">Chỉnh sửa</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Thị C</td>
-            <td>fdsa@gmail.com</td>
-            <td>Giải trí</td>
-            <td>
-              <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal">Chỉnh sửa</div>
-            </td>
-          </tr>
+
+          {{#each this.data.editers as |editer|}}
+            <tr>
+              <td><input type="checkbox" name="name1"></td>
+              <td>{{editer.fullname}}</td>
+              <td>{{editer.email}}</td>
+              <td>
+                {{#each editer.category as |category|}}
+                  {{category}} | 
+                {{/each}}
+              </td>
+              <td>
+                <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal">Chỉnh sửa</div>
+              </td>
+            </tr>
+          {{/each}}
+
         </table>
         <!-- Button modal trigger -->
         <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
@@ -186,87 +135,18 @@
             <th>Ngày hết hạn</th>
             <th>Tác vụ</th>
           </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Nguyễn Văn A</td>
-            <td>abc@gmail.com</td>
-            <td>21/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Lê Văn B</td>
-            <td>hgfd@gmail.com</td>
-            <td>1/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Thị C</td>
-            <td>fdsa@gmail.com</td>
-            <td>13/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Nguyễn Văn D</td>
-            <td>ytrwe@gmail.com</td>
-            <td>1/4/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Kim E</td>
-            <td>fdegd@gmail.com</td>
-            <td>3/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Lê Văn B</td>
-            <td>hgfd@gmail.com</td>
-            <td>1/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Thị C</td>
-            <td>fdsa@gmail.com</td>
-            <td>13/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Nguyễn Văn D</td>
-            <td>ytrwe@gmail.com</td>
-            <td>1/4/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" name="name1"></td>
-            <td>Trần Kim E</td>
-            <td>fdegd@gmail.com</td>
-            <td>3/5/2019</td>
-            <td>
-              <div class="btn action">Gia hạn</div>
-            </td>
-          </tr>
+
+          {{#each this.data.users as |user|}}
+            <tr>
+              <td><input type="checkbox" name="name1"></td>
+              <td>{{user.fullname}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.expirationdate}}</td>
+              <td>
+                <div class="btn action">Gia hạn</div>
+              </td>
+            </tr>
+          {{/each}}
         </table>
         <!-- Button modal trigger -->
         <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
@@ -353,10 +233,10 @@
               </div>
               <div class="form-item">
                 <label for="parent">Chuyên mục</label>
-                <select name="parent" id="parent" class="parent">
-                  <option value="1">Thời sự</option>
-                  <option value="2">Kinh tế</option>
-                  <option value="3">Giải trí</option>
+                <select name="parent" id="parent" class="parent" multiple>
+                  {{#each this.data.categories as |cate|}}
+                    <option value="{{cate.id}}">{{cate.name}}</option>
+                  {{/each}}
                 </select>
               </div>
             </form>

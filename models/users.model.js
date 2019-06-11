@@ -19,5 +19,21 @@ module.exports = {
 
   delete: id => {
     return db.delete("users", "id", id);
+  },
+
+  allStaff: () => {
+    return db.load(`select * from users where position <> 'user'`);
+  },
+
+  allUser: () => {
+    return db.load(`select * from users where position = 'user'`);
+  },
+
+  allEditer: () => {
+    return db.load(`select * from users where position = 'editor'`)
+  },
+
+  catesOfEditer: (id) => {
+    return db.load(`select * from editor where idEditor = ${id}`)
   }
 }

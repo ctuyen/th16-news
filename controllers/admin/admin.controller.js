@@ -28,18 +28,57 @@ module.exports = {
       })
   },
 
-  user: (req, res) => {
+  user: async (req, res) => {
+    // staffs, cate of editor, all users
+    var data = {}
 
-    users
-      .then(data => {
+    var staffs = await userModel.allStaff();
+    var users = await userModel.allUser();
+    var editers = await userModel.allEditer();
+    var categories = await categoryModel.all();
 
-      })
-      .catch(err => {
-        throw err
-      })
+    if (staffs.rowCount > 0) {
+      data.staffs = staffs.rows
+    }
+
+    if (users.rowCount > 0) {
+      data.users = users.rows
+    }
+
+    data.editers = []
+
+    for (let [index, editer] of editers.rows.entries()) {
+      let editerRender = {}
+      editerRender.fullname = editer.fullname;
+      editerRender.email = editer.email;
+      
+      let idCategory = await userModel.catesOfEditer(editer.id)
+      let category = []
+
+      if (idCategory.rowCount > 0) {
+        for (id of idCategory.rows) {
+          let cate = await categoryModel.single(id.idcategory)
+          category.push(cate.rows[0].name)
+        }
+      }
+
+      editerRender.category = category;
+      data.editers.push(editerRender);
+    }
+
+    if (categories.rowCount > 0) {
+      let categoriesRender = []
+      for (cate of categories.rows) {
+        categoriesRender.push({id: cate.id, name: cate.name})
+      }
+
+      data.categories = categoriesRender;
+    }
+
     res.render("admin/user", {
       title: 'Quản lí người dùng | Salad News',
-      layout: 'admin.hbs'
+      layout: 'admin.hbs',
+      data
     });
   },
 
@@ -61,7 +100,6 @@ module.exports = {
 
   post: (req, res) => {
     var posts = postModel.allWithStatus('draft')
-    var huhu = 1
 
     posts
       .then(async data => {
@@ -90,6 +128,7 @@ module.exports = {
           });
 
           draftPosts[index].date = date;
+
           if (category.rowCount > 0) {
             draftPosts[index].category = category.rows[0].name;
           }
@@ -105,12 +144,12 @@ module.exports = {
           if (tags.rowCount > 0) {
             let tagsRender = []
             for (tag of tags.rows) {
-              tagsRender.push(tag.name)
+              tagsRender.push(tag.tagname)
             }
+
             draftPosts[index].tags = tagsRender;
           }
           
-          console.log(huhu++)
         }
 
         console.log('...done')
