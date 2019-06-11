@@ -4,7 +4,10 @@ module.exports = {
   all: () => {
     return db.load("select * from posts");
   },
-
+  allWithDetails: ()=>{
+    var sql = `select p.id, p.title, p.summary, p.content, p.urlthumbnail, p.view, p.writingdate, p.publicationdate, u.fullname as writer, p.idcategory, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.idwriter=u.id and p.idcategory=c.id`;
+    return db.load(sql);
+  },
   allByCat: id => {
     return db.load(`select * from posts where idCategory = ${id}`);
   },
