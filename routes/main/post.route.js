@@ -21,6 +21,7 @@ router.get("/", (req, res) => {
   var p = postmodel.singleWithDetal(1);
   p.then(data => {
     var post = data.rows[0];
+    post.urlthumbnail = post.urlthumbnail || "/images/no_image.png";
 
     var p1 = postmodel.loadTag(post.id);
     p1.then(data1 => {

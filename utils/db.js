@@ -9,48 +9,87 @@ var createConnection = () => {
 
 module.exports = {
   load: sql => {
-    return new Promise((resolve, reject) => {
-      var connection = createConnection();
-      connection.connect();
-      connection.query(sql, (error, results) => {
-        if (error) reject(error);
-        else resolve(results);
-        // console.log(results);
-        connection.end();
-      });
-    });
+      return new Promise((resolve, reject) => {
+          var connection = createConnection();
+          connection.connect();
+          connection.query(sql, (error, results) => {
+              if (error) reject(error);
+              else resolve(results);
+            //   console.log(results.rows);
+              connection.end();
+          });
+      })
   },
+  add: (table, entity) => {
+      var sql = `insert into ${table}`;
+      var cols = "(";
+      var numCols= "(";
+      Object.keys(entity).forEach((key, i) => {
+          cols += ` ${key},`;
+          numCols+= ` $${i + 1},`;
+      });
+      sql += cols;
+      sql = sql.substr(0, sql.length - 1);
+      sql += ') values ';
+      sql += numCols;
+      sql = sql.substr(0, sql.length - 1);
+      sql += ')';
+      // console.log(sql);
+      var values = Object.keys(entity).map((key) => {
+          return entity[key];
+      });
+      // console.log(values);
 
-  add: (tableName, entity) => {
-    return new Promise((resolve, reject) => {
-      var sql = `insert into ${tableName} set ?`;
       var connection = createConnection();
       connection.connect();
-      connection.query(sql, entity, (error, value) => {
-        if (error) reject(error);
-        else resolve(value.insertId);
-        //console.log(results);
-        connection.end();
-      });
-    });
-  },
+      return new Promise((resolve, reject) => {
 
-  update: (tableName, idField, entity) => {
-    return new Promise((resolve, reject) => {
-      var id = entity[idField];
-      delete entity[idField];
-      
-      var sql = `update ${tableName} set ? where ${idField} = ?`;
+          connection.query(sql, values, (error, results) => {
+              if (error) reject(error);
+              else resolve(results);
+              // console.log(results);
+              connection.end();
+          });
+      })
+  },
+  update: (table, entity) => {
+      var sql = `update ${table} set`;
+      Object.keys(entity).forEach((key, i) => {
+          sql += ` ${key} = $${i + 1},`;
+      });
+      sql = sql.substr(0, sql.length - 1);
+      sql += ` where id = ${entity.id}`;
+    //   console.log(sql);
+      var values = Object.keys(entity).map((key) => {
+          return entity[key];
+      });
+
+    //   console.log(values);
       var connection = createConnection();
       connection.connect();
-      connection.query(sql, [entity, id], (error, value) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(value.changedRows);
-        }
-        connection.end();
-      });
-    });
+      return new Promise((resolve, reject) => {
+
+          connection.query(sql, values, (error, results) => {
+              if (error) reject(error);
+              else resolve(results);
+              // console.log(results);
+              connection.end();
+          });
+      })
   },
-};
+  delete: (table, id) => {
+      var sql = `DELETE FROM ${table} WHERE id = ${id}`
+      var connection = createConnection();
+      connection.connect();
+      return new Promise((resolve, reject) => {
+          connection.query(sql, (err, value) => {
+              if (err)
+                  reject(err);
+              else
+                  resolve(value.affectedRows);
+              connection.end();
+          });
+
+      })
+  }
+}
