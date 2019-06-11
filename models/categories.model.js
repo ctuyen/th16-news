@@ -10,6 +10,12 @@ module.exports = {
         from categories c LEFT join posts p ON c.id = p.idCategory
         group by c.id, c.name`);
   },
+  allWithLimit: (offset,limit)=>{
+    return db.load(`select * from categories offset ${offset} limit ${limit}`);
+  },
+  HighestEachCat: ()=>{
+    
+  },
 
   single: id => {
     return db.load(`select * from categories where id = ${id}`);
