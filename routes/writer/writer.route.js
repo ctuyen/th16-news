@@ -5,6 +5,10 @@ const router = express.Router()
 
 
 router.get('/textEditor', controller.textEditor);
+router.post('/textEditor', controller.addPost);
+
+router.get('/textEditor/:id', controller.loadEditPost);
+router.post('/textEditor/update', controller.editPost);
 
 router.get("/pending", controller.pending);
 
@@ -15,3 +19,4 @@ router.get("/approved", controller.approved);
 router.get("/published", controller.published);
 
 module.exports = router
+

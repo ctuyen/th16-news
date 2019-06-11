@@ -27,11 +27,18 @@ app.set("view engine", "hbs");
 
 app.set("views", "./views");
 
+//new post
+app.use(express.json());
+app.use(express.urlencoded());
+
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser(process.env.SESSION_SECRET)); // SESSION_SECRET variable in .env
 
 //load categories mdw-------------------------------------
 app.use(require('./middlewares/home.middleware'));
+//middleware
+app.use(require('./middlewares/categories.mdw'));
+app.use(require('./middlewares/tag.mdw'));
 
 //MAIN----------------------------------------------------
 app.use('/', require('./routes/main/index.route'));

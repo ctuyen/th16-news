@@ -23,9 +23,9 @@ module.exports = {
   },
 
   update: entity => {
-    return db.update("posts", "id", entity);
+    return db.update("posts", entity);
   },
-
+  
   delete: id => {
     return db.delete("posts", "id", id);
   },
@@ -34,7 +34,7 @@ module.exports = {
     var sql = `select t.name as tagname from tag as t, tagpost as tp where t.id = tp.idtag and tp.idpost=${id}`;
     return db.load(sql);
   },
-  
+
   loadComment: id => {
     var sql = `select fullname, urlavatar, commentdate, content from comment as cm, users as u where cm.iduser = u.id and cm.idpost = ${id}`;
     return db.load(sql);

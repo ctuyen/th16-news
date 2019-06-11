@@ -43,14 +43,10 @@
                         <div class="col-lg-7">
                             <div class="post_content">
                                 <div>
-                                    <button class="btn btn-info pull-right" data-toggle="modal"
-                                        data-target="#modalAccept">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-edit"></i>
-                                        </span>
-                                        <span class="text"><a href="textEditor" style="color:white">Chỉnh
-                                                sửa</a></span>
-                                    </button>
+                                    <a class="btn btn-info pull-right" href="textEditor/{{id}}" role="button">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        Chỉnh sửa
+                                    </a>
                                     <div class="post_category cat_world"><a href="/categories">Công nghệ</a></div>
                                 </div>
                                 <div
@@ -69,7 +65,7 @@
                                                 class="post_date"><a href="#">Ngày giờ</a></div>
                                     </div>
                                     <div class="post_text">
-                                        <p>{{abstract}}</p>
+                                        <p>{{summary}}</p>
                                     </div>
                                 </div>
                             </div>
