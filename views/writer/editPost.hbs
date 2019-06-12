@@ -89,8 +89,10 @@
 
   <script>
     $(document).ready(function () {
-      var HTMLstring = '<div>' + $('#content').val() + '</div>';
-      $('#summernote').summernote('pasteHTML', HTMLstring);
+      var HTMLstring = $('#content').val();
+      $(".note-editable").empty();
+      $(".note-editable").append(`${HTMLstring}`);
+
     });
   </script>
 

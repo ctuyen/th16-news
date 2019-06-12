@@ -54,6 +54,7 @@ module.exports = {
       reason: req.body.reason,
       status: 'deny'
     };
+    // console.log(entity);
     postModel
       .update(entity)
       .then(Post => {

@@ -151,7 +151,8 @@ module.exports = {
       idCategory: parseInt(req.body.category)
     };
     var tagList = req.body.tag;
-    console.log(tagList);
+    // console.log(tagList);
+    // console.log(entity);
     postModel
       .update(entity)
       .then(Post => {
