@@ -1,3 +1,6 @@
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 var categoryModel = require("../../models/categories.model");
 var tagModel = require("../../models/tags.model");
 var postModel = require("../../models/posts.model");
@@ -69,7 +72,10 @@ module.exports = {
     if (categories.rowCount > 0) {
       let categoriesRender = [];
       for (cate of categories.rows) {
-        categoriesRender.push({ id: cate.id, name: cate.name });
+        categoriesRender.push({
+          id: cate.id,
+          name: cate.name
+        });
       }
 
       data.categories = categoriesRender;
@@ -97,6 +103,7 @@ module.exports = {
         throw err;
       });
   },
+
   post: (req, res) => {
     var p = postModel.allWithDetails();
     p.then(async data => {
@@ -113,15 +120,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
           }
         );
 
-        console.log(post);
       }
       res.render("admin/post", {
         title: "Quản lí bài đăng | Salad News",
@@ -129,73 +134,61 @@ module.exports = {
         posts
       });
     }).catch(err => console.log(err));
+  },
+
+  postCategory: (req, res) => {
+    if (req.body.tagname === '') {
+      res.redirect("/admin/category")
+      return
+    }
+
+    let entity = {}
+    entity.name = req.body.tagname;
+    if (req.body.parent != "0") {
+      entity.idCategory = req.body.parent;
+    }
+
+    categoryModel.add(entity)
+      .then(
+        res.redirect("/admin/category")
+      )
+      .catch(err => {
+        throw err
+      })
+  },
+
+  postTag: (req, res) => {
+    let entity = {}
+    entity.name = req.body.tagname
+    tagModel.add(entity)
+      .then(
+        res.redirect('/admin/tag')
+      )
+      .catch(err => {
+        throw err
+      })
+
+
+  },
+
+  postUser: (req, res) => {
+    let entity = {}
+    entity.fullname = req.body.name
+    entity.email = req.body.email
+    entity.position = req.body.position
+    entity.password = bcrypt.hashSync(req.body.password, saltRounds);
+
+    userModel.add(entity)
+      .then(
+        res.redirect('user')
+      )
+      .catch(err => {
+        throw err
+      })
+
+  },
+
+  postPost: (req, res) => {
+
   }
-
-  // post: (req, res) => {
-  //   var posts = postModel.allWithStatus("draft");
-
-  //   posts
-  //     .then(async data => {
-  //       //console.log(data.rows)
-  //       //render: date, writer, category
-  //       var draftPosts = data.rows;
-
-  //       for (let [index, post] of data.rows.entries()) {
-  //         // [writer, category, tags] = function() {
-  //         //   let writer = userModel.single(post.idwriter)
-  //         //   let category = categoryModel.single(post.idcategory)
-  //         //   let tags = postModel.loadTag(post.id)
-
-  //         //   return [writer, category, tags]
-  //         // }
-
-  //         let writer = await userModel.single(post.idwriter);
-  //         let category = await categoryModel.single(post.idcategory);
-  //         let tags = await postModel.loadTag(post.id);
-
-  //         let date = new Date(`${post.writingdate}`).toLocaleDateString(
-  //           "vi-VI",
-  //           {
-  //             day: "numeric",
-  //             month: "short",
-  //             year: "numeric"
-  //           }
-  //         );
-
-  //         draftPosts[index].date = date;
-
-  //         if (category.rowCount > 0) {
-  //           draftPosts[index].category = category.rows[0].name;
-  //         }
-
-  //         if (writer.rowCount > 0) {
-  //           draftPosts[index].writer = writer.rows[0].fullname;
-  //           draftPosts[index].urlAvatar =
-  //             "https://res.cloudinary.com/ctuyen/image/upload/v1560189828/th16-news/thing-654750_960_720.png"; //writer.rows[0].urlavatar;
-  //         } else {
-  //           draftPosts[index].writer = "No name";
-  //         }
-
-  //         if (tags.rowCount > 0) {
-  //           let tagsRender = [];
-  //           for (tag of tags.rows) {
-  //             tagsRender.push(tag.tagname);
-  //           }
-
-  //           draftPosts[index].tags = tagsRender;
-  //         }
-  //       }
-
-  //       console.log("...done");
-
-  //       res.render("admin/post", {
-  //         title: "Quản lí bài đăng | Salad News",
-  //         layout: "admin.hbs",
-  //         draftPosts
-  //       });
-  //     })
-  //     .catch(err => {
-  //       throw err;
-  //     });
-  // }
 };
