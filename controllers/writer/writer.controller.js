@@ -23,7 +23,7 @@ module.exports = {
   },
 
   denied: (req, res) => {
-    var p = postModel.allWithStatus('denied');
+    var p = postModel.allWithStatus('deny');
     p.then(data => {
       res.render("writer/denied", {
         layout: "writer.hbs",
@@ -36,7 +36,7 @@ module.exports = {
   },
 
   approved: (req, res) => {
-    var p = postModel.allWithStatus('approved');
+    var p = postModel.allWithStatusTime('accept', '>');
     p.then(data => {
       res.render("writer/approved", {
         layout: "writer.hbs",
@@ -49,7 +49,7 @@ module.exports = {
   },
 
   published: (req, res) => {
-    var p = postModel.allWithStatus('published');
+    var p = postModel.allWithStatusTime('accept', '<=');
     p.then(data => {
       res.render("writer/published", {
         layout: "writer.hbs",
@@ -147,6 +147,7 @@ module.exports = {
       summary: req.body.summary,
       content: req.body.content,
       urlThumbnail: thumbnail,
+      status: 'draft',
       idCategory: parseInt(req.body.category)
     };
     var tagList = req.body.tag;

@@ -7,15 +7,15 @@ module.exports = {
 
   allWithDetails: () => {
     return db.load(`select c.id as CatId, c.name, count(p.id) as numOfPosts
-        from categories c LEFT join posts p ON c.id = p.idCategory
-        group by c.id, c.name`);
+                  from categories c left join 
+                  (select * from posts where status = 'draft' and isDelete = false) p 
+                  on c.id = p.idCategory
+                  group by c.id, c.name`);
   },
-  allWithLimit: (offset,limit)=>{
+  allWithLimit: (offset, limit) => {
     return db.load(`select * from categories offset ${offset} limit ${limit}`);
   },
-  HighestEachCat: ()=>{
-    
-  },
+  HighestEachCat: () => {},
 
   single: id => {
     return db.load(`select * from categories where id = ${id}`);

@@ -2,18 +2,18 @@ var db = require("../utils/db");
 
 module.exports = {
   all: () => {
-    return db.load("select * from posts");
+    return db.load("select * from posts where isDelete = false");
   },
   allWithDetails: ()=>{
     var sql = `select p.id, p.title, p.summary, p.content, p.urlthumbnail, p.view, p.writingdate, p.publicationdate, u.fullname as writer, p.idcategory, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.idwriter=u.id and p.idcategory=c.id`;
     return db.load(sql);
   },
   allByCat: id => {
-    return db.load(`select * from posts where idCategory = ${id}`);
+    return db.load(`select * from posts where idCategory = ${id} and status = 'draft'`);
   },
 
   single: id => {
-    return db.load(`select * from posts where id = ${id}`);
+    return db.load(`select * from posts where id = ${id} and isDelete = false`);
   },
 
   singleWithDetal: id => {
@@ -44,7 +44,12 @@ module.exports = {
   },
 
   allWithStatus: status => {
-    var sql = `select * from posts where status = '${status}'`;
+    var sql = `select * from posts where status = '${status}' and isDelete = false`;
+    return db.load(sql);
+  },
+
+  allWithStatusTime: (status, compare )=> {
+    var sql = `select * from posts where status = '${status}' and isDelete = false and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   }
 };
