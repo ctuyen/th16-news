@@ -67,98 +67,11 @@
             {{{body}}}
         </div>
     </div>
-    <!-- modal accept -->
-    <div class="modal fade" id="modalAccept" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form action="">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">Hiệu chỉnh thông tin bài viết</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body mx-3">
-                        <div class="form-group">
-                            <div class="md-form mb-5">
-                                <i class="fas fa-user prefix grey-text"></i>
-                                <label for="category-list">Chọn chuyên mục cho bài viết</label>
-                                <select id="category-list" class="form-control black_text">
-                                    <option value="Thế giới">Thế giới</option>
-                                    <option value="Sức khoẻ">Sức khoẻ</option>
-                                    <option value="Công nghệ">Công nghệ</option>
-                                    <option value="Nông Sản">Kinh doanh nông sản</option>
-                                    <option value="Hải sản">Kinh doanh hải sản</option>
-                                    <option value="Thể thao trong nước">Thể thao trong nước</option>
-                                    <option value="Thể thao ngoài nước">Thể thao ngoài nước</option>
-                                    <option value="Du lịch trong nước">Du lịch trong nước</option>
-                                    <option value="Du lịch ngoài nước">Du lịch ngoài nước</option>
-                                </select>
-                            </div>
-                            <div class="md-form mb-5">
-                                <i class="fas fa-user prefix grey-text"></i>
-                                <label for="tag-list">Chọn thẻ cho bài viết</label>
-                                <select id="tag-list" class="form-control black_text" multiple required>
-                                    <option value="technology">technology</option>
-                                    <option value="design">design</option>
-                                    <option value="travel">travel</option>
-                                    <option value="video">video</option>
-                                    <option value="party">party</option>
-                                    <option value="music">music</option>
-                                    <option value="world">world</option>
-                                    <option value="adventure">adventure</option>
-                                </select>
-                            </div>
-                            <div class="md-form mb-5">
-                                <i class="fas fa-user prefix grey-text"></i>
-                                <label data-error="wrong" data-success="right" for="orangeForm-name">Ngày xuất
-                                    bản</label>
-                                <input id="input" width="312" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" class="btn btn-deep-orange">OK</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- modal deny -->
-    <div class="modal fade" id="modalDeny" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form action="">
-                    <div class="modal-header text-center">
-                        <h4 class="modal-title w-100 font-weight-bold">Thông tin từ chối</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="form-group">
-                        <div class="modal-body mx-3">
-                            <div class="md-form mb-5">
-                                <i class="fas fa-user prefix grey-text"></i>
-                                <label data-error="wrong" data-success="right" for="orangeForm-name">Lý do từ
-                                    chối</label>
-                                <input type="text" id="orangeForm-name" class="form-control validate black_text"
-                                    required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" class="btn btn-deep-orange">OK</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     {{!-- <script type="text/javascript" src="/js/script1612771.js"></script> --}}
     <script>
-        $('#input').datetimepicker({ footer: true, modal: true });
+        $('#inputDatetime').datetimepicker({ footer: true, modal: true, format: 'yyyy-mm-dd HH:MM' });
     </script>
 
 </body>
