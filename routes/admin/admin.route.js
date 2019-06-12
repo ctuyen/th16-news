@@ -13,4 +13,12 @@ router.get("/tag", controller.tag);
 
 router.get("/user", controller.user);
 
+router.post('/category', controller.postCategory);
+
+router.post('/tag', controller.postTag);
+
+router.post('/user', controller.postUser);
+
+router.post('/post', controller.postPost);
+
 module.exports = router

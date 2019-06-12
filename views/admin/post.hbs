@@ -27,53 +27,54 @@
       </div>
     </header>
 
-<div class="container-main">
-  <div class="admin-label">Quản lý bài viết</div>
-  <div class="edit">
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="approved" role="tabpanel" aria-labelledby="v-pills-home-tab">
-        <div class="posts">
-          {{#each posts as |post postIndex|}}
-            <!-- Post -->
-            <div class="post_item post_h_large">
-              <diviii class="row">
-                <div class="col-lg-5">
-                  <div class="post_image"><img src="{{post.urlthumbnail}}" alt="post_image">
+    <div class="container-main">
+      <div class="admin-label">Quản lý bài viết</div>
+      <div class="edit">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="approved" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="posts">
+              {{#each posts as |post postIndex|}}
+              <!-- Post -->
+              <div class="post_item post_h_large">
+                <diviii class="row">
+                  <div class="col-lg-5">
+                    <div class="post_image"><img src="{{post.urlthumbnail}}" alt="post_image">
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-7">
-                  <div class="post_content">
-                    <div class="post_category cat_technology"><a href="../category.html">{{post.category}}</a></div>
-                    <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                      {{#each post.tags as |tag|}}
+                  <div class="col-lg-7">
+                    <div class="post_content">
+                      <div class="post_category cat_technology"><a href="../category.html">{{post.category}}</a></div>
+                      <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                        {{#each post.tags as |tag|}}
                         <div class="tag"><a href="#">#{{tag}}</a></div>
-                      {{/each}}
-                    </div>
-                    <div class="post_title"><a href="single.html">{{post.title}}</a></div>
-                    <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                      <div class="post_author d-flex flex-row align-items-center justify-content-start">
-                        <div>
-                          <div class="post_author_image"><img src="{{post.urlAvatar}}" alt="author_avatar" width="16"></div>
-                        </div>
-                        <div class="post_author_name"><a href="#">{{post.writer}}</a>
-                        </div>
+                        {{/each}}
                       </div>
-                      <div class="post_date"><a href="#">{{this.date}}</a></div>
+                      <div class="post_title"><a href="single.html">{{post.title}}</a></div>
+                      <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                        <div class="post_author d-flex flex-row align-items-center justify-content-start">
+                          <div>
+                            <div class="post_author_image"><img src="{{post.urlavatar}}" alt="author_avatar" width="16">
+                            </div>
+                          </div>
+                          <div class="post_author_name"><a href="#">{{post.writer}}</a>
+                          </div>
+                        </div>
+                        <div class="post_date"><a href="#">{{this.date}}</a></div>
+                      </div>
+                      <div class="post_text">
+                        <p>{{this.summary}}</p>
+                      </div>
                     </div>
-                    <div class="post_text">
-                      <p>{{this.summary}}</p>
-                    </div>
+                    <div class="btn">Xuất bản</div>
                   </div>
-                  <div class="btn">Xuất bản</div>
-                </div>
+              </div>
+              {{/each}}
             </div>
-          {{/each}}
-        </div>
 
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-</div>
+  </div>
 </div>

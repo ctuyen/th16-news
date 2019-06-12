@@ -17,4 +17,8 @@ router.get('/forgot-password', controller.forgotpass);
 
 router.post('/forgot-password', controller.postForgotpass);
 
+router.get('/redirect', controller.redirect);
+
+router.get('/welcome', controller.welcome);
+
 module.exports = router;
