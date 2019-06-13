@@ -55,34 +55,6 @@ $(document).ready(function(){
             <div class="post_date"><a href="#">`+date+`</a></div>
         </div>
     </div>`);
-    $(".post03").html(`<div class="row">
-        <div class="col-lg-5">
-            <div class="post_image"><a href="single.html"><img src="`+imgs[0]+`" alt="ảnh nền"></a></div>
-        </div>
-        <div class="col-lg-7">
-            <div class="post_content">
-            <div class="post_category cat_technology"><a href="category.html">`+cat+`</a></div>
-            <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                <div class="tag"><a href="category.html">`+tags[0]+`</a></div>
-                <div class="tag"><a href="category.html">`+tags[1]+`</a></div>
-                <div class="tag"><a href="category.html">`+tags[2]+`</a></div>
-                <div class="tag"><a href="category.html">`+tags[3]+`</a></div>            
-            </div>
-                <div class="post_title"><a href="single.html">`+tilte+`</a></div>
-                <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                    <div class="post_author d-flex flex-row align-items-center justify-content-start">
-                        <div><div class="post_author_image"><img src="`+imgs[1]+`" alt=""></div></div>
-                        <div class="post_author_name"><a href="#">`+name+`</a></div>
-                    </div>
-                    <div class="post_date"><a href="#">`+date+`</a></div>
-                    <div class="post_comments ml-auto"><a href="#">`+comment+` bình luận</a></div>
-                </div>
-                <div class="post_text">
-                    <p>`+tomTat+`</p>
-                </div>
-            </div>
-        </div>
-    </div>`);
 
     $(".post05").html(`<div class="d-flex flex-row align-items-start justify-content-start">
     <div><div class="latest_post_image"><a href="single.html"><img src="images/latest_4.jpg" alt="https://unsplash.com/@juja_han"></a></div></div>

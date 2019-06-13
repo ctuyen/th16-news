@@ -48,40 +48,40 @@
                         <div class="featured_post post_h_large">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div class="featured_post_image"><img src="/images/featured_1.jpg" alt=""></div>
+                                    <div class="featured_post_image"><img src="{{posts.0.urlthumbnail}}" alt="{{posts.0.urlthumbnail}}" onclick="window.location='/posts/{{posts.0.id}}';">
+                                    </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="post_content">
-                                        <div class="post_category cat_technology"><a href="/categories">technology</a>
+                                        <div class="post_category cat_technology"><a
+                                                href="/categories/{{posts.0.idcategory}}">{{posts.0.category}}</a>
                                         </div>
                                         <!--tabs-->
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="/categories">kinh doanh</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="/categories">Nông sản</a>
-                                            <a class="dropdown-item" href="/categories">Hải sản</a>
+                                        <div
+                                            class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                            {{#each posts.0.tags}}
+                                                <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                                            {{/each}}
                                         </div>
-                                        <div class="post_title"><a href="/posts">The new Apple release ceremony</a>
+
+                                        <div class="post_title"><a href="/posts/{{posts.0.id}}">{{posts.0.title}}</a>
                                         </div>
                                         <div class="post_info d-flex flex-row align-items-center justify-content-start">
                                             <div
                                                 class="post_author d-flex flex-row align-items-center justify-content-start">
                                                 <div>
-                                                    <div class="post_author_image"><img src="/images/author_1.jpg"
+                                                    <div class="post_author_image"><img src="{{posts.0.urlavatar}}"
                                                             alt=""></div>
                                                 </div>
-                                                <div class="post_author_name"><a href="#">Michael Smith</a></div>
+                                                <div class="post_author_name"><a href="#">{{posts.0.writer}}</a></div>
                                             </div>
-                                            <div class="post_date"><a href="#">29 April 2018</a></div>
-                                            <div class="post_comments ml-auto"><a href="#">3 comments</a></div>
+                                            <div class="post_date"><a href="#">{{posts.0.date}}</a></div>
+                                            <div class="post_comments ml-auto"><a href="#">Lượt xem: {{posts.0.view}}</a></div>
                                         </div>
                                         <div class="post_text">
-                                            <p>Curabitur venenatis efficitur lorem sed tempor. Integer aliquet tempor
-                                                cursus. Nullam vestibulum convallis risus vel condimentum. Nullam auctor
-                                                lorem in libero luctus, vel volutpat quam tincidunt. Nullam vestibulum
-                                                convallis risus vel condimentum. Nullam auctor lorem in libero.</p>
+                                            <p>{{posts.0.summary}}</p>
                                         </div>
-                                        <div class="post_button trans_200"><a href="/posts">read more</a></div>
+                                        <!--<div class="post_button trans_200"><a href="/posts/{{posts.0.id}}">read more</a></div>-->
                                     </div>
                                 </div>
                             </div>
@@ -93,37 +93,48 @@
                 <div class="col-lg-9">
 
                     <div class="posts">
+                        {{#each posts}}
 
+                        {{#if @index}}
                         <!-- Post -->
-
-                        <div class="post_item post_h_large">
-                            <div class="post03"></div>
+                        <div class="post_item post_h_large row">
+                            <div class="col-lg-5">
+                                <div class="post_image"><a href="/posts/{{id}}"><img src="{{urlthumbnail}}"
+                                            alt="ảnh nền"></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="post_content">
+                                    <div class="post_category cat_technology"><a href="javasript:;">{{category}}</a>
+                                    </div>
+                                    <div
+                                        class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                        {{#each tags}}
+                                        <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                                        {{/each}}
+                                    </div>
+                                    <div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
+                                    <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                                        <div
+                                            class="post_author d-flex flex-row align-items-center justify-content-start">
+                                            <div>
+                                                <div class="post_author_image"><img src="{{urlavatar}}"
+                                                        alt="avatar tác giả"></div>
+                                            </div>
+                                            <div class="post_author_name"><a href="#">{{writer}}</a></div>
+                                        </div>
+                                        <div class="post_date"><a href="#">{{date}}</a></div>
+                                        <div class="post_comments ml-auto"><a href="javascript:;">Lượt xem: {{view}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="post_text">
+                                        <p>{{summary}}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <!-- Post -->
-                        <div class="post_item post_h_large">
-                            <div class="post03"></div>
-                        </div>
-
-                        <!-- Post -->
-                        <div class="post_item post_h_large">
-                            <div class="post03"></div>
-                        </div>
-                        <!-- Post -->
-
-                        <div class="post_item post_h_large">
-                            <div class="post03"></div>
-                        </div>
-
-                        <!-- Post -->
-                        <div class="post_item post_h_large">
-                            <div class="post03"></div>
-                        </div>
-
-                        <!-- Post -->
-                        <div class="post_item post_h_large">
-                            <div class="post03"></div>
-                        </div>
+                        {{/if}}
+                        {{/each}}
 
                     </div>
 

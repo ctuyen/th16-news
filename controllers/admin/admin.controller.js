@@ -113,7 +113,7 @@ module.exports = {
         var t = await postModel.loadTag(post.id);
         var temp = [];
         t.rows.forEach(i => {
-          temp.push(i.tagname);
+          temp.push(i);
         });
         // console.log(temp);
 
