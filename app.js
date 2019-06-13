@@ -38,6 +38,11 @@ app.use(require('./middlewares/home.middleware'));
 //middleware
 app.use(require('./middlewares/categories.mdw'));
 app.use(require('./middlewares/tag.mdw'));
+//middleware count number of posts
+app.use(require('./middlewares/NumberOfPosts/postsPending.mdw'));
+app.use(require('./middlewares/NumberOfPosts/postsDenied.mdw'));
+app.use(require('./middlewares/NumberOfPosts/postsPublished.mdw'));
+app.use(require('./middlewares/NumberOfPosts/postsApproved.mdw'));
 
 //MAIN----------------------------------------------------
 app.use('/', require('./routes/main/index.route'));

@@ -26,7 +26,7 @@ module.exports = {
     p.then(data => {
       res.render("writer/denied", {
         layout: "writer.hbs",
-        titlePage: "Bài chưa duyệt",
+        titlePage: "Bài bị từ chối",
         posts: data.rows
       });
     }).catch(err => {
@@ -35,11 +35,11 @@ module.exports = {
   },
 
   approved: (req, res) => {
-    var p = postModel.allWithStatusTime("accept", ">");
+    var p = postModel.allWithStatusTime(">");
     p.then(data => {
       res.render("writer/approved", {
         layout: "writer.hbs",
-        titlePage: "Bài chưa duyệt",
+        titlePage: "Bài đã được duyệt & chờ xuất bản",
         posts: data.rows
       });
     }).catch(err => {
@@ -48,11 +48,11 @@ module.exports = {
   },
 
   published: (req, res) => {
-    var p = postModel.allWithStatusTime("accept", "<=");
+    var p = postModel.allWithStatusTime("<=");
     p.then(data => {
       res.render("writer/published", {
         layout: "writer.hbs",
-        titlePage: "Bài chưa duyệt",
+        titlePage: "Bài đã xuất bản",
         posts: data.rows
       });
     }).catch(err => {
