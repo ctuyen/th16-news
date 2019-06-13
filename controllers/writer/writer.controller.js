@@ -8,9 +8,8 @@ module.exports = {
     });
   },
 
-  
   pending: (req, res) => {
-    var p = postModel.allWithStatus('draft');
+    var p = postModel.allWithStatus("draft");
     p.then(data => {
       res.render("writer/pending", {
         layout: "writer.hbs",
@@ -23,7 +22,7 @@ module.exports = {
   },
 
   denied: (req, res) => {
-    var p = postModel.allWithStatus('deny');
+    var p = postModel.allWithStatus("deny");
     p.then(data => {
       res.render("writer/denied", {
         layout: "writer.hbs",
@@ -36,7 +35,7 @@ module.exports = {
   },
 
   approved: (req, res) => {
-    var p = postModel.allWithStatusTime('accept', '>');
+    var p = postModel.allWithStatusTime("accept", ">");
     p.then(data => {
       res.render("writer/approved", {
         layout: "writer.hbs",
@@ -49,7 +48,7 @@ module.exports = {
   },
 
   published: (req, res) => {
-    var p = postModel.allWithStatusTime('accept', '<=');
+    var p = postModel.allWithStatusTime("accept", "<=");
     p.then(data => {
       res.render("writer/published", {
         layout: "writer.hbs",
@@ -63,8 +62,9 @@ module.exports = {
 
   addPost: (req, res) => {
     var thumbnail = req.body.thumbnail;
-    if(thumbnail == ''){
-      thumbnail = 'https://1080motion.com/wp-content/uploads/2018/06/NoImageFound.jpg.png';
+    if (thumbnail == "") {
+      thumbnail =
+        "https://1080motion.com/wp-content/uploads/2018/06/NoImageFound.jpg.png";
     }
     var entity = {
       title: req.body.title,
@@ -77,14 +77,15 @@ module.exports = {
     var tagList = req.body.tag;
     postModel
       .add(entity)
-      .then(NewPost => {
+      .then(async NewPost => {
         console.log("Đã thêm được bảng posts");
         for (let i = 0; i < tagList.length; i++) {
           var entityTagPost = {
             idTag: parseInt(tagList[i]),
             idPost: NewPost.rows[0].id
           };
-          tagPostModel.add(entityTagPost);
+          await tagPostModel.add(entityTagPost);
+          console.log("Đã thêm được dòng tagPost");
         }
         res.render("writer/textEditor", {
           layout: "writer.hbs",
@@ -98,7 +99,7 @@ module.exports = {
 
   loadEditPost: (req, res) => {
     var id = req.params.id;
-    if(isNaN(id)){
+    if (isNaN(id)) {
       res.render("writer/editPost", {
         layout: "writer.hbs",
         titlePage: "Chỉnh sửa bài viết",
@@ -124,7 +125,7 @@ module.exports = {
           posts: data.rows[0],
           err: false
         });
-      }else{
+      } else {
         res.render("writer/editPost", {
           layout: "writer.hbs",
           titlePage: "Chỉnh sửa bài viết",
@@ -136,10 +137,11 @@ module.exports = {
     });
   },
 
-  editPost: (req, res) => {
+  editPost: async (req, res) => {
     var thumbnail = req.body.thumbnail;
-    if(thumbnail == ''){
-      thumbnail = 'https://1080motion.com/wp-content/uploads/2018/06/NoImageFound.jpg.png';
+    if (thumbnail == "") {
+      thumbnail =
+        "https://1080motion.com/wp-content/uploads/2018/06/NoImageFound.jpg.png";
     }
     var entity = {
       id: req.body.id,
@@ -147,30 +149,52 @@ module.exports = {
       summary: req.body.summary,
       content: req.body.content,
       urlThumbnail: thumbnail,
-      status: 'draft',
+      status: "draft",
       idCategory: parseInt(req.body.category)
     };
     var tagList = req.body.tag;
-    // console.log(tagList);
-    // console.log(entity);
+    // const makeRequest = () =>
+    //   getJSON().then(data => {
+    //     console.log(data);
+    //     return "done";
+    //   });
+
+    // const deleteTagPost = () => {
+    //   let data = tagPostModel.delete(entity.id);
+    //   console.log("Đã Xoá được dòng bảng tagPost");
+    //   return "done";
+    // };
+    // await deleteTagPost();
     postModel
       .update(entity)
       .then(Post => {
         console.log("Đã sửa được bảng posts");
-        // console.log(Post.rows[0].id);
-        tagPostModel.delete(Post.rows[0].id);
-        for (let i = 0; i < tagList.length; i++) {
-          var entityTagPost = {
-            idTag: parseInt(tagList[i]),
-            idPost: Post.rows[0].id
-          };
-          tagPostModel.add(entityTagPost);
-          console.log("Đã sửa được bảng tagPost");
-        }
-        res.redirect('/writer/pending')
+        res.redirect("/writer/pending");
       })
       .catch(err => {
         console.log(err);
       });
+    await tagPostModel
+      .delete(entity.id)
+      .then(data => {
+        console.log("Đã Xoá được dòng bảng tagPost");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    for (let i = 0; i < tagList.length; i++) {
+      var entityTagPost = {
+        idTag: parseInt(tagList[i]),
+        idPost: entity.id
+      };
+      await tagPostModel
+        .add(entityTagPost)
+        .then(data => {
+          console.log("Đã sửa được bảng tagPost");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 };
