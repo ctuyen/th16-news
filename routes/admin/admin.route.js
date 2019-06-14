@@ -9,6 +9,8 @@ router.get('/category', controller.category)
 
 router.get("/post", controller.post);
 
+router.get("/post/:id/public", controller.public);
+
 router.get("/tag", controller.tag);
 
 router.get("/user", controller.user);

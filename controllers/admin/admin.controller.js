@@ -124,7 +124,7 @@ module.exports = {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }
+          }, { timeZone: 'Asia/Saigon' }
         );
 
       }
@@ -190,5 +190,28 @@ module.exports = {
 
   postPost: (req, res) => {
 
-  }
+  },
+
+  public: (req, res) => {
+    var id = req.params.id;
+    if (isNaN(id)) {
+      res.redirect("back");
+      console.log("This id does not exist");
+    }
+    var entity = {
+      id: id,
+      status: 'accept',
+      publicationDate: new Date().toLocaleString('en-US', { timeZone: 'UTC' })
+    };
+    console.log(entity.publicationDate);
+    postModel
+      .update(entity)
+      .then(Post => {
+        console.log("Đã sửa được bảng posts");
+        res.redirect("back");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
 };

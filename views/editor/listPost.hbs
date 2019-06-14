@@ -7,7 +7,8 @@
         <div class="post_item post_h_large">
           <div class="row">
             <div class="col-lg-5">
-              <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail">
+              <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail"
+                  onclick="window.location='/posts/{{id}}';">
               </div>
             </div>
             <div class="col-lg-7">
@@ -25,115 +26,116 @@
                       Từ chối
                     </button>
                   </div>
-                  <div class="post_category cat_world"><a href="/categories">Công nghệ</a></div>
+                  <div class="post_category cat_world"><a href="/categories">{{category}}</a></div>
                 </div>
                 <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                  <div class="tag"><a href="../category.html">#smartphone</a></div>
+                  {{#each tags}}
+                  <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                  {{/each}}
                 </div>
-                <div class="post_title"><a href="/single">{{title}}</a></div>
+                <div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
                 <div class="post_info d-flex flex-row align-items-center justify-content-start">
                   <div class="post_author d-flex flex-row align-items-center justify-content-start">
                     <div>
-                      <div class="post_author_image"><img
-                          src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/62044047_625196087977000_549128624108732416_n.jpg?_nc_cat=105&_nc_eui2=AeHGyglMWe9rethO9-kxIlGvxOsZeg4ZDdbh7caG0kLNpFFb1xz8ZnIp3RxFZ1OM0NiD_bQwxVPGCAKSD0bTTMJIOSX6s3uv1GawYsU8KOYsBA&_nc_oc=AQmZ8c7CyGHeyvRXi7xocCkldRVM7_mdx7fyZVt4Uq6_j2NXf_XFnfy7xltZZhOvHxE&_nc_ht=scontent.fsgn5-2.fna&oh=e79046e225eb88ad5e41c578b079329b&oe=5D81056B"
-                          alt=""></div>
+                      <div class="post_author_image"><img src="{{urlavatar}}" alt="avatar {{writer}}"></div>
                     </div>
-                    <div class="post_author_name"><a href="#" Truong nguyen</a> </div> </div> <div class="post_date"><a
-                          href="#">Ngày giờ</a></div>
+                    <div class="post_author_name"><a href="#">{{writer}}</a> </div>
                   </div>
-                  <div class="post_text">
-                    <p>{{summary}}</p>
-                  </div>
+                  <div class="post_date"><a href="#">{{date}}</a></div>
+                </div>
+                <div class="post_text">
+                  <p>{{summary}}</p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- modal accept -->
-          <div class="modal fade" id="modalAccept{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <form method="POST" action="/editor/accept">
-                  <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Hiệu chỉnh thông tin bài viết</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body mx-3">
-                    <div class="form-group">
-                      <div class="md-form mb-5">
-                        <label for="idAccept{{id}}">ID</label>
-                        <input readonly class="form-control" name="id" id="idAccept{{id}}" type="text" value="{{id}}">
-                      </div>
-                      <div class="md-form mb-5">
-                        <i class="fas fa-user prefix grey-text"></i>
-                        <label for="category-list">Chọn chuyên mục cho bài viết</label>
-                        <select name="category" id="category-list" class="form-control black_text">
-                          {{#each ../lcCategories}}
-                          <option value="{{catid}}">{{name}}</option>
-                          {{/each}}
-                        </select>
-                      </div>
-                      <div class="md-form mb-5">
-                        <i class="fas fa-user prefix grey-text"></i>
-                        <label for="tag-list">Chọn thẻ cho bài viết</label>
-                        <select name="tag" id="tag-list" class="form-control black_text" multiple required>
-                          {{#each ../lcTags}}
-                          <option value="{{id}}">{{name}}</option>
-                          {{/each}}
-                        </select>
-                      </div>
-                      <div class="md-form mb-5">
-                        <i class="fas fa-user prefix grey-text"></i>
-                        <label data-error="wrong" data-success="right" for="orangeForm-name">Ngày xuất
-                          bản</label>
-                        <input class="inputDatetime" name="publicationDate" width="312" required />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success">OK</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- modal deny -->
-          <div class="modal fade" id="modalDeny{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog modal-lg" role="document">
-              <div class="modal-content">
-                <form method="POST" action="/editor/deny">
-                  <div class="modal-header text-center">
-                    <h4 class="modal-title w-100 font-weight-bold">Thông tin từ chối</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="form-group">
-                    <div class="modal-body mx-3">
-                      <div class="md-form mb-5">
-                        <label for="idDeny{{id}}">ID</label>
-                        <input readonly class="form-control" id="idDeny{{id}}" name="id" type="text" value="{{id}}">
-                      </div>
-                      <div class="md-form mb-5">
-                        <i class="fas fa-user prefix grey-text"></i>
-                        <label data-error="wrong" data-success="right" for="reason">Lý do từ
-                          chối</label>
-                        <input type="text" id="reason" name="reason" class="form-control validate black_text" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success">OK</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          {{/each}}
         </div>
+        <!-- modal accept -->
+        <div class="modal fade" id="modalAccept{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <form method="POST" action="/editor/accept">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Hiệu chỉnh thông tin bài viết</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3">
+                  <div class="form-group">
+                    <div class="md-form mb-5">
+                      <label for="idAccept{{id}}">ID</label>
+                      <input readonly class="form-control" name="id" id="idAccept{{id}}" type="text" value="{{id}}">
+                    </div>
+                    <div class="md-form mb-5">
+                      <i class="fas fa-user prefix grey-text"></i>
+                      <label for="category-list">Chọn chuyên mục cho bài viết</label>
+                      <select name="category" id="category-list" class="form-control black_text">
+                        {{#each ../lcCategories}}
+                        <option value="{{catid}}" {{#if isSelect}}selected="selected" {{/if}}>{{name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                    <div class="md-form mb-5">
+                      <i class="fas fa-user prefix grey-text"></i>
+                      <label for="tag-list">Chọn thẻ cho bài viết</label>
+                      <select name="tag" id="tag-list" class="form-control black_text" multiple required>
+                        {{#each ../lcTags}}
+                        <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                    <div class="md-form mb-5">
+                      <i class="fas fa-user prefix grey-text"></i>
+                      <label data-error="wrong" data-success="right" for="orangeForm-name">Ngày xuất
+                        bản</label>
+                      <input class="inputDatetime" name="publicationDate" width="312" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button type="submit" class="btn btn-success">OK</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- modal deny -->
+        <div class="modal fade" id="modalDeny{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <form method="POST" action="/editor/deny">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Thông tin từ chối</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="form-group">
+                  <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                      <label for="idDeny{{id}}">ID</label>
+                      <input readonly class="form-control" id="idDeny{{id}}" name="id" type="text" value="{{id}}">
+                    </div>
+                    <div class="md-form mb-5">
+                      <i class="fas fa-user prefix grey-text"></i>
+                      <label data-error="wrong" data-success="right" for="reason">Lý do từ
+                        chối</label>
+                      <input type="text" id="reason" name="reason" class="form-control validate black_text" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button type="submit" class="btn btn-success">OK</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{/each}}
       </div>
     </div>
   </div>
+</div>

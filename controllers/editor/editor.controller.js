@@ -5,15 +5,37 @@ module.exports = {
     var id = req.params.id;
     // console.log(id);
     var p = postModel.allByCat(id);
-    p.then(data => {
-      // console.log(data.rows);
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+        post.tags = temp;
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, { timeZone: 'Asia/Saigon' }
+        );
+      }
+      for (const c of res.locals.lcCategories) {
+        if (c.catid === +posts[0].idcategory) {
+          c.isSelect = true;
+        }
+      }
       for (const c of res.locals.lcCategories) {
         if (c.catid === +id) {
           c.isActive = true;
         }
       }
       res.render("editor/listPost", {
-        posts: data.rows,
+        posts,
         titlePage: "Editor",
         layout: "editor.hbs"
       });
@@ -25,10 +47,11 @@ module.exports = {
     var entity = {
       id: req.body.id,
       idCategory: parseInt(req.body.category),
-      publicationDate: req.body.publicationDate,
+      publicationDate: new Date(req.body.publicationDate).toLocaleString('en-US', { timeZone: 'UTC' }),
       status: "accept"
     };
-    var tagList = req.body.tag;
+    // console.log(entity.publicationDate);
+
     postModel
       .update(entity)
       .then(Post => {
