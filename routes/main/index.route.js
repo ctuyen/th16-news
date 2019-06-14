@@ -7,7 +7,7 @@ var router = express.Router();
 
 router.get("/", (req, res) => {
   var cats = res.locals.lObjCategories;
-  var p = postmodel.all();
+  var p = postmodel.allwithLimit(5);
   p.then(data => {
     var posts = data.rows;
     // console.log(posts);

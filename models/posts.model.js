@@ -4,6 +4,16 @@ module.exports = {
   all: () => {
     return db.load("select * from posts where isDelete = false");
   },
+  allwithLimit: limit => {
+    return db.load(
+      `select * from posts where isDelete = false order by publicationDate desc limit ${limit}`
+    );
+  },
+  topView: ()=>{
+    return db.load(
+      `select * from posts where isDelete = false order by publicationDate desc limit ${limit}`
+    );
+  },
   allWithDetails: () => {
     var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.idwriter=u.id and p.idcategory=c.id`;
     return db.load(sql);
@@ -64,19 +74,19 @@ module.exports = {
     var sql = `select count(*) as num from posts where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   },
-  pageByCat: (idcat,offset,limit) => {
+  pageByCat: (idcat, offset, limit) => {
     var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
-    limit ${limit} offset ${offset}`;// and p.idcategory=${idcat} 
+    limit ${limit} offset ${offset}`; // and p.idcategory=${idcat}
     return db.load(sql);
   },
-  numByCat: (idcat) => {
-    var sql=`select count(*) as total from posts where idcategory=${idcat}`
+  numByCat: idcat => {
+    var sql = `select count(*) as total from posts where idcategory=${idcat}`;
     return db.load(sql);
   },
-  addView: (idPost)=>{
-    var sql = `update posts set view =view +1 where id=${idPost}`
+  addView: idPost => {
+    var sql = `update posts set view =view +1 where id=${idPost}`;
     return db.updateSQL(sql);
   }
 };
