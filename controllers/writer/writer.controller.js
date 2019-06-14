@@ -10,11 +10,31 @@ module.exports = {
 
   pending: (req, res) => {
     var p = postModel.allWithStatus("draft");
-    p.then(data => {
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, { timeZone: 'Asia/Saigon' }
+        );
+      }
       res.render("writer/pending", {
         layout: "writer.hbs",
         titlePage: "Bài chưa duyệt",
-        posts: data.rows
+        posts
       });
     }).catch(err => {
       console.log(err);
@@ -23,11 +43,31 @@ module.exports = {
 
   denied: (req, res) => {
     var p = postModel.allWithStatus("deny");
-    p.then(data => {
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, { timeZone: 'Asia/Saigon' }
+        );
+      }
       res.render("writer/denied", {
         layout: "writer.hbs",
         titlePage: "Bài bị từ chối",
-        posts: data.rows
+        posts
       });
     }).catch(err => {
       console.log(err);
@@ -36,11 +76,31 @@ module.exports = {
 
   approved: (req, res) => {
     var p = postModel.allWithStatusTime(">");
-    p.then(data => {
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, { timeZone: 'Asia/Saigon' }
+        );
+      }
       res.render("writer/approved", {
         layout: "writer.hbs",
         titlePage: "Bài đã được duyệt & chờ xuất bản",
-        posts: data.rows
+        posts
       });
     }).catch(err => {
       console.log(err);
@@ -49,11 +109,31 @@ module.exports = {
 
   published: (req, res) => {
     var p = postModel.allWithStatusTime("<=");
-    p.then(data => {
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, { timeZone: 'Asia/Saigon' }
+        );
+      }
       res.render("writer/published", {
         layout: "writer.hbs",
         titlePage: "Bài đã xuất bản",
-        posts: data.rows
+        posts
       });
     }).catch(err => {
       console.log(err);
@@ -71,7 +151,7 @@ module.exports = {
       summary: req.body.summary,
       content: req.body.content,
       urlThumbnail: thumbnail,
-      idWriter: 3,
+      idWriter: req.signedCookies.userId,
       idCategory: parseInt(req.body.category)
     };
     var tagList = req.body.tag;
@@ -153,18 +233,7 @@ module.exports = {
       idCategory: parseInt(req.body.category)
     };
     var tagList = req.body.tag;
-    // const makeRequest = () =>
-    //   getJSON().then(data => {
-    //     console.log(data);
-    //     return "done";
-    //   });
 
-    // const deleteTagPost = () => {
-    //   let data = tagPostModel.delete(entity.id);
-    //   console.log("Đã Xoá được dòng bảng tagPost");
-    //   return "done";
-    // };
-    // await deleteTagPost();
     postModel
       .update(entity)
       .then(Post => {

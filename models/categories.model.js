@@ -26,7 +26,7 @@ module.exports = {
   },
 
   update: entity => {
-    return db.update("categories", "id", entity);
+    return db.update("categories", entity);
   },
 
   delete: id => {

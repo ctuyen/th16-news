@@ -17,18 +17,24 @@
               <div class="post_item post_h_large">
                 <diviii class="row">
                   <div class="col-lg-5">
-                    <div class="post_image"><img src="{{post.urlthumbnail}}" alt="post_image">
+                    <div class="post_image"><img src="{{post.urlthumbnail}}" alt="post_image" onclick="window.location='/posts/{{id}}';">
                     </div>
                   </div>
                   <div class="col-lg-7">
                     <div class="post_content">
-                      <div class="post_category cat_technology"><a href="../category.html">{{post.category}}</a></div>
+                      <div>
+                        <a class="btn btn-info pull-right" href="post/{{id}}/public" role="button">
+                          <i class="fa fa-cloud-upload-alt" aria-hidden="true"></i>
+                          Xuất bản
+                        </a>
+                        <div class="post_category cat_technology"><a href="../category.html">{{post.category}}</a></div>
+                      </div>
                       <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                         {{#each post.tags}}
                         <div class="tag"><a href="#">{{name}}</a></div>
                         {{/each}}
                       </div>
-                      <div class="post_title"><a href="single.html">{{post.title}}</a></div>
+                      <div class="post_title"><a href="/posts/{{id}}">{{post.title}}</a></div>
                       <div class="post_info d-flex flex-row align-items-center justify-content-start">
                         <div class="post_author d-flex flex-row align-items-center justify-content-start">
                           <div>
@@ -44,7 +50,6 @@
                         <p>{{this.summary}}</p>
                       </div>
                     </div>
-                    <div class="btn">Xuất bản</div>
                   </div>
               </div>
               {{/each}}
