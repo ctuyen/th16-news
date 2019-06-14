@@ -1,19 +1,30 @@
 var db = require("../utils/db");
-
+var categoriesmodel = require("./categories.model");
 module.exports = {
   all: () => {
     return db.load("select * from posts where isDelete = false");
   },
-  allwithLimit: limit => {
+  topDate: limit => {
     return db.load(
       `select * from posts where isDelete = false order by publicationDate desc limit ${limit}`
     );
   },
-  topView: ()=>{
+  topView: limit => {
     return db.load(
-      `select * from posts where isDelete = false order by publicationDate desc limit ${limit}`
+      `select * from posts where isDelete = false order by view desc limit ${limit}`
     );
   },
+  topWithCat: () => {
+    var sql = `SELECT max(id) id,idcategory, publicationDate
+    FROM posts
+    WHERE (idcategory, publicationDate) IN (SELECT idcategory, min(publicationDate) publicationDate FROM posts GROUP BY idcategory)
+    group by idcategory, publicationDate`;
+    return db.load(sql);
+  },
+  // group: () => {
+  //   var sql = `select idcategory, max(view) as maxview from posts group by idcategory`;
+  //   return db.load(sql);
+  // },
   allWithDetails: () => {
     var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
@@ -57,7 +68,9 @@ module.exports = {
   },
 
   loadComment: id => {
-    var sql = `select fullname, urlavatar, commentdate, content from comment as cm, users as u where cm.iduser = u.id and cm.idpost = ${id}`;
+    var sql = `select fullname, urlavatar, commentdate, content 
+    from comment as cm, users as u 
+     cm.iduser = u.id and cm.idpost = ${id}`;
     return db.load(sql);
   },
 
@@ -84,7 +97,9 @@ module.exports = {
   },
 
   numberByStatusTime: compare => {
-    var sql = `select count(*) as num from posts where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
+    var sql = `select count(*) as num 
+    from posts 
+    where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   },
   pageByCat: (idcat, offset, limit) => {
@@ -101,5 +116,30 @@ module.exports = {
   addView: idPost => {
     var sql = `update posts set view =view +1 where id=${idPost}`;
     return db.updateSQL(sql);
-  }
+  },
+  pageByCatssss: async (idcat, offset, limit) => {
+    var d = await categoriesmodel.loadSon(idcat);
+    var cats = d.rows;
+    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+        from posts as p, categories as c, users as u 
+        where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat}`;
+    if (cats.length > 0) {
+      cats.forEach(cat => {
+        sql += `|| p.idcategory = ${cat.id} `;
+      });
+    }
+    sql += `limit ${limit} offset ${offset}`;
+    return db.load(sql);
+  },
+  numByCatssss: async idcat => {
+    var d = await categoriesmodel.loadSon(idcat);
+    var cats = d.rows;
+    var sql = `select count(*) as total from posts where idcategory=${idcat}`;
+    if (cats.length > 0) {
+      cats.forEach(cat => {
+        sql += `|| idcategory = ${cat.id} `;
+      });
+    }
+    return db.load(sql);
+  },
 };
