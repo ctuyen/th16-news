@@ -7,24 +7,24 @@
       <div class="list-group list-group-flush">
         <a href="approved" class="list-group-item list-group-item-action">
           Đã duyệt & chờ xuất bản
-          <span class="badge badge-danger float-right">1</span>
+          <span class="badge badge-danger float-right">{{lcNumOfApproved.num}}</span>
         </a>
         <a href="published" class="list-group-item list-group-item-action">
           Đã xuất bản
-          <span class="badge badge-danger float-right">1</span>
+          <span class="badge badge-danger float-right">{{lcNumOfPublished.num}}</span>
         </a>
         <a href="denied" class="list-group-item list-group-item-action">
           Bị từ chối
-          <span class="badge badge-danger float-right">1</span>
+          <span class="badge badge-danger float-right">{{lcNumOfDeny.num}}</span>
         </a>
         <a href="pending" class="list-group-item list-group-item-action">
           Chưa được duyệt
-          <span class="badge badge-danger float-right">1</span>
+          <span class="badge badge-danger float-right">{{lcNumOfDraft.num}}</span>
         </a>
       </div>
     </div>
     <div class="font-size shadow">
-      <a class="nav-link btn btn-outline-primary" id="text-editor-tab" href="textEditor">Viết bài mới</a>
+      <a class="nav-link btn btn-outline-primary active" id="text-editor-tab" href="textEditor">Viết bài mới</a>
     </div>
   </div>
 </div>

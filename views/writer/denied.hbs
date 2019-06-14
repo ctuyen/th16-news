@@ -7,19 +7,19 @@
             <div class="list-group list-group-flush">
                 <a href="approved" class="list-group-item list-group-item-action">
                     Đã duyệt & chờ xuất bản
-                    <span class="badge badge-danger float-right">1</span>
+                    <span class="badge badge-danger float-right">{{lcNumOfApproved.num}}</span>
                 </a>
                 <a href="published" class="list-group-item list-group-item-action">
                     Đã xuất bản
-                    <span class="badge badge-danger float-right">1</span>
+                    <span class="badge badge-danger float-right">{{lcNumOfPublished.num}}</span>
                 </a>
                 <a href="denied" class="list-group-item list-group-item-action active">
                     Bị từ chối
-                    <span class="badge badge-danger float-right">1</span>
+                    <span class="badge badge-danger float-right">{{lcNumOfDeny.num}}</span>
                 </a>
                 <a href="pending" class="list-group-item list-group-item-action">
                     Chưa được duyệt
-                    <span class="badge badge-danger float-right">1</span>
+                    <span class="badge badge-danger float-right">{{lcNumOfDraft.num}}</span>
                 </a>
             </div>
         </div>
@@ -43,10 +43,17 @@
                         <div class="col-lg-7">
                             <div class="post_content">
                                 <div>
-                                    <a class="btn btn-info pull-right" href="textEditor/{{id}}" role="button">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        Chỉnh sửa
-                                    </a>
+                                    <div class="pull-right">
+                                        <a class="btn btn-secondary" href="" role="button" data-toggle="modal"
+                                            data-target="#modalReason{{id}}">
+                                            <i class="fa fa-question" aria-hidden="true"></i>
+                                            Xem lý do
+                                        </a>
+                                        <a class="btn btn-info" href="textEditor/{{id}}" role="button">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            Chỉnh sửa
+                                        </a>
+                                    </div>
                                     <div class="post_category cat_world"><a href="/categories">Công nghệ</a></div>
                                 </div>
                                 <div
@@ -67,6 +74,39 @@
                                     <div class="post_text">
                                         <p>{{summary}}</p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- modal --}}
+                    <div class="modal fade" id="modalReason{{id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header text-center">
+                                    <h4 class="modal-title w-100 font-weight-bold">Lý do từ chối</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <div class="modal-body mx-3">
+                                        <div class="md-form mb-5">
+                                            <label for="idDeny{{id}}">ID</label>
+                                            <input readonly class="form-control" id="idDeny{{id}}" name="id" type="text"
+                                                value="{{id}}">
+                                        </div>
+                                        <div class="md-form mb-5">
+                                            <i class="fas fa-user prefix grey-text"></i>
+                                            <label data-error="wrong" data-success="right" for="reason">Lý do từ
+                                                chối</label>
+                                            <input readonly class="form-control" type="text" id="reason" name="reason"
+                                                class="form-control validate black_text" value="{{reason}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button class="btn btn-secondary" data-dismiss="modal">OK</button>
                                 </div>
                             </div>
                         </div>

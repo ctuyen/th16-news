@@ -24,8 +24,8 @@
                     <div class="post_content">
                       <div class="post_category cat_technology"><a href="../category.html">{{post.category}}</a></div>
                       <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                        {{#each post.tags as |tag|}}
-                        <div class="tag"><a href="#">#{{tag}}</a></div>
+                        {{#each post.tags}}
+                        <div class="tag"><a href="#">{{name}}</a></div>
                         {{/each}}
                       </div>
                       <div class="post_title"><a href="single.html">{{post.title}}</a></div>

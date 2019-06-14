@@ -4,12 +4,14 @@ module.exports = {
   all: () => {
     return db.load("select * from posts where isDelete = false");
   },
-  allWithDetails: ()=>{
-    var sql = `select p.id, p.title, p.summary, p.content, p.urlthumbnail, p.view, p.writingdate, p.publicationdate, u.fullname as writer, p.idcategory, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.idwriter=u.id and p.idcategory=c.id`;
+  allWithDetails: () => {
+    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.idwriter=u.id and p.idcategory=c.id`;
     return db.load(sql);
   },
   allByCat: id => {
-    return db.load(`select * from posts where idCategory = ${id} and status = 'draft'`);
+    return db.load(
+      `select * from posts where idCategory = ${id} and status = 'draft' and isDelete = false`
+    );
   },
 
   single: id => {
@@ -28,13 +30,13 @@ module.exports = {
   update: entity => {
     return db.update("posts", entity);
   },
-  
+
   delete: id => {
     return db.delete("posts", "id", id);
   },
 
   loadTag: id => {
-    var sql = `select t.name as tagname from tag as t, tagpost as tp where t.id = tp.idtag and tp.idpost=${id}`;
+    var sql = `select t.* from tag as t, tagpost as tp where t.id = tp.idtag and tp.idpost=${id}`;
     return db.load(sql);
   },
 
@@ -48,8 +50,28 @@ module.exports = {
     return db.load(sql);
   },
 
-  allWithStatusTime: (status, compare )=> {
-    var sql = `select * from posts where status = '${status}' and isDelete = false and publicationDate ${compare} current_timestamp`;
+  allWithStatusTime: compare => {
+    var sql = `select * from posts where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
+  },
+
+  numberByStatus: status => {
+    var sql = `select count(*) as num from posts where status = '${status}' and isDelete = false`;
+    return db.load(sql);
+  },
+
+  numberByStatusTime: compare => {
+    var sql = `select count(*) as num from posts where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
+    return db.load(sql);
+  },
+  pageByCat: (idcat,offset,limit) => {
+    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
+    limit ${limit} offset ${offset}`;// and p.idcategory=${idcat} 
+    return db.load(sql);
+  },
+  numByCat: (idcat) => {
+    var sql=`select count(*) as total from post where idcategory=${idcat}`
   }
 };
