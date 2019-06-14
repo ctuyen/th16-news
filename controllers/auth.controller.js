@@ -25,7 +25,7 @@ module.exports = {
     checkEmail.then(users => {
         if (users.rowCount == 0) {
           res.render("auth/login", {
-            errors: ["Người dùng không tồn tại."],
+            errors: ["Email hoặc mật khẩu sai."],
             values: req.body,
             layout: false
           });
@@ -36,7 +36,7 @@ module.exports = {
           .then(hashedPassword => {
             if (!bcrypt.compareSync(password, hashedPassword.rows[0].password)) {
               res.render("auth/login", {
-                errors: ["Nhập sai mật khẩu."],
+                errors: ["Email hoặc mật khẩu sai."],
                 values: req.body,
                 layout: false
               })

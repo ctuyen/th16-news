@@ -10,6 +10,8 @@ const port = 3000;
 
 const adminRoute = require("./routes/admin/admin.route");
 const authRoute = require("./routes/auth.route");
+const writerRoute = require('./routes/writer/writer.route');
+const editerRoute = require('./routes/editor/editor.route');
 
 const authMiddleware = require("./middlewares/auth.middleware");
 
@@ -43,10 +45,10 @@ app.use(require('./middlewares/tag.mdw'));
 app.use('/', require('./routes/main/index.route'));
 app.use("/categories", require("./routes/main/category.route"));
 app.use("/posts", require("./routes/main/post.route"));
-app.use("/admin", authMiddleware.requireAuth, adminRoute);
+app.use("/admin", authMiddleware.requireAuth, authMiddleware.requireAdmin, adminRoute);
 app.use("/auth", authRoute);
-app.use('/writer', require('./routes/writer/writer.route'));
-app.use('/editor', require('./routes/editor/editor.route'));
+app.use('/writer', authMiddleware.requireAuth, authMiddleware.requireWriter, writerRoute);
+app.use('/editor', authMiddleware.requireAuth, authMiddleware.requireEditer, editerRoute);
 
 
 //--------------------------------------------------------

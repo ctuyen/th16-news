@@ -13,8 +13,7 @@ module.exports.requireAuth = (req, res, next) => {
       if (user.rowCount === 0) {
         res.redirect("/auth/login");
         return;
-      }
-      else {
+      } else {
         res.locals.user = user.rows[0];
       }
     })
@@ -23,4 +22,49 @@ module.exports.requireAuth = (req, res, next) => {
     });
 
   next();
+};
+
+module.exports.requireAdmin = (req, res, next) => {
+  var getPosition = authModel.getPosition(req.signedCookies.userId);
+  getPosition
+    .then(user => {
+      if (user.rows[0].position !== 'admin') {
+        res.redirect('/');
+        return;
+      }
+      next();
+    })
+    .catch(err => {
+      throw err
+    })
+}
+
+module.exports.requireEditer = (req, res, next) => {
+  var getPosition = authModel.getPosition(req.signedCookies.userId);
+  getPosition
+    .then(user => {
+      if (user.rows[0].position !== 'editor') {
+        res.redirect('/');
+        return;
+      }
+      next();
+    })
+    .catch(err => {
+      throw err
+    })
+}
+
+module.exports.requireWriter = (req, res, next) => {
+  var getPosition = authModel.getPosition(req.signedCookies.userId);
+  getPosition
+    .then(user => {
+      if (user.rows[0].position !== 'writer') {
+        res.redirect('/');
+        return;
+      }
+      next();
+    })
+    .catch(err => {
+      throw err
+    })
 }
