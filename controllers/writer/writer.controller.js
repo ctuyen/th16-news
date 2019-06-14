@@ -151,7 +151,7 @@ module.exports = {
       summary: req.body.summary,
       content: req.body.content,
       urlThumbnail: thumbnail,
-      idWriter: 2,
+      idWriter: req.signedCookies.userId,
       idCategory: parseInt(req.body.category)
     };
     var tagList = req.body.tag;

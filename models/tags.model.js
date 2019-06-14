@@ -14,7 +14,7 @@ module.exports = {
   },
 
   update: entity => {
-    return db.update("tag", "id", entity);
+    return db.update("tag", entity);
   },
 
   delete: id => {

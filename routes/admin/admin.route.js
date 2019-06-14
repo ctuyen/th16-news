@@ -7,11 +7,15 @@ router.get('/', controller.admin)
 
 router.get('/category', controller.category)
 
+router.post('/category/:id/changeName', controller.changeCatName)
+
 router.get("/post", controller.post);
 
 router.get("/post/:id/public", controller.public);
 
 router.get("/tag", controller.tag);
+
+router.post('/tag/:id/changeName', controller.changeTagName)
 
 router.get("/user", controller.user);
 
