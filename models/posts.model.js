@@ -72,6 +72,11 @@ module.exports = {
     return db.load(sql);
   },
   numByCat: (idcat) => {
-    var sql=`select count(*) as total from post where idcategory=${idcat}`
+    var sql=`select count(*) as total from posts where idcategory=${idcat}`
+    return db.load(sql);
+  },
+  addView: (idPost)=>{
+    var sql = `update posts set view =view +1 where id=${idPost}`
+    return db.updateSQL(sql);
   }
 };
