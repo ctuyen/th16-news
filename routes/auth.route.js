@@ -21,4 +21,8 @@ router.get('/redirect', controller.redirect);
 
 router.get('/welcome', controller.welcome);
 
+router.get('/changepass/:token', controller.changepass);
+
+router.post('/changepass/:token', controller.postChangepass);
+
 module.exports = router;

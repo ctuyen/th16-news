@@ -37,37 +37,39 @@
         <div class="post_item post_h_large">
           <div class="row">
             <div class="col-lg-5">
-              <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail">
+              <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail"
+                  onclick="window.location='/posts/{{id}}';">
               </div>
             </div>
             <div class="col-lg-7">
               <div class="post_content">
                 <div>
-                  <div class="post_category cat_world"><a href="/categories">Công nghệ</a></div>
+                  <div class="post_category cat_world"><a href="/categories">{{category}}</a></div>
                 </div>
                 <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                  <div class="tag"><a href="../category.html">#smartphone</a></div>
+                  {{#each tags}}
+                  <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                  {{/each}}
                 </div>
-                <div class="post_title"><a href="/single">{{title}}</a></div>
+                <div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
                 <div class="post_info d-flex flex-row align-items-center justify-content-start">
                   <div class="post_author d-flex flex-row align-items-center justify-content-start">
                     <div>
-                      <div class="post_author_image"><img
-                          src="https://scontent.fsgn5-2.fna.fbcdn.net/v/t1.0-9/62044047_625196087977000_549128624108732416_n.jpg?_nc_cat=105&_nc_eui2=AeHGyglMWe9rethO9-kxIlGvxOsZeg4ZDdbh7caG0kLNpFFb1xz8ZnIp3RxFZ1OM0NiD_bQwxVPGCAKSD0bTTMJIOSX6s3uv1GawYsU8KOYsBA&_nc_oc=AQmZ8c7CyGHeyvRXi7xocCkldRVM7_mdx7fyZVt4Uq6_j2NXf_XFnfy7xltZZhOvHxE&_nc_ht=scontent.fsgn5-2.fna&oh=e79046e225eb88ad5e41c578b079329b&oe=5D81056B"
-                          alt=""></div>
+                      <div class="post_author_image"><img src="{{urlavatar}}" alt="avatar {{writer}}"></div>
                     </div>
-                    <div class="post_author_name"><a href="#" Truong nguyen</a> </div> </div> <div class="post_date"><a
-                          href="#">Ngày giờ</a></div>
+                    <div class="post_author_name"><a href="#">{{writer}}</a> </div>
                   </div>
-                  <div class="post_text">
-                    <p>{{summary}}</p>
-                  </div>
+                  <div class="post_date"><a href="#">{{date}}</a></div>
+                </div>
+                <div class="post_text">
+                  <p>{{summary}}</p>
                 </div>
               </div>
             </div>
           </div>
-          {{/each}}
         </div>
+        {{/each}}
       </div>
     </div>
   </div>
+</div>

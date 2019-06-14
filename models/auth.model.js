@@ -11,6 +11,11 @@ module.exports = {
         return db.load(sql);
     },
 
+    checkToken: (token) => {
+        var sql = `select * from users where users.token = '${token}'`;
+        return db.load(sql);
+    },
+
     getPassword: (email) => {
         var sql = `select password from users where users.email = '${email}'`;
         return db.load(sql);
@@ -19,5 +24,9 @@ module.exports = {
     getPosition: (idUser) => {
         var sql = `select position from users where users.id = '${idUser}'`;
         return db.load(sql);
+    },
+
+    update: entity => {
+        return db.update("users", entity);
     }
 }

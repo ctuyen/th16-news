@@ -15,12 +15,18 @@ module.exports = {
     );
   },
   allWithDetails: () => {
-    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar from posts as p, categories as c, users as u where p.idwriter=u.id and p.idcategory=c.id`;
+    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id and p.status = 'draft'
+    and p.isDelete = false and c.isDelete = false`;
     return db.load(sql);
   },
   allByCat: id => {
     return db.load(
-      `select * from posts where idCategory = ${id} and status = 'draft' and isDelete = false`
+      `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id and p.idCategory = ${id} 
+    and p.status = 'draft' and p.isDelete = false and c.isDelete = false`
     );
   },
 
@@ -56,12 +62,19 @@ module.exports = {
   },
 
   allWithStatus: status => {
-    var sql = `select * from posts where status = '${status}' and isDelete = false`;
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+                from posts as p, categories as c, users as u 
+                where p.idwriter=u.id and p.idcategory=c.id and p.status = '${status}' 
+                and p.isDelete = false and c.isDelete = false`;
     return db.load(sql);
   },
 
   allWithStatusTime: compare => {
-    var sql = `select * from posts where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id
+    and p.isDelete = false and c.isDelete = false 
+    and p.status = 'accept' and p.publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   },
 
