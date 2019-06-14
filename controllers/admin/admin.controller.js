@@ -124,7 +124,9 @@ module.exports = {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, { timeZone: 'Asia/Saigon' }
+          }, {
+            timeZone: 'Asia/Saigon'
+          }
         );
 
       }
@@ -201,7 +203,9 @@ module.exports = {
     var entity = {
       id: id,
       status: 'accept',
-      publicationDate: new Date().toLocaleString('en-US', { timeZone: 'UTC' })
+      publicationDate: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC'
+      })
     };
     console.log(entity.publicationDate);
     postModel

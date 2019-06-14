@@ -130,8 +130,7 @@ td {
     margin-top: 16px;
     height: 30px;
     width: 90px;
-    background-color: rgb(34, 37, 185);
-    color: white;
+    color: red;
     border-radius: 5px;
     border: none;
     font-size: 14px;

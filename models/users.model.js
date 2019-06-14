@@ -14,11 +14,11 @@ module.exports = {
   },
 
   update: entity => {
-    return db.update("users", "id", entity);
+    return db.update("users", entity);
   },
 
   delete: id => {
-    return db.delete("users", "id", id);
+    return db.delete("users", id);
   },
 
   allStaff: () => {
