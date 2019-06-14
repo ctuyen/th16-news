@@ -15,7 +15,7 @@ var router = express.Router();
 //     console.log(err);
 //   })
 // });
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   var cats = res.locals.lObjCategories;
 
   var p = postmodel.singleWithDetal(1);
@@ -43,28 +43,28 @@ router.get("/", (req, res) => {
         });
       }).catch(err => {
         console.log(err);
+        next;
       });
     }).catch(err => {
       console.log(err);
+      next;
     });
   }).catch(err => {
     console.log(err);
+    next;
   });
 });
 
 router.get("/:idPost", (req, res) => {
   var cats = res.locals.lObjCategories;
-  var idPost = req.params.idPost;
-  var p = postmodel.singleWithDetal(idPost);
+
+  postmodel.addView(req.params.idPost);
+
+  var p = postmodel.singleWithDetal(req.params.idPost);
   p.then(data => {
     var post = data.rows[0];
-    // console.log(post);
-    // var category
-    // console.log(post);
-    // for (const c in res.locals.lcCategories) {
-    //   if(c.id == post.idcategory)
+    post.urlthumbnail = post.urlthumbnail || "/images/no_image.png";
 
-    // }
     var p1 = postmodel.loadTag(post.id);
     p1.then(data1 => {
       var tags = data1.rows;
@@ -85,12 +85,15 @@ router.get("/:idPost", (req, res) => {
         });
       }).catch(err => {
         console.log(err);
+        next;
       });
     }).catch(err => {
       console.log(err);
+      next;
     });
   }).catch(err => {
     console.log(err);
+    next;
   });
 });
 
