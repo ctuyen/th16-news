@@ -121,45 +121,46 @@ module.exports = {
     where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   },
-  pageByCat: (idcat, offset, limit) => {
-    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
-    from posts as p, categories as c, users as u 
-    where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
-    limit ${limit} offset ${offset}`; // and p.idcategory=${idcat}
-    return db.load(sql);
-  },
-  numByCat: idcat => {
-    var sql = `select count(*) as total from posts where idcategory=${idcat}`;
-    return db.load(sql);
-  },
+  // pageByCat: (idcat, offset, limit) => {
+  //   var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+  //   from posts as p, categories as c, users as u 
+  //   where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
+  //   limit ${limit} offset ${offset}`; // and p.idcategory=${idcat}
+  //   return db.load(sql);
+  // },
+  // numByCat: idcat => {
+  //   var sql = `select count(*) as total from posts where idcategory=${idcat}`;
+  //   return db.load(sql);
+  // },
   addView: idPost => {
     var sql = `update posts set view =view +1 where id=${idPost}`;
     return db.updateSQL(sql);
   },
-  pageByCatssss: async (idcat, offset, limit) => {
+  pageByCat: async (idcat, offset, limit) => {
     var d = await categoriesmodel.loadSonCat(idcat);
-    console.log(d.rows);
+    // console.log(d.rows);
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
-        where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat}`;
+        where p.idwriter=u.id and p.idcategory=c.id and (p.idcategory = ${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or p.idcategory = ${cat.id} `;
       });
     }
-    sql += ` limit ${limit} offset ${offset}`;
+    sql += `) limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
-  numByCatssss: async idcat => {
+  numByCat: async idcat => {
     var d = await categoriesmodel.loadSonCat(idcat);
     var cats = d.rows;
-    var sql = `select count(*) as total from posts where idcategory=${idcat}`;
+    var sql = `select count(*) as total from posts where (idcategory=${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or idcategory = ${cat.id} `;
       });
     }
+    sql += `)`;
     return db.load(sql);
   }
 };

@@ -21,12 +21,12 @@ router.get("/:idCat", (req, res, next) => {
   var offset = (page - 1) * limit;
   // console.log("before     OMG");
   Promise.all([
-    postModel.pageByCatssss(idCat, offset, limit),
-    postModel.numByCatssss(idCat)
+    postModel.pageByCat(idCat, offset, limit),
+    postModel.numByCat(idCat)
   ])
     .then(async ([data, data1]) => {
       var posts = data.rows;
-      // console.log("load post       "+posts);
+      // console.log(posts);
       var count = data1.rows[0].total;
       // console.log("load rout       "+count)
       var numpage = Math.floor(count / limit);
