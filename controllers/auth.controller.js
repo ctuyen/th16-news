@@ -149,10 +149,6 @@ module.exports = {
                 .catch(err => {
                   throw err
                 })
-
-              // user.save(function (err) {
-              //   done(err, token, user);
-              // });
             },
             function (token) {
               var transporter = nodemailer.createTransport({

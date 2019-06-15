@@ -199,8 +199,7 @@
 											<!-- Post -->
 											<div
 												class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
-												<div class="post_image"><a href="/posts"><img
-															src="/images/post_4.jpg"
+												<div class="post_image"><a href="/posts"><img src="/images/post_4.jpg"
 															alt="https://unsplash.com/@oria_hector"></a></div>
 												<div class="post_content">
 													<div class="post_category cat_technology"><a
@@ -248,8 +247,7 @@
 											<!-- Post -->
 											<div
 												class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
-												<div class="post_image"><a href="/posts"><img
-															src="/images/post_5.jpg"
+												<div class="post_image"><a href="/posts"><img src="/images/post_5.jpg"
 															alt="https://unsplash.com/@mattyfours"></a></div>
 												<div class="post_content">
 													<div class="post_category cat_technology"><a
@@ -330,8 +328,23 @@
 						<div class="most_viewed">
 							<div class="sidebar_title">Bài viết được xem nhiều nhất</div>
 							<div class="most_viewed_items" id="sidebar-scroll">
-
+								{{#each topView}}
 								<!-- Most Viewed Item -->
+								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
+									<div>
+										<div class="most_viewed_num">{{@index}}.</div>
+									</div>
+									<div class="most_viewed_content">
+										<div class="post_category_small cat_economy"><a
+												href="/categories/{{idcategory}}">video</a>
+										</div>
+										<div class="most_viewed_title"><a href="/posts/{{id}}">{{title}}</a></div>
+										<div class="most_viewed_date"><a href="javascript:;">view: {{view}}</a></div>
+									</div>
+								</div>
+								{{/each}}
+
+								{{!-- <!-- Most Viewed Item -->
 								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
 									<div>
 										<div class="most_viewed_num">01.</div>
@@ -343,130 +356,8 @@
 												development</a></div>
 										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
 									</div>
-								</div>
+								</div> --}}
 
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">02.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_world"><a href="/categories">world</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">Robots are taking
-												over</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">03.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_technology"><a href="/categories">tech</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">10 tips to tech
-												world</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">04.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_economy"><a href="/categories">video</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">New tech
-												development</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">05.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_world"><a href="/categories">world</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">Robots are taking
-												over</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">06.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_technology"><a href="/categories">tech</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">10 tips to tech
-												world</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">07.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_economy"><a href="/categories">video</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">New tech
-												development</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">08.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_world"><a href="/categories">world</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">Robots are taking
-												over</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">09.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_technology"><a href="/categories">tech</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">10 tips to tech
-												world</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
-								<!-- Most Viewed Item -->
-								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
-									<div>
-										<div class="most_viewed_num">10.</div>
-									</div>
-									<div class="most_viewed_content">
-										<div class="post_category_small cat_technology"><a href="/categories">tech</a>
-										</div>
-										<div class="most_viewed_title"><a href="/posts">10 tips to tech
-												world</a></div>
-										<div class="most_viewed_date"><a href="javascript:;">March 12, 2018</a></div>
-									</div>
-								</div>
 							</div>
 						</div>
 
@@ -474,55 +365,24 @@
 						<div class="sidebar_latest">
 							<div class="sidebar_title">Bài viết theo chuyên mục mới nhất</div>
 							<div class="latest_posts" id="sidebar-scroll">
+								{{#each posts}}
+								<!-- Latest Post -->
 
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
+								<div class="latest_post d-flex flex-row align-items-start justify-content-start">
+									<div>
+										<div class="latest_post_image"><a href="posts/{{id}}"><img
+													src="{{urlthumbnail}}" alt="ảnh bìa"></a>
+										</div>
+									</div>
+									<div class="latest_post_content">
+										<div class="post_category_small cat_technology"><a
+												href="categories/{{idcategory}}">Tiêu pục</a>
+										</div>
+										<div class="latest_post_title"><a href="posts/{{id}}">{{title}}</a></div>
+										<div class="latest_post_date">{{publicationdate}}</div>
+									</div>
 								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
-
-								<!-- Latest Post -->
-								<div class="latest_post">
-									<div class="post05"></div>
-								</div>
+								{{/each}}
 							</div>
 						</div>
 
@@ -533,15 +393,11 @@
 						<div class="tags">
 							<div class="sidebar_title">Tags</div>
 							<div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-								<div class="tag cat_world"><a href="/categories">thế giới</a></div>
-								<div class="tag cat_economy"><a href="/categories">kinh doanh</a></div>
-								<div class="tag"><a href="/categories">nông sản</a></div>
-								<div class="tag"><a href="/categories">hải sản</a></div>
-								<div class="tag cat_sport"><a href="/categories">thể thao</a></div>
-								<div class="tag cat_travel"><a href="/categories">du lịch</a></div>
-								<div class="tag"><a href="/categories">trong nước</a></div>
-								<div class="tag"><a href="/categories">ngoài nước</a></div>
-								<div class="tag cat_technology"><a href="/categories">Công nghệ</a></div>
+								{{#each tags}}
+									<div class="tag cat_world"><a href="/{{id}}">{{name}}</a></div>
+								{{/each}}
+								{{!-- <div class="tag cat_world"><a href="/categories">thế giới</a></div> --}}
+
 							</div>
 						</div>
 
