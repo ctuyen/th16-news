@@ -118,7 +118,7 @@ module.exports = {
       });
   },
 
-  post: (req, res) => {
+  post: (req, res, next) => {
     var p = postModel.allWithDetails();
     p.then(async data => {
       var posts = data.rows;
@@ -148,7 +148,7 @@ module.exports = {
         layout: "admin.hbs",
         posts
       });
-    }).catch(err => console.log(err));
+    }).catch(err => next(err));
   },
 
   postCategory: (req, res) => {
@@ -199,11 +199,10 @@ module.exports = {
 
   postPost: (req, res) => {},
 
-  public: (req, res) => {
+  public: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = {
         id: id,
@@ -218,31 +217,15 @@ module.exports = {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
-    var entity = {
-      id: id,
-      status: "accept",
-      publicationDate: new Date().toLocaleString("en-US", {
-        timeZone: "UTC"
-      })
-    };
-    postModel
-      .update(entity)
-      .then(Post => {
-        res.redirect("back");
-      })
-      .catch(err => {
-        console.log(err);
-      });
   },
 
-  changeCatName: (req, res) => {
+  changeCatName: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = req.body;
       categoryModel
@@ -251,54 +234,49 @@ module.exports = {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
   },
 
-  changeTagName: (req, res) => {
+  changeTagName: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = req.body;
-      // console.log(entity);
       tagModel
         .update(entity)
         .then(Post => {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
   },
 
-  changePosition: (req, res) => {
+  changePosition: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = req.body;
-      // console.log(entity);
       userModel
         .update(entity)
         .then(Post => {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
   },
 
-  changeCategory: async (req, res) => {
+  changeCategory: async (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var idEditor = req.body.idEditor;
       var listIdCat = req.body.categories;
@@ -322,7 +300,7 @@ module.exports = {
               console.log("Đã sửa được bảng Editor");
             })
             .catch(err => {
-              console.log(err);
+              next(err);
             });
         }
       } else {
@@ -336,7 +314,7 @@ module.exports = {
             console.log("Đã sửa được bảng Editor");
           })
           .catch(err => {
-            console.log(err);
+            next(err);
           });
       }
       res.redirect("back");
@@ -347,7 +325,6 @@ module.exports = {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = {
         id: req.body.id,
@@ -373,7 +350,6 @@ module.exports = {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = {
         id: id,
@@ -381,12 +357,17 @@ module.exports = {
       };
       try {
         await categoryModel.update(entity);
-        var catSon = await categoryModel.deleteByIdCat(id);
-        catSon.rows.forEach(cat => {
-          postModel.deleteByIdCat(cat.id);
-        });
-        await postModel.deleteByIdCat(id);
-        res.redirect("back");
+        try {
+          var catSon = await categoryModel.deleteByIdCat(id);
+          catSon.rows.forEach(cat => {
+            postModel.deleteByIdCat(cat.id);
+          });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          await postModel.deleteByIdCat(id);
+          res.redirect("back");
+        }
       } catch (error) {
         console.log(error);
         next(error);
@@ -394,11 +375,10 @@ module.exports = {
     }
   },
 
-  deleteTag: (req, res) => {
+  deleteTag: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = {
         id: id,
@@ -410,16 +390,15 @@ module.exports = {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
   },
 
-  deleteUser: (req, res) => {
+  deleteUser: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
-      console.log("This id does not exist");
     } else {
       var entity = {
         id: id,
@@ -431,210 +410,12 @@ module.exports = {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
   },
 
-  addPost: (req, res) => {
-    var thumbnail = req.body.thumbnail;
-    if (thumbnail == "") {
-      thumbnail =
-        "https://1080motion.com/wp-content/uploads/2018/06/NoImageFound.jpg.png";
-    }
-    var entity = {
-      title: req.body.title,
-      summary: req.body.summary,
-      content: req.body.content,
-      urlThumbnail: thumbnail,
-      idWriter: req.signedCookies.userId,
-      idCategory: parseInt(req.body.category)
-    };
-    var tagList = req.body.tag;
-    postModel
-      .add(entity)
-      .then(async NewPost => {
-        console.log("Đã thêm dòng bảng posts");
-        if (Array.isArray(tagList)) {
-          for (let i = 0; i < tagList.length; i++) {
-            var entityTagPost = {
-              idTag: parseInt(tagList[i]),
-              idPost: NewPost.rows[0].id
-            };
-            await tagPostModel
-              .add(entityTagPost)
-              .then(data => {
-                console.log("Đã thêm dòng bảng tagPost");
-              })
-              .catch(err => {
-                console.log(err);
-              });
-          }
-        } else {
-          var entityTagPost = {
-            idTag: parseInt(tagList),
-            idPost: entity.id
-          };
-          tagPostModel
-            .add(entityTagPost)
-            .then(data => {
-              console.log("Đã thêm dòng bảng tagPost");
-            })
-            .catch(err => {
-              console.log(err);
-            });
-        }
-        res.redirect("/admin/post");
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  },
-  // Phần post
-  textEditor: (req, res) => {
-    res.render("admin/textEditor", {
-      layout: "admin.hbs",
-      titlePage: "Viết bài"
-    });
-  },
-
-  pending: (req, res) => {
-    var p = postModel.allWithStatus("draft");
-    p.then(async data => {
-      var posts = data.rows;
-      for (var post of posts) {
-        var t = await postModel.loadTag(post.id);
-        var temp = [];
-        t.rows.forEach(i => {
-          temp.push(i);
-        });
-        // console.log(temp);
-
-        post.tags = temp;
-
-        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          }, {
-            timeZone: "Asia/Saigon"
-          }
-        );
-      }
-      res.render("admin/pending", {
-        layout: "admin.hbs",
-        titlePage: "Bài chưa duyệt",
-        posts
-      });
-    }).catch(err => {
-      console.log(err);
-    });
-  },
-
-  denied: (req, res) => {
-    var p = postModel.allWithStatus("deny");
-    p.then(async data => {
-      var posts = data.rows;
-      for (var post of posts) {
-        var t = await postModel.loadTag(post.id);
-        var temp = [];
-        t.rows.forEach(i => {
-          temp.push(i);
-        });
-        // console.log(temp);
-
-        post.tags = temp;
-
-        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          }, {
-            timeZone: "Asia/Saigon"
-          }
-        );
-      }
-      res.render("admin/denied", {
-        layout: "admin.hbs",
-        titlePage: "Bài bị từ chối",
-        posts
-      });
-    }).catch(err => {
-      console.log(err);
-    });
-  },
-
-  approved: (req, res) => {
-    var p = postModel.allWithStatusTime(">");
-    p.then(async data => {
-      var posts = data.rows;
-      for (var post of posts) {
-        var t = await postModel.loadTag(post.id);
-        var temp = [];
-        t.rows.forEach(i => {
-          temp.push(i);
-        });
-        // console.log(temp);
-
-        post.tags = temp;
-
-        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          }, {
-            timeZone: "Asia/Saigon"
-          }
-        );
-      }
-      res.render("admin/approved", {
-        layout: "admin.hbs",
-        titlePage: "Bài đã được duyệt & chờ xuất bản",
-        posts
-      });
-    }).catch(err => {
-      console.log(err);
-    });
-  },
-
-  published: (req, res) => {
-    var p = postModel.allWithStatusTime("<=");
-    p.then(async data => {
-      var posts = data.rows;
-      for (var post of posts) {
-        var t = await postModel.loadTag(post.id);
-        var temp = [];
-        t.rows.forEach(i => {
-          temp.push(i);
-        });
-        // console.log(temp);
-
-        post.tags = temp;
-
-        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          }, {
-            timeZone: "Asia/Saigon"
-          }
-        );
-      }
-      res.render("admin/published", {
-        layout: "admin.hbs",
-        titlePage: "Bài đã xuất bản",
-        posts
-      });
-    }).catch(err => {
-      console.log(err);
-    });
-  },
-
-  addPost: (req, res) => {
+  addPost: (req, res, next) => {
     var thumbnail = req.body.thumbnail;
     if (thumbnail == "") {
       thumbnail =
@@ -685,11 +466,155 @@ module.exports = {
         res.redirect("/admin/post/pending");
       })
       .catch(err => {
-        console.log(err);
+        next(err);
       });
   },
+  // Phần post
+  textEditor: (req, res) => {
+    res.render("admin/textEditor", {
+      layout: "admin.hbs",
+      titlePage: "Viết bài"
+    });
+  },
 
-  loadEditPost: (req, res) => {
+  pending: (req, res, next) => {
+    var p = postModel.allWithStatus("draft");
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, {
+            timeZone: "Asia/Saigon"
+          }
+        );
+      }
+      res.render("admin/pending", {
+        layout: "admin.hbs",
+        titlePage: "Bài chưa duyệt",
+        posts
+      });
+    }).catch(err => {
+      next(err);
+    });
+  },
+
+  denied: (req, res, next) => {
+    var p = postModel.allWithStatus("deny");
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, {
+            timeZone: "Asia/Saigon"
+          }
+        );
+      }
+      res.render("admin/denied", {
+        layout: "admin.hbs",
+        titlePage: "Bài bị từ chối",
+        posts
+      });
+    }).catch(err => {
+      next(err);
+    });
+  },
+
+  approved: (req, res, next) => {
+    var p = postModel.allWithStatusTime(">");
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, {
+            timeZone: "Asia/Saigon"
+          }
+        );
+      }
+      res.render("admin/approved", {
+        layout: "admin.hbs",
+        titlePage: "Bài đã được duyệt & chờ xuất bản",
+        posts
+      });
+    }).catch(err => {
+      next(err);
+    });
+  },
+
+  published: (req, res, next) => {
+    var p = postModel.allWithStatusTime("<=");
+    p.then(async data => {
+      var posts = data.rows;
+      for (var post of posts) {
+        var t = await postModel.loadTag(post.id);
+        var temp = [];
+        t.rows.forEach(i => {
+          temp.push(i);
+        });
+        // console.log(temp);
+
+        post.tags = temp;
+
+        post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+          "vi-VI", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, {
+            timeZone: "Asia/Saigon"
+          }
+        );
+      }
+      res.render("admin/published", {
+        layout: "admin.hbs",
+        titlePage: "Bài đã xuất bản",
+        posts
+      });
+    }).catch(err => {
+      next(err);
+    });
+  },
+
+
+  loadEditPost: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.render("admin/editPost", {
@@ -720,11 +645,11 @@ module.exports = {
         });
       }
     }).catch(err => {
-      console.log(err);
+      next(err);
     });
   },
 
-  editPost: async (req, res) => {
+  editPost: async (req, res, next) => {
     var thumbnail = req.body.thumbnail;
     if (thumbnail == "") {
       thumbnail =
@@ -789,7 +714,7 @@ module.exports = {
     res.redirect("/admin/post/pending");
   },
 
-  deletePost: (req, res) => {
+  deletePost: (req, res, next) => {
     var id = req.params.id;
     if (isNaN(id)) {
       res.redirect("back");
@@ -805,8 +730,8 @@ module.exports = {
           res.redirect("back");
         })
         .catch(err => {
-          console.log(err);
+          next(err);
         });
     }
-  },
+  }
 };
