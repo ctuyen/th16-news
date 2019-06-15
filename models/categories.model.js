@@ -34,6 +34,10 @@ module.exports = {
     return db.update("categories", entity);
   },
 
+  deleteByIdCat: idCategory => {
+    return db.updateSQL(`update table categories set isDelete = true where idCategory = ${idCategory}`);
+  },
+
   delete: id => {
     return db.delete("categories", "id", id);
   },

@@ -192,10 +192,7 @@ module.exports = {
               console.log(err);
             });
         }
-        res.render("writer/textEditor", {
-          layout: "writer.hbs",
-          titlePage: "Viết bài"
-        });
+        res.redirect("back");
       })
       .catch(err => {
         console.log(err);
@@ -263,7 +260,7 @@ module.exports = {
       .update(entity)
       .then(Post => {
         console.log("Đã sửa được bảng posts");
-        res.redirect("/writer/pending");
+        
       })
       .catch(err => {
         console.log(err);
@@ -305,5 +302,6 @@ module.exports = {
           console.log(err);
         });
     }
+    res.redirect("/writer/pending");
   }
 };
