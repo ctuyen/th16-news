@@ -208,6 +208,22 @@ module.exports = {
           console.log(err);
         });
     }
+    var entity = {
+      id: id,
+      status: 'accept',
+      publicationDate: new Date().toLocaleString('en-US', {
+        timeZone: 'UTC'
+      })
+    };
+    console.log(entity.publicationDate);
+    postModel
+      .update(entity)
+      .then(Post => {
+        res.redirect("back");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
 
   changeCatName: (req, res) => {

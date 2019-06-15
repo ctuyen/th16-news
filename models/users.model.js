@@ -18,7 +18,7 @@ module.exports = {
   },
 
   delete: id => {
-    return db.delete("users", "id", id);
+    return db.delete("users", id);
   },
 
   allStaff: () => {
