@@ -96,13 +96,53 @@ router.get('/signup', (req, res) => {
 })
 
 router.get("/personal", authMiddleware.requireAuth, (req, res) => {
-  res.render("main/personal", {
-    layout: false
-  });
+  userModel.single(req.signedCookies.userId)
+    .then(users => {
+      let user = users.rows[0]
+      if (!user.urlavatar) {
+        user.urlavatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
+      }
+
+
+      res.render("main/personal", {
+        layout: false,
+        user
+      });
+    })
+    .catch(err => {
+      throw err
+    })
 });
 
 router.post("/personal", (req, res) => {
+  let entity = {}
+  entity.id = req.signedCookies.userId
+  entity.fullname = req.body.fullname
+  entity.email = req.body.email
+  entity.urlavatar = req.body.urlavatar
 
+  userModel.update(entity)
+    .then(
+      userModel.single(req.signedCookies.userId)
+      .then(users => {
+        let user = users.rows[0]
+        console.log(user)
+        if (!user.urlavatar) {
+          user.urlavatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
+        }
+        res.render("main/personal", {
+          layout: false,
+          user,
+          notices: "Chúc mừng. Bạn đã đổi thông tin thành công!"
+        });
+      })
+      .catch(err => {
+        throw err
+      })
+    )
+    .catch(err => {
+      throw err
+    })
 });
 
 module.exports = router;

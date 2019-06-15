@@ -1,0 +1,30 @@
+body {
+    margin: 0 75px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    height: fit-content;
+    margin: 32px 10%;
+    border-bottom: 3px solid rgb(3, 70, 146)
+}
+
+img {
+    display: inline;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 32;
+    margin: 16px 16px;
+}
+
+form {
+    margin: 32px 30% 32px 10%;
+}
+
+.avatar {
+    margin: 32px 10%;
+}

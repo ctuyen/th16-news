@@ -31,15 +31,27 @@
         </div>
     </header>
     <div class="label">Thông tin cá nhân</div>
-    {{#if notices}}
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Well done!</h4>
-        <p>{{this.notices}}</p>
-    </div>
-    {{/if}}
 
-    <div>
-
+    <div class="container">
+        <div class="avatar">
+            <img src="{{user.urlavatar}}" alt="avatar" width="128" height="128">
+            <span class="name">Xin chào, {{user.fullname}} !!</span>
+        </div>
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Họ tên</label>
+                <input type="text" name="fullname" value="{{user.fullname}}" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" value="{{user.email}}" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="url">Link ảnh đại diện</label>
+                <input type="text" name="urlavatar" value="{{user.urlavatar}}" class="form-control" id="url">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Thay đổi</button>
+        </form>
     </div>
 </body>
 
