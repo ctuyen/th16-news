@@ -28,7 +28,8 @@ module.exports = {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, { timeZone: 'Asia/Saigon' }
+          },
+          { timeZone: "Asia/Saigon" }
         );
       }
       res.render("writer/pending", {
@@ -61,7 +62,8 @@ module.exports = {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, { timeZone: 'Asia/Saigon' }
+          },
+          { timeZone: "Asia/Saigon" }
         );
       }
       res.render("writer/denied", {
@@ -94,7 +96,8 @@ module.exports = {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, { timeZone: 'Asia/Saigon' }
+          },
+          { timeZone: "Asia/Saigon" }
         );
       }
       res.render("writer/approved", {
@@ -127,7 +130,8 @@ module.exports = {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, { timeZone: 'Asia/Saigon' }
+          },
+          { timeZone: "Asia/Saigon" }
         );
       }
       res.render("writer/published", {
@@ -158,14 +162,35 @@ module.exports = {
     postModel
       .add(entity)
       .then(async NewPost => {
-        console.log("Đã thêm được bảng posts");
-        for (let i = 0; i < tagList.length; i++) {
+        console.log("Đã thêm dòng bảng posts");
+        if (Array.isArray(tagList)) {
+          for (let i = 0; i < tagList.length; i++) {
+            var entityTagPost = {
+              idTag: parseInt(tagList[i]),
+              idPost: NewPost.rows[0].id
+            };
+            await tagPostModel
+              .add(entityTagPost)
+              .then(data => {
+                console.log("Đã thêm dòng bảng tagPost");
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          }
+        } else {
           var entityTagPost = {
-            idTag: parseInt(tagList[i]),
-            idPost: NewPost.rows[0].id
+            idTag: parseInt(tagList),
+            idPost: entity.id
           };
-          await tagPostModel.add(entityTagPost);
-          console.log("Đã thêm được dòng tagPost");
+          tagPostModel
+            .add(entityTagPost)
+            .then(data => {
+              console.log("Đã thêm dòng bảng tagPost");
+            })
+            .catch(err => {
+              console.log(err);
+            });
         }
         res.render("writer/textEditor", {
           layout: "writer.hbs",
@@ -251,12 +276,27 @@ module.exports = {
       .catch(err => {
         console.log(err);
       });
-    for (let i = 0; i < tagList.length; i++) {
+    if (Array.isArray(tagList)) {
+      for (let i = 0; i < tagList.length; i++) {
+        var entityTagPost = {
+          idTag: parseInt(tagList[i]),
+          idPost: entity.id
+        };
+        await tagPostModel
+          .add(entityTagPost)
+          .then(data => {
+            console.log("Đã sửa được bảng tagPost");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    } else {
       var entityTagPost = {
-        idTag: parseInt(tagList[i]),
+        idTag: parseInt(tagList),
         idPost: entity.id
       };
-      await tagPostModel
+      tagPostModel
         .add(entityTagPost)
         .then(data => {
           console.log("Đã sửa được bảng tagPost");

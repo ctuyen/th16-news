@@ -1,5 +1,6 @@
 var postModel = require("../../models/posts.model");
 var tagPostModel = require("../../models/tagPost.model");
+var categoryModel = require("../../models/categories.model");
 module.exports = {
   list: (req, res) => {
     var id = req.params.id;
@@ -8,7 +9,7 @@ module.exports = {
     p.then(async data => {
       var posts = data.rows;
       if (posts.length > 0) {
-        console.log(data);
+        // console.log(data);
         for (var post of posts) {
           var t = await postModel.loadTag(post.id);
           var temp = [];
@@ -37,10 +38,26 @@ module.exports = {
             c.isActive = true;
           }
         }
+        categoryModel.allCatOfEditor(req.signedCookies.userId).then( data =>{
+          listIdCat = data.rows;
+          console.log(listIdCat);
+          for (const c of res.locals.lcCategories) {
+            c.isView = false;
+            for(const cv of listIdCat){
+              if (c.catid === +cv.idcategory) {
+                c.isView = true;
+              }
+            }
+            console.log(c.isView);
+          }
+        }).catch(err => {
+          console.log(err);
+        });
+        
       }
       res.render("editor/listPost", {
         posts,
-        titlePage: "Editor",
+        titlePage: "Duyệt bài",
         layout: "editor.hbs"
       });
     }).catch(err => {
@@ -57,7 +74,7 @@ module.exports = {
       ),
       status: "accept"
     };
-    // console.log(entity.publicationDate);
+    // console.log(req.body.publicationDate);
 
     postModel
       .update(entity)
@@ -76,12 +93,27 @@ module.exports = {
       .catch(err => {
         console.log(err);
       });
-    for (let i = 0; i < tagList.length; i++) {
+    if (Array.isArray(tagList)) {
+      for (let i = 0; i < tagList.length; i++) {
+        var entityTagPost = {
+          idTag: parseInt(tagList[i]),
+          idPost: entity.id
+        };
+        await tagPostModel
+          .add(entityTagPost)
+          .then(data => {
+            console.log("Đã sửa được bảng tagPost");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    } else {
       var entityTagPost = {
-        idTag: parseInt(tagList[i]),
+        idTag: parseInt(tagList),
         idPost: entity.id
       };
-      await tagPostModel
+      tagPostModel
         .add(entityTagPost)
         .then(data => {
           console.log("Đã sửa được bảng tagPost");
