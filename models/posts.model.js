@@ -40,7 +40,7 @@ module.exports = {
     and p.status = 'draft' and p.isDelete = false and c.isDelete = false`
     );
   },
-
+ 
   single: id => {
     return db.load(`select * from posts where id = ${id} and isDelete = false`);
   },
@@ -60,6 +60,10 @@ module.exports = {
 
   delete: id => {
     return db.delete("posts", "id", id);
+  },
+
+  deleteByIdCat: idCategory => {
+    return db.updateSQL(`update table posts set isDelete = true where idCategory = ${idCategory}`);
   },
 
   loadTag: id => {

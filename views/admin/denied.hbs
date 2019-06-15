@@ -1,0 +1,121 @@
+<div class="super">
+    <div class="menu-left">
+        <div class="menu-item"><a href="./category">Chuyên mục</a></div>
+        <div class="menu-item"><a href="./tag">Thẻ</a></div>
+        <div class="menu-item selected"><a href="./post">Bài viết</a></div>
+        <div class="menu-item"><a href="./user">Người dùng</a></div>
+    </div>
+    <div class="right">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/post/pending">Bài chưa duyệt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/admin/post/denied">Bị từ chối</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/post/published">Đã xuất bản</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/post/approved">Đã duyệt & chờ xuất bản</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/post/textEditor">Viết bài</a>
+            </li>
+        </ul>
+        <div class="posts">
+            <!-- Post -->
+            {{#each this.posts}}
+            <div class="post_item post_h_large">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="post_image"><img src="{{urlthumbnail}}" alt="hello thumbnail"
+                                onclick="window.location='/posts/{{id}}';">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="post_content">
+                            <div>
+                                <div class="pull-right">
+                                    <a class="btn btn-secondary" href="" role="button" data-toggle="modal"
+                                        data-target="#modalReason{{id}}">
+                                        <i class="fa fa-question" aria-hidden="true"></i>
+                                        Xem lý do
+                                    </a>
+                                    <a class="btn btn-info" href="/admin/post/textEditor/{{id}}" role="button">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        Chỉnh sửa
+                                    </a>
+                                    <a type="button" class="btn btn-warning" href="/admin/post/{{id}}/public"
+                                        role="button">
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                        Xuất bản
+                                    </a>
+                                    <a class="btn btn-info" href="/admin/post/delete/{{id}}" role="button">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        Xoá
+                                    </a>
+                                </div>
+                                <div class="post_category cat_world"><a href="/categories">{{category}}</a></div>
+                            </div>
+                            <div
+                                class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                {{#each tags}}
+                                <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                                {{/each}}
+                            </div>
+                            <div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
+                            <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                                <div class="post_author d-flex flex-row align-items-center justify-content-start">
+                                    <div>
+                                        <div class="post_author_image"><img src="{{urlavatar}}" alt="avatar {{writer}}">
+                                        </div>
+                                    </div>
+                                    <div class="post_author_name"><a href="#">{{writer}}</a> </div>
+                                </div>
+                                <div class="post_date"><a href="#">{{date}}</a></div>
+                            </div>
+                            <div class="post_text">
+                                <p>{{summary}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- modal --}}
+            <div class="modal fade" id="modalReason{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h4 class="modal-title w-100 font-weight-bold">Lý do từ chối</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <div class="modal-body mx-3">
+                                <div class="md-form mb-5">
+                                    <label for="idDeny{{id}}">ID</label>
+                                    <input readonly class="form-control" id="idDeny{{id}}" name="id" type="text"
+                                        value="{{id}}">
+                                </div>
+                                <div class="md-form mb-5">
+                                    <i class="fas fa-user prefix grey-text"></i>
+                                    <label data-error="wrong" data-success="right" for="reason">Lý do từ
+                                        chối</label>
+                                    <input readonly class="form-control" type="text" id="reason" name="reason"
+                                        class="form-control validate black_text" value="{{reason}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button class="btn btn-secondary" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
