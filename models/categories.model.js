@@ -7,7 +7,9 @@ module.exports = {
 
   allWithDetails: () => {
     return db.load(`select c.id as CatId, c.name, count(p.id) as numOfPosts
-                  from categories c left join 
+                  from 
+                  (select * from categories where isDelete = false) c 
+                  left join 
                   (select * from posts where status = 'draft' and isDelete = false) p 
                   on c.id = p.idCategory
                   group by c.id, c.name`);
@@ -35,7 +37,7 @@ module.exports = {
   },
 
   deleteByIdCat: idCategory => {
-    return db.updateSQL(`update table categories set isDelete = true where idCategory = ${idCategory}`);
+    return db.updateSQL(`update categories set isDelete = true where idCategory = ${idCategory} RETURNING *`);
   },
 
   delete: id => {

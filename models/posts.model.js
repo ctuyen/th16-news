@@ -63,7 +63,7 @@ module.exports = {
   },
 
   deleteByIdCat: idCategory => {
-    return db.updateSQL(`update table posts set isDelete = true where idCategory = ${idCategory}`);
+    return db.updateSQL(`update posts set isDelete = true where idCategory = ${idCategory}`);
   },
 
   loadTag: id => {
