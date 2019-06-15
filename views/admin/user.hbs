@@ -13,7 +13,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#home">Thêm người dùng</a>
+              <a class="nav-link active" data-toggle="tab" href="#home">Thêm nhân viên</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#menu1">Danh sách nhân viên</a>
@@ -29,7 +29,7 @@
           <!-- Tab panes -->
           <div class="tab-content">
             <div id="home" class="container tab-pane active"><br>
-              <h3 class="divider gradient">Thêm người dùng</h3>
+              <h3 class="divider gradient">Thêm nhân viên</h3>
 
               {{#if errors}}
               {{#each errors}}
@@ -54,7 +54,7 @@
                   <div class="form-item">
                     <label for="parent">Vai trò</label>
                     <select name="position" id="parent" class="parent">
-                      <option value="user">Độc giả</option>
+                      <option value="user">Người dùng</option>
                       <option value="writer">Phóng viên</option>
                       <option value="editor">Biên tập viên</option>
                       <option value="admin">Admin</option>
@@ -73,7 +73,6 @@
                 <div class="details" style="height:260px;overflow:auto;">
                   <table>
                     <tr>
-                      <th>&nbsp;</th>
                       <th>Tên</th>
                       <th>Email</th>
                       <th>Vai trò</th>
@@ -82,20 +81,90 @@
 
                     {{#each this.data.staffs as |staff|}}
                     <tr>
-                      <td><input type="checkbox" name="name1"></td>
                       <td>{{staff.fullname}}</td>
                       <td>{{staff.email}}</td>
                       <td>{{staff.position}}</td>
                       <td>
-                        <div class="btn btn-primary action" data-toggle="modal" data-target="#staffModal">Chỉnh sửa
-                        </div>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#staffModal{{id}}">Chỉnh
+                          sửa
+                        </a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#deleteStaff{{id}}">Xoá</a>
                       </td>
                     </tr>
+                    <!-- Modal change position staff-->
+                    <div class="modal fade" id="staffModal{{id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <form method="POST" action="/admin/user/{{id}}/changePosition">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-item">
+                                <input name="id" type="hidden" id="id" type="text" value="{{id}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="name">Tên:</label>
+                                <input name="fullname" id="name" type="text" value="{{fullname}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="email">Email:</label>
+                                <input readonly class="form-control" id="email" type="email" value="{{email}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="parent" class="parent">Vai trò:</label>
+                                <select name="position" id="parent">
+                                  <option value="writer">Phóng viên</option>
+                                  <option value="editor">Biên tập viên</option>
+                                  <option value="admin">Admin</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                              <button type="submit" class="btn btn-success">Lưu</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- Modal Delete Staff-->
+                    <div class="modal fade" id="deleteStaff{{id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-item">
+                              <label for="name">Tên nhân viên:</label>
+                              <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                            </div>
+                            <div class="form-item">
+                              <label for="email">Email:</label>
+                              <input readonly class="form-control" id="email" type="text" value="{{email}}">
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary"
+                              onclick="window.location='/admin/user/{{id}}/delete';">Xóa</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {{/each}}
                   </table>
                 </div>
-                <!-- Button modal trigger -->
-                <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
               </div>
             </div>
             <div id="menu2" class="container tab-pane fade"><br>
@@ -105,7 +174,6 @@
                 <div class="details">
                   <table>
                     <tr>
-                      <th>&nbsp;</th>
                       <th>Tên</th>
                       <th>Email</th>
                       <th>Chuyên mục</th>
@@ -114,7 +182,6 @@
 
                     {{#each this.data.editers as |editer|}}
                     <tr>
-                      <td><input type="checkbox" name="name1"></td>
                       <td>{{editer.fullname}}</td>
                       <td>{{editer.email}}</td>
                       <td>
@@ -123,15 +190,54 @@
                         {{/each}}
                       </td>
                       <td>
-                        <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal">Chỉnh sửa
-                        </div>
+                        <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal{{id}}">Chỉnh
+                          sửa</div>
                       </td>
                     </tr>
+                    <!-- Modal change category cho editor staff-->
+                    <div class="modal fade" id="editorModal{{id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <form method="POST" action="/admin/user/{{id}}/changeCategory">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-item">
+                                <input name="idEditor" type="hidden" id="id" type="text" value="{{id}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="name">Tên</label>
+                                <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="email">Email</label>
+                                <input readonly class="form-control" id="email" type="email" value="{{email}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="parent">Chuyên mục</label>
+                                <select name="categories" id="parent" class="larger" multiple>
+                                  {{#each ../data.categories as |cate|}}
+                                  <option value="{{cate.id}}">{{cate.name}}</option>
+                                  {{/each}}
+                                </select>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                              <button type="submit" class="btn btn-success">Lưu</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                     {{/each}}
-
                   </table>
-                  <!-- Button modal trigger -->
-                  <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
                 </div>
               </div>
             </div>
@@ -142,7 +248,6 @@
                 <div class="details" style="height:310px;overflow:auto;">
                   <table>
                     <tr>
-                      <th>&nbsp;</th>
                       <th>Tên</th>
                       <th>Email</th>
                       <th>Ngày hết hạn</th>
@@ -151,19 +256,85 @@
 
                     {{#each this.data.users as |user|}}
                     <tr>
-                      <td><input type="checkbox" name="name1"></td>
                       <td>{{user.fullname}}</td>
                       <td>{{user.email}}</td>
-                      <td>{{user.expirationdate}}</td>
+                      <td>{{user.expirationPremium}}</td>
                       <td>
-                        <div class="btn action">Gia hạn</div>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#premiumDate{{id}}">Gia hạn</a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#deleteUser{{id}}">Xoá</a>
                       </td>
                     </tr>
+                    {{!-- modal  premium date--}}
+                    <div class="modal fade" id="premiumDate{{id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <form method="POST" action="/admin/user/{{id}}/changePremiumDate">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Ngày hết hạn Premium cho user
+                              </h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="form-item">
+                                <input name="id" type="hidden" id="id" type="text" value="{{id}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="name">Tên</label>
+                                <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="email">Email</label>
+                                <input readonly class="form-control" id="email" type="email" value="{{email}}">
+                              </div>
+                              <div class="form-item">
+                                <label for="parent">Gia hạn đến ngày</label>
+                                <input name="publicationDate" class="Datetime" value="{{user.expirationPremium}}"
+                                  id="parent" />
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                              <button type="submit" class="btn btn-success">Lưu</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <!-- Modal Delete User-->
+                    <div class="modal fade" id="deleteUser{{id}}" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="form-item">
+                              <label for="name">Tên người dùng:</label>
+                              <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                            </div>
+                            <div class="form-item">
+                              <label for="email">Email:</label>
+                              <input readonly class="form-control" id="email" type="text" value="{{email}}">
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-primary"
+                              onclick="window.location='/admin/user/{{id}}/delete';">Xóa</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {{/each}}
                   </table>
                 </div>
-                <!-- Button modal trigger -->
-                <div class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">Xóa</div>
               </div>
             </div>
 
@@ -184,83 +355,6 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                   <button type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Modal -->
-          <div class="modal fade" id="staffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="">
-                    <div class="form-item">
-                      <label for="name">Tên</label>
-                      <input id="name" type="text">
-                    </div>
-                    <div class="form-item">
-                      <label for="name">Email</label>
-                      <input id="name" type="email">
-                    </div>
-                    <div class="form-item">
-                      <label for="parent">Vai trò</label>
-                      <select name="parent" id="parent" class="parent">
-                        <option value="-1">Độc giả</option>
-                        <option value="46">Phóng viên</option>
-                        <option value="3">Biên tập viên</option>
-                        <option value="3">Admin</option>
-                      </select>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Modal -->
-          <div class="modal fade" id="editorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa chuyên mục</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="">
-                    <div class="form-item">
-                      <label for="name">Tên</label>
-                      <input id="name" type="text">
-                    </div>
-                    <div class="form-item">
-                      <label for="name">Email</label>
-                      <input id="name" type="email">
-                    </div>
-                    <div class="form-item">
-                      <label for="parent">Chuyên mục</label>
-                      <select name="parent" id="parent" class="larger" multiple>
-                        {{#each this.data.categories as |cate|}}
-                        <option value="{{cate.id}}">{{cate.name}}</option>
-                        {{/each}}
-                      </select>
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Lưu</button>
                 </div>
               </div>
             </div>

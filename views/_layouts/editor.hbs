@@ -52,9 +52,13 @@
                         </h5>
                         <div class="list-group list-group-flush">
                             {{#each lcCategories}}
+
                             <a href="/editor/{{catid}}/posts"
                                 class="list-group-item list-group-item-action {{#if isActive}}active{{/if}}">
                                 {{name}}
+                                {{#if isView}}
+                                <p>{{isView}}</p>
+                                {{/if}}
                                 {{#if numofposts}}
                                 <span class="badge badge-danger float-right">{{numofposts}}</span>
                                 {{/if}}

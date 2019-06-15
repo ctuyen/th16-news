@@ -2,11 +2,11 @@ var db = require("../utils/db");
 
 module.exports = {
   all: () => {
-    return db.load("select * from users");
+    return db.load("select * from users where isDelete = false");
   },
 
   single: id => {
-    return db.load(`select * from users where id = ${id}`);
+    return db.load(`select * from users where id = ${id} and isDelete = false`);
   },
 
   add: entity => {
@@ -14,7 +14,7 @@ module.exports = {
   },
 
   update: entity => {
-    return db.update("users", "id", entity);
+    return db.update("users", entity);
   },
 
   delete: id => {
@@ -22,15 +22,15 @@ module.exports = {
   },
 
   allStaff: () => {
-    return db.load(`select * from users where position <> 'user'`);
+    return db.load(`select * from users where position <> 'user' and position <> 'admin' and isDelete = false`);
   },
 
   allUser: () => {
-    return db.load(`select * from users where position = 'user'`);
+    return db.load(`select * from users where position = 'user' and isDelete = false`);
   },
 
   allEditer: () => {
-    return db.load(`select * from users where position = 'editor'`)
+    return db.load(`select * from users where position = 'editor' and isDelete = false`)
   },
 
   catesOfEditer: (id) => {

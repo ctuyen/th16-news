@@ -2,7 +2,7 @@ var db = require("../utils/db");
 
 module.exports = {
   all: () => {
-    return db.load("select * from categories");
+    return db.load("select * from categories where isDelete = false");
   },
 
   allWithDetails: () => {
@@ -12,13 +12,18 @@ module.exports = {
                   on c.id = p.idCategory
                   group by c.id, c.name`);
   },
+
+  allCatOfEditor: idEditor =>{
+    return db.load(`select * from editor where idEditor = ${idEditor}`);
+  },
+
   allWithLimit: (offset, limit) => {
-    return db.load(`select * from categories offset ${offset} limit ${limit}`);
+    return db.load(`select * from categories where isDelete = false offset ${offset} limit ${limit}`);
   },
   HighestEachCat: () => {},
 
   single: id => {
-    return db.load(`select * from categories where id = ${id}`);
+    return db.load(`select * from categories where id = ${id} and isDelete = false`);
   },
 
   add: entity => {
@@ -32,17 +37,13 @@ module.exports = {
   delete: id => {
     return db.delete("categories", "id", id);
   },
-
-  // load: () => {
-  //   var sql = "select * from categories";
-  //   return db.load(sql);
-  // },
+  
   loadFather: () => {
-    var sql = "select * from categories where idCategory is null";
+    var sql = "select * from categories where idCategory is null and isDelete = false";
     return db.load(sql);
   },
   loadSon: id => {
-    var sql = `select * from categories where idCategory = ${id}`;
+    var sql = `select * from categories where idCategory = ${id} and not (select isDelete from categories where id = ${id})`;
     return db.load(sql);
   }
 
