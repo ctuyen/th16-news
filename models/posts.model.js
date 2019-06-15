@@ -4,9 +4,18 @@ module.exports = {
   all: () => {
     return db.load("select * from posts where isDelete = false");
   },
+  topSlide: ()=>{
+    var sql=`select * from posts 
+    where status = 'accept' and isDelete = false 
+    order by publicationDate desc, view desc limit 4`
+    return db.load(sql);
+  }
+  ,
   topDate: limit => {
     return db.load(
-      `select * from posts where isDelete = false order by publicationDate desc limit ${limit}`
+      `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+      from posts as p, categories as c, users as u 
+      where p.idwriter=u.id and p.idcategory=c.id and p.isDelete = false order by publicationDate desc limit ${limit}`
     );
   },
   topView: limit => {
@@ -14,11 +23,17 @@ module.exports = {
       `select * from posts where isDelete = false order by view desc limit ${limit}`
     );
   },
-  topWithCat: () => {
-    var sql = `SELECT max(id) id,idcategory, publicationDate
-    FROM posts
-    WHERE (idcategory, publicationDate) IN (SELECT idcategory, min(publicationDate) publicationDate FROM posts GROUP BY idcategory)
-    group by idcategory, publicationDate`;
+  topWithCat: (limit) => {
+    var sql = `select p.id, p.title, p.urlthumbnail, p.idCategory, p.publicationDate , c.name as category  
+    from posts p, categories as c,
+        (SELECT max(id) as id, idcategory, view
+      FROM posts
+        WHERE (idcategory, view) IN 
+      (SELECT idcategory, max(view) as view FROM posts 
+      where status = 'accept' and isDelete = false
+        GROUP BY idcategory limit ${limit})
+      group by idcategory, view) as t 
+    where p.id=t.id and p.idcategory=c.id`;
     return db.load(sql);
   },
   // group: () => {
@@ -106,44 +121,46 @@ module.exports = {
     where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   },
-  pageByCat: (idcat, offset, limit) => {
-    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
-    from posts as p, categories as c, users as u 
-    where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
-    limit ${limit} offset ${offset}`; // and p.idcategory=${idcat}
-    return db.load(sql);
-  },
-  numByCat: idcat => {
-    var sql = `select count(*) as total from posts where idcategory=${idcat}`;
-    return db.load(sql);
-  },
+  // pageByCat: (idcat, offset, limit) => {
+  //   var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+  //   from posts as p, categories as c, users as u 
+  //   where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
+  //   limit ${limit} offset ${offset}`; // and p.idcategory=${idcat}
+  //   return db.load(sql);
+  // },
+  // numByCat: idcat => {
+  //   var sql = `select count(*) as total from posts where idcategory=${idcat}`;
+  //   return db.load(sql);
+  // },
   addView: idPost => {
     var sql = `update posts set view =view +1 where id=${idPost}`;
     return db.updateSQL(sql);
   },
-  pageByCatssss: async (idcat, offset, limit) => {
-    var d = await categoriesmodel.loadSon(idcat);
+  pageByCat: async (idcat, offset, limit) => {
+    var d = await categoriesmodel.loadSonCat(idcat);
+    // console.log(d.rows);
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
-        where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat}`;
+        where p.idwriter=u.id and p.idcategory=c.id and (p.idcategory = ${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
-        sql += `|| p.idcategory = ${cat.id} `;
+        sql += ` or p.idcategory = ${cat.id} `;
       });
     }
-    sql += `limit ${limit} offset ${offset}`;
+    sql += `) limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
-  numByCatssss: async idcat => {
-    var d = await categoriesmodel.loadSon(idcat);
+  numByCat: async idcat => {
+    var d = await categoriesmodel.loadSonCat(idcat);
     var cats = d.rows;
-    var sql = `select count(*) as total from posts where idcategory=${idcat}`;
+    var sql = `select count(*) as total from posts where (idcategory=${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
-        sql += `|| idcategory = ${cat.id} `;
+        sql += ` or idcategory = ${cat.id} `;
       });
     }
+    sql += `)`;
     return db.load(sql);
-  },
+  }
 };

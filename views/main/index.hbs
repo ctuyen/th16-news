@@ -5,17 +5,17 @@
 	<!-- Home Slider -->
 	<div class="home_slider_container">
 		<div class="owl-carousel owl-theme home_slider">
-			{{#each this.posts}}
+			{{#each this.topCat}}
 			<!-- Slide -->
 			<div class="owl-item home_slider_item">
 				<div class="background_image" style="background-image:url({{urlthumbnail}})"></div>
 				<div class="bgC home_slider_content text-center">
 					<div class="home_slider_content_inner" data-animation-in="fadeIn"
 						data-animation-out="animate-out fadeOut">
-						<div class="home_category"><a href="/categories">technology</a></div>
+						<div class="home_category"><a href="/categories">{{category}}</a></div>
 						<div class="home_title">{{title}}</div>
 						<div class="home_text">{{summary}}</div>
-						<div class="home_button trans_200"><a href="/posts/{{id}}">read more</a></div>
+						<div class="home_button trans_200"><a href="/posts/{{id}}">Xem thêm</a></div>
 					</div>
 				</div>
 			</div>
@@ -147,39 +147,6 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- Technology -->
-
-						<div class="technology">
-							<div
-								class="section_title_container d-flex flex-row align-items-start justify-content-start">
-								<div>
-									<div class="section_title">Tin tức mới nhất</div>
-									<div class="section_subtitle">Nóng sốt dẻo</div>
-								</div>
-								<div class="section_bar"></div>
-							</div>
-							<div class="technology_content">
-
-								<!-- Post -->
-
-								<div class="post_item post_h_large">
-									<div class="post03"></div>
-								</div>
-
-								<!-- Post -->
-								<div class="post_item post_h_large">
-									<div class="post03"></div>
-								</div>
-
-								<!-- Post -->
-								<div class="post_item post_h_large">
-									<div class="post03"></div>
-								</div>
-
-							</div>
-						</div>
-
 						<!-- World -->
 
 						<div class="world">
@@ -194,16 +161,17 @@
 							<div class="row world_row">
 								<div class="col-lg-11">
 									<div class="row">
-										<div class="col-lg-6">
 
+										{{#each posts}}
+										<div class="col-lg-6">
 											<!-- Post -->
 											<div
 												class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
-												<div class="post_image"><a href="/posts"><img src="/images/post_4.jpg"
-															alt="https://unsplash.com/@oria_hector"></a></div>
+												<div class="post_image"><a href="/posts"><img src="{{urlthumbnail}}"
+															alt="ảnh bìa"></a></div>
 												<div class="post_content">
 													<div class="post_category cat_technology"><a
-															href="/categories">technology</a></div>
+															href="/categories/{{idcategory}}">{{category}}</a></div>
 													<div
 														class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
 														<div class="tag"><a href="/categories">#công nghệ</a>
@@ -213,36 +181,33 @@
 														<div class="tag"><a href="/categories">#video</a></div>
 
 													</div>
-													<div class="post_title"><a href="/posts">Keep up with the
-															tech</a></div>
+													<div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
 													<div
 														class="post_info d-flex flex-row align-items-center justify-content-start">
 														<div
 															class="post_author d-flex flex-row align-items-center justify-content-start">
 															<div>
-																<div class="post_author_image"><img
-																		src="/images/author_1.jpg" alt=""></div>
+																<div class="post_author_image"><img src="{{urlavatar}}"
+																		alt=""></div>
 															</div>
-															<div class="post_author_name"><a href="javascript:;">Michael
-																	Smith</a></div>
+															<div class="post_author_name"><a
+																	href="javascript:;">{{writer}}</a></div>
 														</div>
-														<div class="post_date"><a href="javascript:;">29 April 2018</a>
+														<div class="post_date"><a
+																href="javascript:;">{{publicationdate}}</a>
 														</div>
-														<div class="post_comments ml-auto"><a href="javascript:;">3
-																comments</a></div>
+														<div class="post_comments ml-auto"><a href="javascript:;">lượt
+																xem: {{view}}</a></div>
 													</div>
 													<div class="post_text">
-														<p>Curabitur venenatis efficitur lorem sed tempor. Integer
-															aliquet tempor cursus. Nullam vestibulum convallis risus
-															vel condimentum. Nullam auctor lorem in libero luctus,
-															vel volutpat quam tincidunt. Nullam vestibulum convallis
-															risus vel condimentum. Nullam auctor lorem in libero.
-														</p>
+														<p>{{summary}}</p>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-6">
+										{{/each}}
+
+										{{!-- <div class="col-lg-6">
 
 											<!-- Post -->
 											<div
@@ -289,7 +254,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> --}}
 									</div>
 								</div>
 							</div>
@@ -365,7 +330,7 @@
 						<div class="sidebar_latest">
 							<div class="sidebar_title">Bài viết theo chuyên mục mới nhất</div>
 							<div class="latest_posts" id="sidebar-scroll">
-								{{#each posts}}
+								{{#each topCat}}
 								<!-- Latest Post -->
 
 								<div class="latest_post d-flex flex-row align-items-start justify-content-start">
@@ -376,7 +341,7 @@
 									</div>
 									<div class="latest_post_content">
 										<div class="post_category_small cat_technology"><a
-												href="categories/{{idcategory}}">Tiêu pục</a>
+												href="categories/{{idcategory}}">{{category}}</a>
 										</div>
 										<div class="latest_post_title"><a href="posts/{{id}}">{{title}}</a></div>
 										<div class="latest_post_date">{{publicationdate}}</div>
@@ -394,7 +359,7 @@
 							<div class="sidebar_title">Tags</div>
 							<div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
 								{{#each tags}}
-									<div class="tag cat_world"><a href="/{{id}}">{{name}}</a></div>
+								<div class="tag cat_world"><a href="/{{id}}">{{name}}</a></div>
 								{{/each}}
 								{{!-- <div class="tag cat_world"><a href="/categories">thế giới</a></div> --}}
 
