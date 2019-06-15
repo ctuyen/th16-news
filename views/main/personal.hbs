@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thông tin cá nhân | SaladNews</title>
+    <link rel="stylesheet" href="/styles/main_styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/personal.css">
+</head>
+
+<body>
+    <header class="header">
+        <!-- Header Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="header_content d-flex flex-row align-items-center justfy-content-start">
+                        <div class="logo_container">
+                            <a href="/">
+                                <div class="logo"><span>Salad</span>News</div>
+                                <div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="label">Thông tin cá nhân</div>
+    {{#if notices}}
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p>{{this.notices}}</p>
+    </div>
+    {{/if}}
+
+    <div>
+
+    </div>
+</body>
+
+</html>

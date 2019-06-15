@@ -73,50 +73,32 @@
 									</div>
 									<!-- <div class="sub_button text-center" ><a href="javascript:;">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div> -->
 									<div class="header_social ml-auto">
-
-										<div class="sub_button text-center"><a href="/auth/login">đăng nhập</a>
-											<div class="d-flex flex-row align-items-start justify-content-start">
-												<div></div>
-												<div></div>
-												<div></div>
+										{{#if user}}
+										<div class="btn-group">
+											<button type="button" class="btn btn-success dropdown-toggle"
+												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+												style="border: none; border-radius: 2; box-shadow: none; background: #0d0d0d">
+												Hi, {{user.fullname}}
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="/personal">Thông tin cá nhân</a>
+												<a class="dropdown-item" href="/auth/forgot-password">Đổi mật khẩu</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="/auth/signout">Đăng xuất</a>
 											</div>
 										</div>
+										{{else}}
+										<div class="sub_button text-center">
+											<a href="/auth/login">đăng nhập</a>
+										</div>
+										{{/if}}
 
-										<!-- <ul class="d-flex flex-row align-items-center justify-content-start">									
-										<li><a href="javascript:;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="javascript:;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>									
-									</ul> -->
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="header_content_container" >
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="header_content d-flex flex-row align-items-center justfy-content-start">
-								<div class="logo_container">
-									<a href="javascript:;">
-										<div class="logo"><span>Tabbage</span>NEWS</div>
-										<div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam</div>
-									</a>
-								</div>
-								<div class="header_extra ml-auto d-flex flex-row align-items-center justify-content-start">
-									<a href="javascript:;">
-										<div class="background_image" style="background-image:url(images/extra.jpg)"></div>
-										<div class="header_extra_content">
-											<div class="header_extra_title">save 50%</div>
-											<div class="header_extra_subtitle">Buy now in stores</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>-->
 				<!-- Header Navigation & Search -->
 				<div class="header_nav_container">
 					<div class="container">
@@ -153,9 +135,9 @@
 													<a class="dropdown-item" href="/categories/{{0.id}}">{{0.name}}</a>
 													<div class="dropdown-divider"></div>
 													{{#each this}}
-														{{#if @index}}
-															<a class="dropdown-item" href="/categories/{{id}}">{{name}}</a>			
-														{{/if}}																								
+													{{#if @index}}
+													<a class="dropdown-item" href="/categories/{{id}}">{{name}}</a>
+													{{/if}}
 													{{/each}}
 												</div>
 											</li>

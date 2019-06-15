@@ -301,5 +301,10 @@ module.exports = {
         });
       }
     ], function (err) {});
+  },
+
+  signout: (req, res) => {
+    res.clearCookie('userId')
+    res.redirect('/')
   }
 };

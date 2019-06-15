@@ -25,4 +25,6 @@ router.get('/changepass/:token', controller.changepass);
 
 router.post('/changepass/:token', controller.postChangepass);
 
+router.get('/signout', controller.signout)
+
 module.exports = router;

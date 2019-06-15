@@ -9,22 +9,30 @@ var router = express.Router();
 
 router.get("/", (req, res, next) => {
   var cats = res.locals.lObjCategories;
-  Promise.all([
-      postmodel.topDate(10),
-      postmodel.topView(10),
-      tagmodel.all(),
-      postmodel.topWithCat(10)
-    ])
-    .then(([data, data1, data2, data3]) => {
+  var tasks = [
+    postmodel.topDate(10),
+    postmodel.topView(10),
+    tagmodel.all(),
+    postmodel.topWithCat(10)
+  ];
+
+  if (req.signedCookies.userId) {
+    tasks.push(userModel.single(req.signedCookies.userId))
+  } else {
+    tasks.push(Promise.resolve(false))
+  }
+
+  Promise.all(tasks)
+    .then(([data, data1, data2, data3, user]) => {
       var topView = data1.rows;
       var posts = data.rows;
-      // console.log(data2);
-      // postmodel.topWithCat(10).then(d=>{
-      //   console.log(d.rows);
-      // })
       var topCat = data3.rows;
       var tags = data2.rows;
-      // console.log(posts);
+
+      if (user) {
+        user = user.rows[0]
+      }
+
       res.render("main/index", {
         titlePage: "SaladNews - trang tin hàng đầu Việt Nam",
         stylePage: "main_styles",
@@ -33,12 +41,12 @@ router.get("/", (req, res, next) => {
         categories: cats,
         topView,
         topCat,
-        tags
+        tags,
+        user
       });
     })
     .catch(err => {
-      console.log(err);
-      next(err);
+      throw err;
     });
 });
 
@@ -49,7 +57,6 @@ router.get("/request-premium", authMiddleware.requireAuth, (req, res) => {
 });
 
 router.post("/request-premium", (req, res) => {
-  //tim xem user co trong db hay khong
   var checkId = authModel.checkId(req.signedCookies.userId);
 
   checkId.then(user => {
@@ -87,5 +94,15 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   res.redirect('/auth/register')
 })
+
+router.get("/personal", authMiddleware.requireAuth, (req, res) => {
+  res.render("main/personal", {
+    layout: false
+  });
+});
+
+router.post("/personal", (req, res) => {
+
+});
 
 module.exports = router;
