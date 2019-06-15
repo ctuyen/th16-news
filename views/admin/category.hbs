@@ -2,7 +2,7 @@
   <div class="menu-left">
     <div class="menu-item selected"><a href="./category">Chuyên mục</a></div>
     <div class="menu-item"><a href="./tag">Thẻ</a></div>
-    <div class="menu-item"><a href="./post">Bài viết</a></div>
+    <div class="menu-item"><a href="./post/pending">Bài viết</a></div>
     <div class="menu-item"><a href="./user">Người dùng</a></div>
   </div>
   <div class="right">
@@ -108,7 +108,8 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary" onclick="window.location='/admin/category/{{id}}/delete';">Xóa</button>
+                        <button type="button" class="btn btn-primary"
+                          onclick="window.location='/admin/category/{{id}}/delete';">Xóa</button>
                       </div>
                     </div>
                   </div>

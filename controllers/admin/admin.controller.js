@@ -48,6 +48,17 @@ module.exports = {
 
     if (users.rowCount > 0) {
       data.users = users.rows;
+      let expirationdate = []
+
+      for (let [index, user] of data.users.entries()) {
+        if (user.expirationdate) {
+          let date = new Date(user.expirationdate);
+          date.setTime(date.valueOf());
+          data.users[index].expirationdate = date.toLocaleString()
+        } else {
+          data.users[index].expirationdate = 'Chưa gia hạn'
+        }
+      }
     }
 
     data.editers = [];
@@ -123,13 +134,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
+          }, {
+            timeZone: "Asia/Saigon"
+          }
         );
       }
       res.render("admin/post", {
@@ -197,9 +208,10 @@ module.exports = {
       var entity = {
         id: id,
         status: "accept",
-        publicationDate: new Date().toLocaleString("en-US", { timeZone: "UTC" })
+        publicationDate: new Date().toLocaleString("en-US", {
+          timeZone: "UTC"
+        })
       };
-      console.log(entity.publicationDate);
       postModel
         .update(entity)
         .then(Post => {
@@ -216,7 +228,6 @@ module.exports = {
         timeZone: "UTC"
       })
     };
-    console.log(entity.publicationDate);
     postModel
       .update(entity)
       .then(Post => {
@@ -341,8 +352,9 @@ module.exports = {
       var entity = {
         id: req.body.id,
         expirationDate: new Date(req.body.publicationDate).toLocaleString(
-          "en-US",
-          { timeZone: "UTC" }
+          "en-US", {
+            timeZone: "UTC"
+          }
         )
       };
       console.log(req.body);
@@ -501,13 +513,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
+          }, {
+            timeZone: "Asia/Saigon"
+          }
         );
       }
       res.render("admin/pending", {
@@ -535,13 +547,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
+          }, {
+            timeZone: "Asia/Saigon"
+          }
         );
       }
       res.render("admin/denied", {
@@ -569,13 +581,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
+          }, {
+            timeZone: "Asia/Saigon"
+          }
         );
       }
       res.render("admin/approved", {
@@ -603,13 +615,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
+          }, {
+            timeZone: "Asia/Saigon"
+          }
         );
       }
       res.render("admin/published", {

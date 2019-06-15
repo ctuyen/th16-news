@@ -2,7 +2,7 @@
   <div class="menu-left">
     <div class="menu-item"><a href="./category">Chuyên mục</a></div>
     <div class="menu-item"><a href="./tag">Thẻ</a></div>
-    <div class="menu-item"><a href="./post">Bài viết</a></div>
+    <div class="menu-item"><a href="./post/peding">Bài viết</a></div>
     <div class="menu-item selected"><a href="./user">Người dùng</a></div>
   </div>
   <div class="right">
@@ -258,7 +258,7 @@
                     <tr>
                       <td>{{user.fullname}}</td>
                       <td>{{user.email}}</td>
-                      <td>{{user.expirationPremium}}</td>
+                      <td>{{user.expirationdate}}</td>
                       <td>
                         <a class="btn btn-primary" data-toggle="modal" data-target="#premiumDate{{id}}">Gia hạn</a>
                         <a class="btn btn-danger" data-toggle="modal" data-target="#deleteUser{{id}}">Xoá</a>
@@ -291,8 +291,8 @@
                               </div>
                               <div class="form-item">
                                 <label for="parent">Gia hạn đến ngày</label>
-                                <input name="publicationDate" class="Datetime" value="{{user.expirationPremium}}"
-                                  id="parent" />
+                                <input name="publicationDate" class="Datetime" type="datetime-local"
+                                  value="{{user.expirationPremium}}" id="parent" />
                               </div>
                             </div>
                             <div class="modal-footer">

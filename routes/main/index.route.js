@@ -10,11 +10,11 @@ var router = express.Router();
 router.get("/", (req, res, next) => {
   var cats = res.locals.lObjCategories;
   Promise.all([
-    postmodel.topDate(10),
-    postmodel.topView(10),
-    tagmodel.all(),
-    postmodel.topWithCat(10)
-  ])
+      postmodel.topDate(10),
+      postmodel.topView(10),
+      tagmodel.all(),
+      postmodel.topWithCat(10)
+    ])
     .then(([data, data1, data2, data3]) => {
       var topView = data1.rows;
       var posts = data.rows;
@@ -59,7 +59,6 @@ router.post("/request-premium", (req, res) => {
       let date = new Date();
       date.setTime(Date.now() + 604800000);
       entity.expirationdate = date;
-      entity.fullname = "chua co expire";
     } else {
       let date = new Date(user.rows[0].expirationdate);
       date.setTime(date.valueOf() + 604800000);
@@ -80,5 +79,13 @@ router.post("/request-premium", (req, res) => {
       });
   });
 });
+
+router.get('/login', (req, res) => {
+  res.redirect('/auth/login')
+})
+
+router.get('/signup', (req, res) => {
+  res.redirect('/auth/register')
+})
 
 module.exports = router;
