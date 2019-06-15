@@ -4,9 +4,18 @@ module.exports = {
   all: () => {
     return db.load("select * from posts where isDelete = false");
   },
+  topSlide: ()=>{
+    var sql=`select * from posts 
+    where status = 'accept' and isDelete = false 
+    order by publicationDate desc, view desc limit 4`
+    return db.load(sql);
+  }
+  ,
   topDate: limit => {
     return db.load(
-      `select * from posts where isDelete = false order by publicationDate desc limit ${limit}`
+      `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+      from posts as p, categories as c, users as u 
+      where p.idwriter=u.id and p.idcategory=c.id and p.isDelete = false order by publicationDate desc limit ${limit}`
     );
   },
   topView: limit => {
@@ -14,11 +23,17 @@ module.exports = {
       `select * from posts where isDelete = false order by view desc limit ${limit}`
     );
   },
-  topWithCat: () => {
-    var sql = `SELECT max(id) id,idcategory, publicationDate
-    FROM posts
-    WHERE (idcategory, publicationDate) IN (SELECT idcategory, min(publicationDate) publicationDate FROM posts GROUP BY idcategory)
-    group by idcategory, publicationDate`;
+  topWithCat: (limit) => {
+    var sql = `select p.id, p.title, p.urlthumbnail, p.idCategory, p.publicationDate , c.name as category  
+    from posts p, categories as c,
+        (SELECT max(id) as id, idcategory, view
+      FROM posts
+        WHERE (idcategory, view) IN 
+      (SELECT idcategory, max(view) as view FROM posts 
+      where status = 'accept' and isDelete = false
+        GROUP BY idcategory limit ${limit})
+      group by idcategory, view) as t 
+    where p.id=t.id and p.idcategory=c.id`;
     return db.load(sql);
   },
   // group: () => {
@@ -141,5 +156,5 @@ module.exports = {
       });
     }
     return db.load(sql);
-  },
+  }
 };
