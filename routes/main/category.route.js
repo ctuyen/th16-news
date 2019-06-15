@@ -21,8 +21,8 @@ router.get("/:idCat", (req, res, next) => {
   var offset = (page - 1) * limit;
   // console.log("before     OMG");
   Promise.all([
-    postModel.pageByCat(idCat, offset, limit),
-    postModel.numByCat(idCat)
+    postModel.pageByCatssss(idCat, offset, limit),
+    postModel.numByCatssss(idCat)
   ])
     .then(async ([data, data1]) => {
       var posts = data.rows;

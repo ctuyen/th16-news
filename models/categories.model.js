@@ -49,6 +49,10 @@ module.exports = {
   loadSon: id => {
     var sql = `select * from categories where idCategory = ${id} and not (select isDelete from categories where id = ${id})`;
     return db.load(sql);
+  },
+  loadSonCat: id => {
+    var sql = `select * from categories where idCategory = ${id} and isdelete=false`;
+    return db.load(sql);
   }
 
   // load -> all

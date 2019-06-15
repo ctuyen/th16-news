@@ -137,26 +137,27 @@ module.exports = {
     return db.updateSQL(sql);
   },
   pageByCatssss: async (idcat, offset, limit) => {
-    var d = await categoriesmodel.loadSon(idcat);
+    var d = await categoriesmodel.loadSonCat(idcat);
+    console.log(d.rows);
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
         where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
-        sql += `|| p.idcategory = ${cat.id} `;
+        sql += ` or p.idcategory = ${cat.id} `;
       });
     }
-    sql += `limit ${limit} offset ${offset}`;
+    sql += ` limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
   numByCatssss: async idcat => {
-    var d = await categoriesmodel.loadSon(idcat);
+    var d = await categoriesmodel.loadSonCat(idcat);
     var cats = d.rows;
     var sql = `select count(*) as total from posts where idcategory=${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
-        sql += `|| idcategory = ${cat.id} `;
+        sql += ` or idcategory = ${cat.id} `;
       });
     }
     return db.load(sql);
