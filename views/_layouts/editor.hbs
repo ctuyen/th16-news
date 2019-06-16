@@ -45,7 +45,7 @@
     <div class="container-fluid">
         <div class="row margin-body">
             <div class="col-sm-3">
-                <div class="fixed_div">
+                <div class="">
                     <div class="card shadow">
                         <h5 class="card-header">
                             PHÂN HỆ BIÊN TẬP VIÊN
@@ -65,6 +65,13 @@
                             </a>
                             {{/each}}
                         </div>
+                    </div>
+                    <div class="font-size mt-3">
+                        <a class="nav-link btn btn-outline-success  mt-2 {{#if isAccept}}active{{/if}}" href="/editor/listAccept" id="listAccept"
+                            href="textEditor">Bài đã
+                            duyệt</a>
+                        <a class="nav-link btn btn-outline-warning  mt-2 {{#if isDeny}}active{{/if}}" href="/editor/listDeny" id="listDeny"
+                            href="textEditor">Bài đã từ chối</a>
                     </div>
                 </div>
             </div>

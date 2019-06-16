@@ -38,22 +38,24 @@ module.exports = {
             c.isActive = true;
           }
         }
-        categoryModel.allCatOfEditor(req.signedCookies.userId).then( data =>{
-          listIdCat = data.rows;
-          console.log(listIdCat);
-          for (const c of res.locals.lcCategories) {
-            c.isView = false;
-            for(const cv of listIdCat){
-              if (c.catid === +cv.idcategory) {
-                c.isView = true;
+        categoryModel
+          .allCatOfEditor(req.signedCookies.userId)
+          .then(data => {
+            listIdCat = data.rows;
+            console.log(listIdCat);
+            for (const c of res.locals.lcCategories) {
+              c.isView = false;
+              for (const cv of listIdCat) {
+                if (c.catid === +cv.idcategory) {
+                  c.isView = true;
+                }
               }
+              console.log(c.isView);
             }
-            console.log(c.isView);
-          }
-        }).catch(err => {
-          console.log(err);
-        });
-        
+          })
+          .catch(err => {
+            console.log(err);
+          });
       }
       res.render("editor/listPost", {
         posts,
@@ -65,9 +67,16 @@ module.exports = {
     });
   },
   acceptPost: async (req, res) => {
+    if (req.body.isPremium) {
+      var isPremium = "true";
+    } else {
+      var isPremium = "false";
+    }
     var entity = {
       id: req.body.id,
       idCategory: parseInt(req.body.category),
+      isPremium,
+      idEditor: req.signedCookies.userId,
       publicationDate: new Date(req.body.publicationDate).toLocaleString(
         "en-US",
         { timeZone: "UTC" }
@@ -75,7 +84,7 @@ module.exports = {
       status: "accept"
     };
     // console.log(req.body.publicationDate);
-
+    var tagList = req.body.tag;
     postModel
       .update(entity)
       .then(Post => {
@@ -128,7 +137,8 @@ module.exports = {
     var entity = {
       id: req.body.id,
       reason: req.body.reason,
-      status: "deny"
+      status: "deny",
+      idEditor: req.signedCookies.userId
     };
     // console.log(entity);
     postModel
@@ -136,6 +146,117 @@ module.exports = {
       .then(Post => {
         console.log("Đã từ chối bài viết");
         res.redirect("back");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+
+  listAccept: (req, res) => {
+    postModel
+      .allByIdEditor(req.signedCookies.userId, 'accept')
+      .then(async data => {
+        var posts = data.rows;
+        if (posts.length > 0) {
+          // console.log(data);
+          for (var post of posts) {
+            var t = await postModel.loadTag(post.id);
+            var temp = [];
+            t.rows.forEach(i => {
+              temp.push(i);
+            });
+            // console.log(temp);
+            post.tags = temp;
+            post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+              "vi-VI",
+              {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+              },
+              { timeZone: "Asia/Saigon" }
+            );
+          }
+          categoryModel
+            .allCatOfEditor(req.signedCookies.userId)
+            .then(data => {
+              listIdCat = data.rows;
+              console.log(listIdCat);
+              for (const c of res.locals.lcCategories) {
+                c.isView = false;
+                for (const cv of listIdCat) {
+                  if (c.catid === +cv.idcategory) {
+                    c.isView = true;
+                  }
+                }
+                console.log(c.isView);
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        res.render("editor/list", {
+          posts,
+          isAccept: true,
+          titlePage: "Bài đã duyệt",
+          layout: "editor.hbs"
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  listDeny: (req, res) => {
+    postModel
+      .allByIdEditor(req.signedCookies.userId, 'deny')
+      .then(async data => {
+        var posts = data.rows;
+        if (posts.length > 0) {
+          // console.log(data);
+          for (var post of posts) {
+            var t = await postModel.loadTag(post.id);
+            var temp = [];
+            t.rows.forEach(i => {
+              temp.push(i);
+            });
+            // console.log(temp);
+            post.tags = temp;
+            post.date = new Date(`${post.writingdate}`).toLocaleDateString(
+              "vi-VI",
+              {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+              },
+              { timeZone: "Asia/Saigon" }
+            );
+          }
+          categoryModel
+            .allCatOfEditor(req.signedCookies.userId)
+            .then(data => {
+              listIdCat = data.rows;
+              console.log(listIdCat);
+              for (const c of res.locals.lcCategories) {
+                c.isView = false;
+                for (const cv of listIdCat) {
+                  if (c.catid === +cv.idcategory) {
+                    c.isView = true;
+                  }
+                }
+                console.log(c.isView);
+              }
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+        res.render("editor/list", {
+          posts,
+          isDeny: true,
+          titlePage: "Bài đã duyệt",
+          layout: "editor.hbs"
+        });
       })
       .catch(err => {
         console.log(err);

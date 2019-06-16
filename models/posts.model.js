@@ -55,6 +55,15 @@ module.exports = {
     and p.status = 'draft' and p.isDelete = false and c.isDelete = false`
     );
   },
+
+  allByIdEditor: (id, status) => {
+    return db.load(
+      `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id and p.idEditor = ${id} 
+    and p.status = '${status}' and p.isDelete = false and c.isDelete = false`
+    );
+  },
  
   single: id => {
     return db.load(`select * from posts where id = ${id} and isDelete = false`);
