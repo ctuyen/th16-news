@@ -49,11 +49,12 @@ module.exports = {
 
     if (users.rowCount > 0) {
       data.users = users.rows;
-      let expirationdate = [];
 
       for (let [index, user] of data.users.entries()) {
         if (user.expirationdate) {
-          let date = new Date(user.expirationdate).toLocaleString("vi-VI",{ timeZone: "Asia/Saigon" });
+          let date = new Date(user.expirationdate).toLocaleString("vi-VI", {
+            timeZone: "Asia/Saigon"
+          });
           // date.setTime(date.valueOf());
           data.users[index].expirationdate = date;
         } else {
@@ -135,13 +136,11 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          {
+          }, {
             timeZone: "Asia/Saigon"
           }
         );
@@ -330,13 +329,19 @@ module.exports = {
     console.log(req.body);
 
     if (Date.parse(req.body.expirationdate)) {
-      var date = new Date(req.body.expirationdate).toLocaleString("en-US", {timeZone: "UTC"});
-      var currentdate = new Date().toLocaleString("en-US", {timeZone: "UTC"});
-      if(date < currentdate){
+      var date = new Date(req.body.expirationdate).toLocaleString("en-US", {
+        timeZone: "UTC"
+      });
+      var currentdate = new Date().toLocaleString("en-US", {
+        timeZone: "UTC"
+      });
+      if (date < currentdate) {
         date = currentdate;
       }
-    } else {    
-      var date = new Date().toLocaleString("en-US", {timeZone: "UTC"});
+    } else {
+      var date = new Date().toLocaleString("en-US", {
+        timeZone: "UTC"
+      });
     }
     // console.log(date);
     userModel
@@ -495,13 +500,11 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          {
+          }, {
             timeZone: "Asia/Saigon"
           }
         );
@@ -531,13 +534,11 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          {
+          }, {
             timeZone: "Asia/Saigon"
           }
         );
@@ -567,13 +568,11 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          {
+          }, {
             timeZone: "Asia/Saigon"
           }
         );
@@ -603,13 +602,11 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          {
+          }, {
             timeZone: "Asia/Saigon"
           }
         );
