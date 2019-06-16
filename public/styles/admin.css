@@ -7,6 +7,10 @@
     margin-left: 300px;
 }
 
+.nav-tabs {
+    margin-bottom: 24px;
+}
+
 .container-main {
     display: flex;
     flex-flow: column nowrap;
@@ -126,10 +130,18 @@ td {
     text-align: left;
 }
 
+.pull-left {
+    margin-bottom: 16px;
+}
+
+.pull-right {
+    margin-bottom: 16px;
+}
+
 .btn {
     margin-top: 16px;
     height: 30px;
-    width: 90px;
+    width: auto;
     color: red;
     border-radius: 5px;
     border: none;

@@ -6,61 +6,64 @@
         <div class="menu-item"><a href="../user">Người dùng</a></div>
     </div>
     <div class="right">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/pending">Bài chưa duyệt</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/denied">Bị từ chối</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/published">Đã xuất bản</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/approved">Đã duyệt & chờ xuất bản</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="/admin/post/textEditor">Viết bài</a>
-            </li>
-        </ul>
-        <form method="POST" >
-            <div class="margin-bottom">
-                <label for="title">Tiêu đề</label>
-                <input name="title" type="text" class="form-control black_text" id="title"
-                    placeholder="Nhập tiêu đề của bài viết" required>
-            </div>
-            <div class="form-group margin-bottom">
-                <label for="summary">Tóm tắt</label>
-                <textarea name="summary" class="form-control black_text" rows="3" id="summary"
-                    placeholder="Tóm tắt nội dung bài viết" required></textarea>
-            </div>
-            <div class="margin-bottom">
-                <label for="editor">Chi tiết bài viết</label>
-                <div id="summernote" name="content"></div>
-                <input id="content" name="content" type="hidden">
-                <input id="thumbnail" name="thumbnail" type="hidden">
-            </div>
-            <div class="margin-bottom">
-                <label for="category-list">Chọn chuyên mục cho bài viết</label>
-                <select name="category" id="category-list" class="form-control black_text">
-                    {{#each lcCategories}}
-                    <option value="{{catid}}">{{name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <div class="margin-bottom">
-                <label for="tag-list">Chọn thẻ cho bài viết</label>
-                <select name="tag" id="tag-list" class="form-control black_text" multiple required>
-                    {{#each lcTags}}
-                    <option value="{{id}}">{{name}}</option>
-                    {{/each}}
-                </select>
-            </div>
-            <button type="submit" id="submit" class="btn btn-success margin-bottom">
-                <i class="fa fa-check" aria-hidden="true"></i>
-                Lưu
-            </button>
-        </form>
+        <div class="container-main">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/pending">Bài chưa duyệt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/denied">Bị từ chối</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/published">Đã xuất bản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/approved">Đã duyệt & chờ xuất bản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin/post/textEditor">Viết bài</a>
+                </li>
+            </ul>
+            <form method="POST">
+                <div class="margin-bottom">
+                    <label for="title">Tiêu đề</label>
+                    <input name="title" type="text" class="form-control black_text" id="title"
+                        placeholder="Nhập tiêu đề của bài viết" required>
+                </div>
+                <div class="form-group margin-bottom">
+                    <label for="summary">Tóm tắt</label>
+                    <textarea name="summary" class="form-control black_text" rows="3" id="summary"
+                        placeholder="Tóm tắt nội dung bài viết" required></textarea>
+                </div>
+                <div class="margin-bottom">
+                    <label for="editor">Chi tiết bài viết</label>
+                    <div id="summernote" name="content"></div>
+                    <input id="content" name="content" type="hidden">
+                    <input id="thumbnail" name="thumbnail" type="hidden">
+                </div>
+                <div class="margin-bottom">
+                    <label for="category-list">Chọn chuyên mục cho bài viết</label>
+                    <select name="category" id="category-list" class="form-control black_text">
+                        {{#each lcCategories}}
+                        <option value="{{catid}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="margin-bottom">
+                    <label for="tag-list">Chọn thẻ cho bài viết</label>
+                    <select name="tag" id="tag-list" class="form-control black_text" multiple required>
+                        {{#each lcTags}}
+                        <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit" id="submit" class="btn btn-success margin-bottom">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Lưu
+                </button>
+            </form>
+        </div>
+
 
         <script>
             $('#summernote').summernote({
