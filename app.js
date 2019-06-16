@@ -12,6 +12,8 @@ const adminRoute = require("./routes/admin/admin.route");
 const authRoute = require("./routes/auth.route");
 const writerRoute = require('./routes/writer/writer.route');
 const editerRoute = require('./routes/editor/editor.route');
+const postRoute = require("./routes/main/post.route");
+const categoryRoute = require("./routes/main/category.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 
@@ -48,10 +50,15 @@ app.use(require('./middlewares/NumberOfPosts/postsApproved.mdw'));
 
 //MAIN----------------------------------------------------
 app.use('/', require('./routes/main/index.route'));
+<<<<<<< HEAD
 app.use("/categories", require("./routes/main/category.route"));
 app.use("/posts", require("./routes/main/post.route"));
 app.use("/tags", require("./routes/main/tags.route"));
 
+=======
+app.use("/categories", categoryRoute);
+app.use("/posts", postRoute);
+>>>>>>> 8c5b8b438fd0a6c99da1504156233f82a3958beb
 app.use("/admin", authMiddleware.requireAuth, authMiddleware.requireAdmin, adminRoute);
 app.use("/auth", authRoute);
 app.use('/writer', authMiddleware.requireAuth, authMiddleware.requireWriter, writerRoute);

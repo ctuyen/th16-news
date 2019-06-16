@@ -55,6 +55,18 @@ module.exports = {
     );
   },
 
+<<<<<<< HEAD
+=======
+  allByIdEditor: (id, status) => {
+    return db.load(
+      `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id and p.idEditor = ${id} 
+    and p.status = '${status}' and p.isDelete = false and c.isDelete = false`
+    );
+  },
+ 
+>>>>>>> 8c5b8b438fd0a6c99da1504156233f82a3958beb
   single: id => {
     return db.load(`select * from posts where id = ${id} and isDelete = false`);
   },
@@ -90,7 +102,11 @@ module.exports = {
   loadComment: id => {
     var sql = `select fullname, urlavatar, commentdate, content 
     from comment as cm, users as u 
+<<<<<<< HEAD
      where cm.iduser = u.id and cm.idpost = ${id}`;
+=======
+    where cm.iduser = u.id and cm.idpost = ${id}`;
+>>>>>>> 8c5b8b438fd0a6c99da1504156233f82a3958beb
     return db.load(sql);
   },
 
