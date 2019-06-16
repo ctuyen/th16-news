@@ -6,54 +6,57 @@
     <div class="menu-item"><a href="./user">Người dùng</a></div>
   </div>
   <div class="right">
-    {{#if this.err}}
-    <div class="alert alert-warning">
-      <strong>Chú ý!</strong> Không tìm thấy bài viết.
+    <div class="container-main">
+      {{#if this.err}}
+      <div class="alert alert-warning">
+        <strong>Chú ý!</strong> Không tìm thấy bài viết.
+      </div>
+      {{else}}
+      <form method="POST" name="formNewPost" action="/admin/post/textEditor/update">
+        <div class="margin-bottom">
+          <label for="id">ID</label>
+          <input readonly name="id" type="text" value="{{posts.id}}" class="form-control black_text" id="id">
+        </div>
+        <div class="margin-bottom">
+          <label for="title">Tiêu đề</label>
+          <input name="title" type="text" value="{{posts.title}}" class="form-control black_text" id="title"
+            placeholder="Nhập tiêu đề của bài viết" required>
+        </div>
+        <div class="form-group margin-bottom">
+          <label for="summary">Tóm tắt</label>
+          <textarea name="summary" class="form-control black_text" rows="3" id="summary"
+            placeholder="Tóm tắt nội dung bài viết" required>{{posts.summary}}</textarea>
+        </div>
+        <div class="margin-bottom">
+          <label for="editor">Chi tiết bài viết</label>
+          <div id="summernote"></div>
+          <input id="content" name="content" type="hidden" value="{{posts.content}}">
+          <input id="thumbnail" name="thumbnail" type="hidden">
+        </div>
+        <div class="margin-bottom">
+          <label for="category-list">Chọn chuyên mục cho bài viết</label>
+          <select name="category" id="category-list" class="form-control black_text">
+            {{#each lcCategories}}
+            <option value="{{catid}}" {{#if isSelect}}selected="selected" {{/if}}>{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="margin-bottom">
+          <label for="tag-list">Chọn thẻ cho bài viết</label>
+          <select name="tag" id="tag-list" class="form-control black_text" multiple required>
+            {{#each lcTags}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <button type="submit" id="submit" class="btn btn-success margin-bottom">
+          <i class="fa fa-check" aria-hidden="true"></i>
+          Lưu
+        </button>
+      </form>
+      {{/if}}
     </div>
-    {{else}}
-    <form method="POST" name="formNewPost" action="/admin/post/textEditor/update">
-      <div class="margin-bottom">
-        <label for="id">ID</label>
-        <input readonly name="id" type="text" value="{{posts.id}}" class="form-control black_text" id="id">
-      </div>
-      <div class="margin-bottom">
-        <label for="title">Tiêu đề</label>
-        <input name="title" type="text" value="{{posts.title}}" class="form-control black_text" id="title"
-          placeholder="Nhập tiêu đề của bài viết" required>
-      </div>
-      <div class="form-group margin-bottom">
-        <label for="summary">Tóm tắt</label>
-        <textarea name="summary" class="form-control black_text" rows="3" id="summary"
-          placeholder="Tóm tắt nội dung bài viết" required>{{posts.summary}}</textarea>
-      </div>
-      <div class="margin-bottom">
-        <label for="editor">Chi tiết bài viết</label>
-        <div id="summernote"></div>
-        <input id="content" name="content" type="hidden" value="{{posts.content}}">
-        <input id="thumbnail" name="thumbnail" type="hidden">
-      </div>
-      <div class="margin-bottom">
-        <label for="category-list">Chọn chuyên mục cho bài viết</label>
-        <select name="category" id="category-list" class="form-control black_text">
-          {{#each lcCategories}}
-          <option value="{{catid}}" {{#if isSelect}}selected="selected" {{/if}}>{{name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      <div class="margin-bottom">
-        <label for="tag-list">Chọn thẻ cho bài viết</label>
-        <select name="tag" id="tag-list" class="form-control black_text" multiple required>
-          {{#each lcTags}}
-          <option value="{{id}}">{{name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      <button type="submit" id="submit" class="btn btn-success margin-bottom">
-        <i class="fa fa-check" aria-hidden="true"></i>
-        Lưu
-      </button>
-    </form>
-    {{/if}}
+
 
 
     <script>

@@ -1,79 +1,82 @@
 <div class="super">
-    <div class="col-sm-3">
+    <div class="menu-left">
         <div class="menu-item"><a href="../category">Chuyên mục</a></div>
         <div class="menu-item"><a href="../tag">Thẻ</a></div>
-        <div class="menu-item selected"><a href="../post">Bài viết</a></div>
+        <div class="menu-item selected"><a href="./pending">Bài viết</a></div>
         <div class="menu-item"><a href="../user">Người dùng</a></div>
     </div>
-    <div class="col-sm-9">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="/admin/post/pending">Bài chưa duyệt</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/denied">Bị từ chối</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/published">Đã xuất bản</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/approved">Đã duyệt & chờ xuất bản</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/post/textEditor">Viết bài</a>
-            </li>
-        </ul>
-        <div id="approved">
-            <div class="posts">
-                {{#each posts as |post postIndex|}}
-                <!-- Post -->
-                <div class="post_item post_h_large">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="post_image"><img src="{{post.urlthumbnail}}" alt="post_image"
-                                    onclick="window.location='/posts/{{id}}';">
+    <div class="right">
+        <div class="container-main">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin/post/pending">Bài chưa duyệt</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/denied">Bị từ chối</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/published">Đã xuất bản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/approved">Đã duyệt & chờ xuất bản</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/post/textEditor">Viết bài</a>
+                </li>
+            </ul>
+            <div id="approved">
+                <div class="posts">
+                    {{#each posts as |post postIndex|}}
+                    <!-- Post -->
+                    <div class="post_item post_h_large">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="post_image"><img src="{{post.urlthumbnail}}" alt="post_image"
+                                        onclick="window.location='/posts/{{id}}';">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="post_content">
-                                <div class="pull-right">
-                                    <a class="btn btn-info" href="/admin/post/textEditor/{{id}}" role="button">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        Chỉnh sửa
-                                    </a>
-                                    <a type="button" class="btn btn-warning" href="/admin/post/{{id}}/public"
-                                        role="button">
-                                        <i class="fa fa-upload" aria-hidden="true"></i>
-                                        Xuất bản
-                                    </a>
-                                    <a class="btn btn-info" href="/admin/post/delete/{{id}}" role="button">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                        Xoá
-                                    </a>
-                                </div>
-                                <div class="post_category cat_technology"><a
-                                        href="../category.html">{{post.category}}</a></div>
-                                <div
-                                    class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                    {{#each post.tags}}
-                                    <div class="tag"><a href="#">#{{name}}</a></div>
-                                    {{/each}}
-                                </div>
-                                <div class="post_title"><a href="/posts/{{id}}">{{post.title}}</a></div>
-                                <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                                    <div class="post_author d-flex flex-row align-items-center justify-content-start">
-                                        <div>
-                                            <div class="post_author_image"><img src="{{post.urlavatar}}"
-                                                    alt="author_avatar" width="16">
+                            <div class="col-lg-7">
+                                <div class="post_content">
+                                    <div class="pull-right">
+                                        <a class="btn btn-info" href="/admin/post/textEditor/{{id}}" role="button">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            Chỉnh sửa
+                                        </a>
+                                        <a class="btn btn-warning" href="/admin/post/{{id}}/public"
+                                            role="button">
+                                            <i class="fa fa-upload" aria-hidden="true"></i>
+                                            Xuất bản
+                                        </a>
+                                        <a class="btn btn-info" href="/admin/post/delete/{{id}}" role="button">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                            Xoá
+                                        </a>
+                                    </div>
+                                    <div class="post_category cat_technology"><a
+                                            href="../category.html">{{post.category}}</a></div>
+                                    <div
+                                        class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                        {{#each post.tags}}
+                                        <div class="tag"><a href="#">#{{name}}</a></div>
+                                        {{/each}}
+                                    </div>
+                                    <div class="post_title"><a href="/posts/{{id}}">{{post.title}}</a></div>
+                                    <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                                        <div
+                                            class="post_author d-flex flex-row align-items-center justify-content-start">
+                                            <div>
+                                                <div class="post_author_image"><img src="{{post.urlavatar}}"
+                                                        alt="author_avatar" width="16">
+                                                </div>
+                                            </div>
+                                            <div class="post_author_name"><a href="#">{{post.writer}}</a>
                                             </div>
                                         </div>
-                                        <div class="post_author_name"><a href="#">{{post.writer}}</a>
-                                        </div>
+                                        <div class="post_date"><a href="#">{{this.date}}</a></div>
                                     </div>
-                                    <div class="post_date"><a href="#">{{this.date}}</a></div>
-                                </div>
-                                <div class="post_text">
-                                    <p>{{this.summary}}</p>
+                                    <div class="post_text">
+                                        <p>{{this.summary}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,4 +85,6 @@
                 </div>
             </div>
         </div>
+
     </div>
+</div>
