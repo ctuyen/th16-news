@@ -6,7 +6,6 @@
     <div class="menu-item selected"><a href="./user">Người dùng</a></div>
   </div>
   <div class="right">
-    <header class="header">
       <div class="container-main">
         <div class="admin-label">Quản lý người dùng</div>
         <div class="edit">
@@ -26,343 +25,343 @@
             </li>
           </ul>
 
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div id="home" class="container tab-pane active"><br>
-              <h3 class="divider gradient">Thêm nhân viên</h3>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div id="home" class="container tab-pane active"><br>
+            <h3 class="divider gradient">Thêm nhân viên</h3>
 
-              {{#if errors}}
-              {{#each errors}}
-              <div class="alert alert-danger">{{this}}</div>
-              {{/each}}
-              {{/if}}
+            {{#if errors}}
+            {{#each errors}}
+            <div class="alert alert-danger">{{this}}</div>
+            {{/each}}
+            {{/if}}
 
-              <div class="add-category">
-                <form action="" method="POST">
-                  <div class="form-item">
-                    <label for="name">Tên</label>
-                    <input id="name" name="name" type="text" required>
-                  </div>
-                  <div class="form-item">
-                    <label for="name">Email</label>
-                    <input id="name" name="email" type="email" required>
-                  </div>
-                  <div class="form-item">
-                    <label for="password">Password</label>
-                    <input id="password" name="password" type="text" minlength="6" required>
-                  </div>
-                  <div class="form-item">
-                    <label for="parent">Vai trò</label>
-                    <select name="position" id="parent" class="parent">
-                      <option value="user">Người dùng</option>
-                      <option value="writer">Phóng viên</option>
-                      <option value="editor">Biên tập viên</option>
-                      <option value="admin">Admin</option>
-                    </select>
-                  </div>
-                  <div class="form-item">
-                    <input class="submit" type="submit" value="Thêm">
-                  </div>
-                </form>
-              </div>
+            <div class="add-category">
+              <form action="" method="POST">
+                <div class="form-item">
+                  <label for="name">Tên</label>
+                  <input id="name" name="name" type="text" required>
+                </div>
+                <div class="form-item">
+                  <label for="name">Email</label>
+                  <input id="name" name="email" type="email" required>
+                </div>
+                <div class="form-item">
+                  <label for="password">Password</label>
+                  <input id="password" name="password" type="text" minlength="6" required>
+                </div>
+                <div class="form-item">
+                  <label for="parent">Vai trò</label>
+                  <select name="position" id="parent" class="parent">
+                    <option value="user">Người dùng</option>
+                    <option value="writer">Phóng viên</option>
+                    <option value="editor">Biên tập viên</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <input class="submit" type="submit" value="Thêm">
+                </div>
+              </form>
             </div>
-            <div id="menu1" class="container tab-pane fade"><br>
-              <h3 class="divider gradient">Danh sách nhân viên</h3>
+          </div>
+          <div id="menu1" class="container tab-pane fade"><br>
+            <h3 class="divider gradient">Danh sách nhân viên</h3>
 
-              <div class="categories">
-                <div class="details" style="height:260px;overflow:auto;">
-                  <table>
-                    <tr>
-                      <th>Tên</th>
-                      <th>Email</th>
-                      <th>Vai trò</th>
-                      <th>Tác vụ</th>
-                    </tr>
+            <div class="categories">
+              <div class="details" style="height:260px;overflow:auto;">
+                <table>
+                  <tr>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th>Tác vụ</th>
+                  </tr>
 
-                    {{#each this.data.staffs as |staff|}}
-                    <tr>
-                      <td>{{staff.fullname}}</td>
-                      <td>{{staff.email}}</td>
-                      <td>{{staff.position}}</td>
-                      <td>
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#staffModal{{id}}">Chỉnh
-                          sửa
-                        </a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#deleteStaff{{id}}">Xoá</a>
-                      </td>
-                    </tr>
-                    <!-- Modal change position staff-->
-                    <div class="modal fade" id="staffModal{{id}}" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <form method="POST" action="/admin/user/{{id}}/changePosition">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
-                              </h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-item">
-                                <input name="id" type="hidden" id="id" type="text" value="{{id}}">
-                              </div>
-                              <div class="form-item">
-                                <label for="name">Tên:</label>
-                                <input name="fullname" id="name" type="text" value="{{fullname}}">
-                              </div>
-                              <div class="form-item">
-                                <label for="email">Email:</label>
-                                <input readonly class="form-control" id="email" type="email" value="{{email}}">
-                              </div>
-                              <div class="form-item">
-                                <label for="parent" class="parent">Vai trò:</label>
-                                <select name="position" id="parent">
-                                  <option value="writer">Phóng viên</option>
-                                  <option value="editor">Biên tập viên</option>
-                                  <option value="admin">Admin</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                              <button type="submit" class="btn btn-success">Lưu</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <!-- Modal Delete Staff-->
-                    <div class="modal fade" id="deleteStaff{{id}}" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
+                  {{#each this.data.staffs as |staff|}}
+                  <tr>
+                    <td>{{staff.fullname}}</td>
+                    <td>{{staff.email}}</td>
+                    <td>{{staff.position}}</td>
+                    <td>
+                      <a class="btn btn-primary" data-toggle="modal" data-target="#staffModal{{id}}">Chỉnh
+                        sửa
+                      </a>
+                      <a class="btn btn-danger" data-toggle="modal" data-target="#deleteStaff{{id}}">Xoá</a>
+                    </td>
+                  </tr>
+                  <!-- Modal change position staff-->
+                  <div class="modal fade" id="staffModal{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <form method="POST" action="/admin/user/{{id}}/changePosition">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
+                            </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class="form-item">
-                              <label for="name">Tên nhân viên:</label>
-                              <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                              <input name="id" type="hidden" id="id" type="text" value="{{id}}">
+                            </div>
+                            <div class="form-item">
+                              <label for="name">Tên:</label>
+                              <input name="fullname" id="name" type="text" value="{{fullname}}">
                             </div>
                             <div class="form-item">
                               <label for="email">Email:</label>
-                              <input readonly class="form-control" id="email" type="text" value="{{email}}">
+                              <input readonly class="form-control" id="email" type="email" value="{{email}}">
+                            </div>
+                            <div class="form-item">
+                              <label for="parent" class="parent">Vai trò:</label>
+                              <select name="position" id="parent">
+                                <option value="writer">Phóng viên</option>
+                                <option value="editor">Biên tập viên</option>
+                                <option value="admin">Admin</option>
+                              </select>
                             </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary"
-                              onclick="window.location='/admin/user/{{id}}/delete';">Xóa</button>
+                            <button type="submit" class="btn btn-success">Lưu</button>
                           </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Modal Delete Staff-->
+                  <div class="modal fade" id="deleteStaff{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="form-item">
+                            <label for="name">Tên nhân viên:</label>
+                            <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                          </div>
+                          <div class="form-item">
+                            <label for="email">Email:</label>
+                            <input readonly class="form-control" id="email" type="text" value="{{email}}">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="button" class="btn btn-primary"
+                            onclick="window.location='/admin/user/{{id}}/delete';">Xóa</button>
                         </div>
                       </div>
                     </div>
-                    {{/each}}
-                  </table>
-                </div>
+                  </div>
+                  {{/each}}
+                </table>
               </div>
             </div>
-            <div id="menu2" class="container tab-pane fade"><br>
-              <h3 class="divider gradient">Chuyên mục của BTV</h3>
+          </div>
+          <div id="menu2" class="container tab-pane fade"><br>
+            <h3 class="divider gradient">Chuyên mục của BTV</h3>
 
-              <div class="categories">
-                <div class="details">
-                  <table>
-                    <tr>
-                      <th>Tên</th>
-                      <th>Email</th>
-                      <th>Chuyên mục</th>
-                      <th>Tác vụ</th>
-                    </tr>
+            <div class="categories">
+              <div class="details">
+                <table>
+                  <tr>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Chuyên mục</th>
+                    <th>Tác vụ</th>
+                  </tr>
 
-                    {{#each this.data.editers as |editer|}}
-                    <tr>
-                      <td>{{editer.fullname}}</td>
-                      <td>{{editer.email}}</td>
-                      <td>
-                        {{#each editer.category as |category|}}
-                        {{category}} |
-                        {{/each}}
-                      </td>
-                      <td>
-                        <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal{{id}}">Chỉnh
-                          sửa</div>
-                      </td>
-                    </tr>
-                    <!-- Modal change category cho editor staff-->
-                    <div class="modal fade" id="editorModal{{id}}" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <form method="POST" action="/admin/user/{{id}}/changeCategory">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
-                              </h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-item">
-                                <input name="idEditor" type="hidden" id="id" type="text" value="{{id}}">
-                              </div>
-                              <div class="form-item">
-                                <label for="name">Tên</label>
-                                <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
-                              </div>
-                              <div class="form-item">
-                                <label for="email">Email</label>
-                                <input readonly class="form-control" id="email" type="email" value="{{email}}">
-                              </div>
-                              <div class="form-item">
-                                <label for="parent">Chuyên mục</label>
-                                <select name="categories" id="parent" class="larger" multiple>
-                                  {{#each ../data.categories as |cate|}}
-                                  <option value="{{cate.id}}">{{cate.name}}</option>
-                                  {{/each}}
-                                </select>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                              <button type="submit" class="btn btn-success">Lưu</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    {{/each}}
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div id="menu3" class="container tab-pane fade"><br>
-              <h3 class="divider gradient">Danh sách độc giả</h3>
-
-              <div class="categories">
-                <div class="details" style="height:310px;overflow:auto;">
-                  <table>
-                    <tr>
-                      <th>Tên</th>
-                      <th>Email</th>
-                      <th>Ngày hết hạn</th>
-                      <th>Tác vụ</th>
-                    </tr>
-
-                    {{#each this.data.users as |user|}}
-                    <tr>
-                      <td>{{user.fullname}}</td>
-                      <td>{{user.email}}</td>
-                      <td>{{user.expirationdate}}</td>
-                      <td>
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#premiumDate{{id}}">Gia hạn</a>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#deleteUser{{id}}">Xoá</a>
-                      </td>
-                    </tr>
-                    {{!-- modal  premium date--}}
-                    <div class="modal fade" id="premiumDate{{id}}" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
-                        <form method="POST" action="/admin/user/{{id}}/changePremiumDate">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Gia hạn Premium cho user
-                              </h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="md-form">
-                                <label>Gia hạn Premium cho tài khoản này thêm 7 ngày?</label>
-                              </div>
-                              <div class="md-form">
-                                <input name="id" type="hidden" id="id" type="text" value="{{id}}">
-                              </div>
-                              <div class="md-form">
-                                <label for="name">Tên</label>
-                                <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
-                              </div>
-                              <div class="md-form">
-                                <label for="email">Email</label>
-                                <input readonly class="form-control" id="email" type="email" value="{{email}}">
-                              </div>
-                              <div class="md-form">
-                                <label for="date">Hạn dùng hiện tại</label>
-                                <input readonly name="expirationdate" class="form-control" id="date" width="312" value="{{expirationdate}}"/>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                              <button type="submit" class="btn btn-success">OK</button>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                    <!-- Modal Delete User-->
-                    <div class="modal fade" id="deleteUser{{id}}" tabindex="-1" role="dialog"
-                      aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog" role="document">
+                  {{#each this.data.editers as |editer|}}
+                  <tr>
+                    <td>{{editer.fullname}}</td>
+                    <td>{{editer.email}}</td>
+                    <td>
+                      {{#each editer.category as |category|}}
+                      {{category}} |
+                      {{/each}}
+                    </td>
+                    <td>
+                      <div class="btn btn-primary action" data-toggle="modal" data-target="#editorModal{{id}}">Chỉnh
+                        sửa</div>
+                    </td>
+                  </tr>
+                  <!-- Modal change category cho editor staff-->
+                  <div class="modal fade" id="editorModal{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <form method="POST" action="/admin/user/{{id}}/changeCategory">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa thông tin nhân viên
+                            </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class="form-item">
-                              <label for="name">Tên người dùng:</label>
+                              <input name="idEditor" type="hidden" id="id" type="text" value="{{id}}">
+                            </div>
+                            <div class="form-item">
+                              <label for="name">Tên</label>
                               <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
                             </div>
                             <div class="form-item">
-                              <label for="email">Email:</label>
-                              <input readonly class="form-control" id="email" type="text" value="{{email}}">
+                              <label for="email">Email</label>
+                              <input readonly class="form-control" id="email" type="email" value="{{email}}">
+                            </div>
+                            <div class="form-item">
+                              <label for="parent">Chuyên mục</label>
+                              <select name="categories" id="parent" class="larger" multiple>
+                                {{#each ../data.categories as |cate|}}
+                                <option value="{{cate.id}}">{{cate.name}}</option>
+                                {{/each}}
+                              </select>
                             </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary"
-                              onclick="window.location='/admin/user/{{id}}/delete';">Xóa</button>
+                            <button type="submit" class="btn btn-success">Lưu</button>
                           </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  {{/each}}
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="menu3" class="container tab-pane fade"><br>
+            <h3 class="divider gradient">Danh sách độc giả</h3>
+
+            <div class="categories">
+              <div class="details" style="height:310px;overflow:auto;">
+                <table>
+                  <tr>
+                    <th>Tên</th>
+                    <th>Email</th>
+                    <th>Ngày hết hạn</th>
+                    <th>Tác vụ</th>
+                  </tr>
+
+                  {{#each this.data.users as |user|}}
+                  <tr>
+                    <td>{{user.fullname}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.expirationdate}}</td>
+                    <td>
+                      <a class="btn btn-primary" data-toggle="modal" data-target="#premiumDate{{id}}">Gia hạn</a>
+                      <a class="btn btn-danger" data-toggle="modal" data-target="#deleteUser{{id}}">Xoá</a>
+                    </td>
+                  </tr>
+                  {{!-- modal  premium date--}}
+                  <div class="modal fade" id="premiumDate{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <form method="POST" action="/admin/user/{{id}}/changePremiumDate">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Gia hạn Premium cho user
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="md-form">
+                              <label>Gia hạn Premium cho tài khoản này thêm 7 ngày?</label>
+                            </div>
+                            <div class="md-form">
+                              <input name="id" type="hidden" id="id" type="text" value="{{id}}">
+                            </div>
+                            <div class="md-form">
+                              <label for="name">Tên</label>
+                              <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                            </div>
+                            <div class="md-form">
+                              <label for="email">Email</label>
+                              <input readonly class="form-control" id="email" type="email" value="{{email}}">
+                            </div>
+                            <div class="md-form">
+                              <label for="date">Hạn dùng hiện tại</label>
+                              <input readonly name="expirationdate" class="form-control" id="date" width="312"
+                                value="{{expirationdate}}" />
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-success">OK</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Modal Delete User-->
+                  <div class="modal fade" id="deleteUser{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã chọn?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="form-item">
+                            <label for="name">Tên người dùng:</label>
+                            <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
+                          </div>
+                          <div class="form-item">
+                            <label for="email">Email:</label>
+                            <input readonly class="form-control" id="email" type="text" value="{{email}}">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                          <button type="button" class="btn btn-primary"
+                            onclick="window.location='/admin/user/{{id}}/delete';">Xóa</button>
                         </div>
                       </div>
                     </div>
-                    {{/each}}
-                  </table>
-                </div>
+                  </div>
+                  {{/each}}
+                </table>
               </div>
             </div>
-
           </div>
 
+        </div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn xóa</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                  <button type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
-                </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Xóa</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-
+    </div>
   </div>
 </div>
