@@ -13,7 +13,7 @@
 							<ul class="d-flex flex-row align-items-start justify-content-start">
 								<li><a href="/">Home</a></li>
 								<li><a href="/categories/{{this.post.idcategory}}">{{this.post.category}}</a></li>
-								<li>Bài viết chi tiết</li>
+								<li>{{post.title}}</li>
 							</ul>
 						</div>
 					</div>
@@ -37,11 +37,12 @@
 					<div class="post_image"><img src="{{post.urlthumbnail}}" alt="{{post.title}}">
 					</div>
 					<div class="post_content">
-						<div class="post_category cat_technology"><a href="/categories/{{post.idcategory}}">{{post.category}}</a></div>
+						<div class="post_category cat_technology"><a
+								href="/categories/{{post.idcategory}}">{{post.category}}</a></div>
 						<!--tabs-->
 						<div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
 							{{#each tags}}
-							<div class="tag"><a href="{{id}}">#{{name}}</a></div>
+							<div class="tag"><a href="/tags/{{id}}">#{{name}}</a></div>
 							{{/each}}
 
 
@@ -55,7 +56,7 @@
 								</div>
 								<div class="post_author_name"><a href="#">{{post.writer}}</a></div>
 							</div>
-							<div class="post_date"><a href="#">{{post.publicationdate}}</a></div>
+							<div class="post_date"><a href="#">{{post.date}}</a></div>
 							<div class="post_comments_num ml-auto"><a href="#">số lượt xem: {{post.view}}</a></div>
 						</div>
 						<div class="post_text">
@@ -96,7 +97,7 @@
 										<p>{{content}}</p>
 									</div>
 									<div class="post_date">
-										{{commentdate}}
+										{{this.date}}
 									</div>
 								</div>
 							</li>
@@ -137,79 +138,23 @@
 					<div class="sidebar_latest">
 						<div class="sidebar_title">Bài viết liên quan</div>
 						<div class="latest_posts">
-
+							{{#each postsCat}}
 							<!-- Bài viết liên quan -->
 							<div class="latest_post d-flex flex-row align-items-start justify-content-start">
 								<div>
-									<div class="latest_post_image"><img src="/images/latest_1.jpg"
-											alt="https://unsplash.com/@anniespratt"></div>
+									<div class="latest_post_image"><img src="{{urlthumbnail}}"
+											alt="ảnh bìa"></div>
 								</div>
 								<div class="latest_post_content">
-									<div class="post_category_small cat_video"><a href="/categories">video</a>
+									<div class="post_category_small cat_video"><a href="/categories/{{idcategory}}">video</a>
 									</div>
-									<div class="latest_post_title"><a href="/posts">New tech
-											development</a></div>
-									<div class="latest_post_date">March 12, 2018</div>
+									<div class="latest_post_title"><a href="/posts">{{title}}</a></div>
+									<div class="latest_post_date">{{date}}</div>
 								</div>
 							</div>
+							{{/each}}
 
-							<!-- Bài viết liên quan -->
-							<div class="latest_post d-flex flex-row align-items-start justify-content-start">
-								<div>
-									<div class="latest_post_image"><img src="/images/latest_1.jpg"
-											alt="https://unsplash.com/@anniespratt"></div>
-								</div>
-								<div class="latest_post_content">
-									<div class="post_category_small cat_video"><a href="/categories">video</a>
-									</div>
-									<div class="latest_post_title"><a href="/posts">New tech
-											development</a></div>
-									<div class="latest_post_date">March 12, 2018</div>
-								</div>
-							</div>
 
-							<!-- Bài viết liên quan -->
-							<div class="latest_post d-flex flex-row align-items-start justify-content-start">
-								<div>
-									<div class="latest_post_image"><img src="/images/latest_2.jpg"
-											alt="https://unsplash.com/@agkdesign"></div>
-								</div>
-								<div class="latest_post_content">
-									<div class="post_category_small cat_world"><a href="/categories">world</a>
-									</div>
-									<div class="latest_post_title"><a href="/posts">New tech
-											development</a></div>
-									<div class="latest_post_date">March 12, 2018</div>
-								</div>
-							</div>
-
-							<!-- Bài viết liên quan -->
-							<div class="latest_post d-flex flex-row align-items-start justify-content-start">
-								<div>
-									<div class="latest_post_image"><img src="/images/latest_3.jpg"
-											alt="https://unsplash.com/@mfgonz"></div>
-								</div>
-								<div class="latest_post_content">
-									<div class="post_category_small cat_technology"><a href="/categories">tech</a></div>
-									<div class="latest_post_title"><a href="/posts">New tech
-											development</a></div>
-									<div class="latest_post_date">March 12, 2018</div>
-								</div>
-							</div>
-
-							<!-- Bài viết liên quan -->
-							<div class="latest_post d-flex flex-row align-items-start justify-content-start">
-								<div>
-									<div class="latest_post_image"><img src="/images/latest_4.jpg"
-											alt="https://unsplash.com/@juja_han"></div>
-								</div>
-								<div class="latest_post_content">
-									<div class="post_category_small cat_technology"><a href="/categories">tech</a></div>
-									<div class="latest_post_title"><a href="/posts">New tech
-											development</a></div>
-									<div class="latest_post_date">March 12, 2018</div>
-								</div>
-							</div>
 
 						</div>
 					</div>

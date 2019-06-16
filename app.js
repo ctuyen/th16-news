@@ -50,6 +50,8 @@ app.use(require('./middlewares/NumberOfPosts/postsApproved.mdw'));
 app.use('/', require('./routes/main/index.route'));
 app.use("/categories", require("./routes/main/category.route"));
 app.use("/posts", require("./routes/main/post.route"));
+app.use("/tags", require("./routes/main/tags.route"));
+
 app.use("/admin", authMiddleware.requireAuth, authMiddleware.requireAdmin, adminRoute);
 app.use("/auth", authRoute);
 app.use('/writer', authMiddleware.requireAuth, authMiddleware.requireWriter, writerRoute);

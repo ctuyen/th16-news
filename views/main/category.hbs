@@ -8,11 +8,11 @@
             <div class="row">
                 <div class="col">
                     <div class="home_content">
-                        <div class="home_title">Technology</div>
+                        <div class="home_title">{{nameT}}</div>
                         <div class="breadcrumbs">
                             <ul class="d-flex flex-row align-items-start justify-content-start">
-                                <li><a href="index.html">Home</a></li>
-                                <li>Technology</li>
+                                <li><a href="/">Trang chủ</a></li>
+                                <li>{{nameT}}</li>
                             </ul>
                         </div>
                     </div>
@@ -33,8 +33,8 @@
                 <div class="col">
                     <div class="section_title_container d-flex flex-row align-items-start justify-content-start">
                         <div>
-                            <div class="section_title">Featured Posts</div>
-                            <div class="section_subtitle">Handpicked articles</div>
+                            <div class="section_title">Danh sách bài viết</div>
+                            <div class="section_subtitle">hằng ngày</div>
                         </div>
                         <div class="section_bar"></div>
                     </div>
@@ -62,7 +62,7 @@
                                         <div
                                             class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                                             {{#each posts.0.tags}}
-                                            <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                                            <div class="tag"><a href="/tags/{{id}}">#{{name}}</a></div>
                                             {{/each}}
                                         </div>
 
@@ -113,7 +113,7 @@
                                     <div
                                         class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                                         {{#each tags}}
-                                        <div class="tag"><a href="{{id}}">#{{name}}</a></div>
+                                        <div class="tag"><a href="/tags/{{id}}">#{{name}}</a></div>
                                         {{/each}}
                                     </div>
                                     <div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>

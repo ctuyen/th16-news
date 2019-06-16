@@ -15,6 +15,10 @@ router.get("/", (req, res, next) => {
 router.get("/:idCat", (req, res, next) => {
   var cats = res.locals.lObjCategories;
   var idCat = req.params.idCat;
+  var cate = res.locals.lcCategories.find(c => {
+    return c.catid == idCat;
+  });
+  console.log(res.locals.lcCategories);
   var page = req.query.page || 1;
   page = page < 1 ? 1 : page;
   var limit = 3;
@@ -33,8 +37,8 @@ router.get("/:idCat", (req, res, next) => {
       if (count % limit > 0) numpage++;
       var pages = [];
 
-      var previousPage = { value: (+page) - 1 };
-      var nextPage = { value: (+page) + 1 };
+      var previousPage = { value: +page - 1 };
+      var nextPage = { value: +page + 1 };
       if (page == 1 || numpage == 1) {
         previousPage.disabled = true;
       }
@@ -80,7 +84,8 @@ router.get("/:idCat", (req, res, next) => {
         posts,
         pages,
         previousPage,
-        nextPage
+        nextPage,
+        nameT: cate.name
       });
     })
     .catch(next);
