@@ -42,27 +42,31 @@
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                             Chỉnh sửa
                                         </a>
-                                        <a class="btn btn-success" href="/admin/post/{{id}}/public" role="button">
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#modalPublic{{id}}">
                                             <i class="fa fa-upload" aria-hidden="true"></i>
                                             Xuất bản
-                                        </a>
+                                        </button>
                                         <a class="btn btn-danger" href="/admin/post/delete/{{id}}" role="button">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                             Xoá
                                         </a>
                                     </div>
-                                    <div class="post_category cat_technology"><a href="../category.html">{{post.category}}</a></div>
-                                    <div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                    <div class="post_category cat_technology"><a
+                                            href="../category.html">{{post.category}}</a></div>
+                                    <div
+                                        class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                                         {{#each post.tags}}
                                         <div class="tag"><a href="#">#{{name}}</a></div>
                                         {{/each}}
                                     </div>
                                     <div class="post_title"><a href="/posts/{{id}}">{{post.title}}</a></div>
                                     <div class="post_info d-flex flex-row align-items-center justify-content-start">
-                                        <div class="post_author d-flex flex-row align-items-center justify-content-start">
+                                        <div
+                                            class="post_author d-flex flex-row align-items-center justify-content-start">
                                             <div>
-                                                <div class="post_author_image"><img src="{{post.urlavatar}}" alt="author_avatar"
-                                                        width="16">
+                                                <div class="post_author_image"><img src="{{post.urlavatar}}"
+                                                        alt="author_avatar" width="16">
                                                 </div>
                                             </div>
                                             <div class="post_author_name"><a href="#">{{post.writer}}</a>
@@ -74,6 +78,35 @@
                                         <p>{{this.summary}}</p>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Public-->
+                    <div class="modal fade" id="modalPublic{{id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="POST" action="/admin/post/public">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Xuất bản ngay</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id" id="id" value="{{id}}">
+                                        <div class="form-check">
+                                            <input name="isPremium" type="checkbox" class="form-check-input" id="check">
+                                            <label class="form-check-label" for="check">Chọn làm bài Premium?</label>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            <i class="fa fa-times" aria-hidden="true"></i>Đóng</button>
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fa fa-check" aria-hidden="true"></i>OK</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

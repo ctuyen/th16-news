@@ -17,7 +17,7 @@ router.get("/post/pending", controller.pending);
 router.get("/post/denied", controller.denied);
 router.get("/post/approved", controller.approved);
 router.get("/post/published", controller.published);
-router.get("/post/:id/public", controller.public);
+router.post("/post/public", controller.public);
 router.get("/post/textEditor", controller.textEditor);
 router.post("/post/textEditor", controller.addPost);
 router.get('/post/textEditor/:id', controller.loadEditPost);

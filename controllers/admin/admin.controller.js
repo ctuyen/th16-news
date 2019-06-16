@@ -203,27 +203,28 @@ module.exports = {
   postPost: (req, res) => {},
 
   public: (req, res, next) => {
-    var id = req.params.id;
-    if (isNaN(id)) {
-      res.redirect("back");
+    if (req.body.isPremium) {
+      var isPremium = "true";
     } else {
-      var entity = {
-        id: id,
-        status: "accept",
-        idEditor: req.signedCookies.userId,
-        publicationDate: new Date().toLocaleString("en-US", {
-          timeZone: "UTC"
-        })
-      };
-      postModel
-        .update(entity)
-        .then(Post => {
-          res.redirect("back");
-        })
-        .catch(err => {
-          next(err);
-        });
+      var isPremium = "false";
     }
+    var entity = {
+      id: req.body.id,
+      status: "accept",
+      isPremium,
+      idEditor: req.signedCookies.userId,
+      publicationDate: new Date().toLocaleString("en-US", {
+        timeZone: "UTC"
+      })
+    };
+    postModel
+      .update(entity)
+      .then(Post => {
+        res.redirect("back");
+      })
+      .catch(err => {
+        next(err);
+      });
   },
 
   changeCatName: (req, res, next) => {
