@@ -209,6 +209,7 @@ module.exports = {
       var entity = {
         id: id,
         status: "accept",
+        idEditor: req.signedCookies.userId,
         publicationDate: new Date().toLocaleString("en-US", {
           timeZone: "UTC"
         })
