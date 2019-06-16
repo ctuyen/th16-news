@@ -98,7 +98,7 @@ module.exports = {
   loadComment: id => {
     var sql = `select fullname, urlavatar, commentdate, content 
     from comment as cm, users as u 
-     cm.iduser = u.id and cm.idpost = ${id}`;
+    where cm.iduser = u.id and cm.idpost = ${id}`;
     return db.load(sql);
   },
 
