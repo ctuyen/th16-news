@@ -31,7 +31,17 @@ router.get("/", (req, res, next) => {
 
       if (user) {
         user = user.rows[0]
+        if (user.expirationdate) {
+          let date = new Date(user.expirationdate).toLocaleString("vi-VI", {
+            timeZone: "Asia/Saigon"
+          });
+          // date.setTime(date.valueOf());
+          user.expirationdate = date;
+        } else {
+          user.expirationdate = "Chưa gia hạn";
+        }
       }
+      console.log(user)
 
       res.render("main/index", {
         titlePage: "SaladNews - trang tin hàng đầu Việt Nam",
@@ -126,7 +136,6 @@ router.post("/personal", (req, res) => {
       userModel.single(req.signedCookies.userId)
       .then(users => {
         let user = users.rows[0]
-        console.log(user)
         if (!user.urlavatar) {
           user.urlavatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
         }
