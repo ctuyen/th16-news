@@ -17,6 +17,11 @@ module.exports = {
     return db.update("users", entity);
   },
 
+  updateTimePremium: (id, datetime) => {
+    return db.updateSQL(`update users set expirationDate = (timestamp '${datetime}' + 	interval '7 day') where id = ${id}`);
+  },
+
+
   delete: id => {
     return db.delete("users", id);
   },

@@ -8,6 +8,7 @@ var userModel = require("../../models/users.model");
 var editorModel = require("../../models/editor.model");
 var tagPostModel = require("../../models/tagPost.model");
 
+
 module.exports = {
   admin: (req, res) => {
     res.redirect("/admin/category");
@@ -48,15 +49,15 @@ module.exports = {
 
     if (users.rowCount > 0) {
       data.users = users.rows;
-      let expirationdate = []
+      let expirationdate = [];
 
       for (let [index, user] of data.users.entries()) {
         if (user.expirationdate) {
-          let date = new Date(user.expirationdate);
-          date.setTime(date.valueOf());
-          data.users[index].expirationdate = date.toLocaleString()
+          let date = new Date(user.expirationdate).toLocaleString("vi-VI",{ timeZone: "Asia/Saigon" });
+          // date.setTime(date.valueOf());
+          data.users[index].expirationdate = date;
         } else {
-          data.users[index].expirationdate = 'Chưa gia hạn'
+          data.users[index].expirationdate = "Chưa gia hạn";
         }
       }
     }
@@ -134,11 +135,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -321,29 +324,27 @@ module.exports = {
     }
   },
 
-  changePremiumDate: (req, res) => {
-    var id = req.params.id;
-    if (isNaN(id)) {
-      res.redirect("back");
-    } else {
-      var entity = {
-        id: req.body.id,
-        expirationDate: new Date(req.body.publicationDate).toLocaleString(
-          "en-US", {
-            timeZone: "UTC"
-          }
-        )
-      };
-      console.log(req.body);
-      // userModel
-      //   .update(entity)
-      //   .then(Post => {
-      //     res.redirect("back");
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
+  changePremiumDate: (req, res, next) => {
+    console.log(req.body);
+
+    if (Date.parse(req.body.expirationdate)) {
+      var date = new Date(req.body.expirationdate).toLocaleString("en-US", {timeZone: "UTC"});
+      var currentdate = new Date().toLocaleString("en-US", {timeZone: "UTC"});
+      if(date < currentdate){
+        date = currentdate;
+      }
+    } else {    
+      var date = new Date().toLocaleString("en-US", {timeZone: "UTC"});
     }
+    // console.log(date);
+    userModel
+      .updateTimePremium(req.body.id, date)
+      .then(Post => {
+        res.redirect("back");
+      })
+      .catch(err => {
+        next(err);
+      });
   },
 
   deleteCategory: async (req, res, next) => {
@@ -492,11 +493,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -526,11 +529,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -560,11 +565,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -594,11 +601,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -612,7 +621,6 @@ module.exports = {
       next(err);
     });
   },
-
 
   loadEditPost: (req, res, next) => {
     var id = req.params.id;
