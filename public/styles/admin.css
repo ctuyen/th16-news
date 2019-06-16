@@ -140,12 +140,8 @@ td {
 
 .btn {
     margin-top: 16px;
-    height: 30px;
+    height: 36px;
     width: auto;
-    color: red;
-    border-radius: 5px;
-    border: none;
-    font-size: 14px;
 }
 
 .action {
