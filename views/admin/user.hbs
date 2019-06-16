@@ -271,33 +271,35 @@
                         <form method="POST" action="/admin/user/{{id}}/changePremiumDate">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Ngày hết hạn Premium cho user
+                              <h5 class="modal-title" id="exampleModalLabel">Gia hạn Premium cho user
                               </h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
-                              <div class="form-item">
+                              <div class="md-form">
+                                <label>Gia hạn Premium cho tài khoản này thêm 7 ngày?</label>
+                              </div>
+                              <div class="md-form">
                                 <input name="id" type="hidden" id="id" type="text" value="{{id}}">
                               </div>
-                              <div class="form-item">
+                              <div class="md-form">
                                 <label for="name">Tên</label>
                                 <input readonly class="form-control" id="name" type="text" value="{{fullname}}">
                               </div>
-                              <div class="form-item">
+                              <div class="md-form">
                                 <label for="email">Email</label>
                                 <input readonly class="form-control" id="email" type="email" value="{{email}}">
                               </div>
-                              <div class="form-item">
-                                <label for="parent">Gia hạn đến ngày</label>
-                                <input name="publicationDate" class="Datetime" type="datetime-local"
-                                  value="{{user.expirationPremium}}" id="parent" />
+                              <div class="md-form">
+                                <label for="date">Hạn dùng hiện tại</label>
+                                <input readonly name="expirationdate" class="form-control" id="date" width="312" value="{{expirationdate}}"/>
                               </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                              <button type="submit" class="btn btn-success">Lưu</button>
+                              <button type="submit" class="btn btn-success">OK</button>
                             </div>
                           </div>
                         </form>
