@@ -216,8 +216,8 @@ module.exports = {
     return db.load(sql);
   },
 
-  numByTag: async idcat => {
-    var sql = `select DISTINCT count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idcategory=${idcat}`;
+  numByTag: async idtag => {
+    var sql = `select count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idtag=${idtag}`;
 
     return db.load(sql);
   },
@@ -227,9 +227,9 @@ module.exports = {
     var sql = `SELECT pid, ptitle
     FROM (SELECT p.id as pid,
                  p.title as ptitle,
-                 setweight(to_tsvector(convertTVkdau(p.title)), 'A') || 
-                 setweight(to_tsvector(convertTVkdau(p.summary)), 'B')|| 
-                 setweight(to_tsvector(convertTVkdau(p.content)), 'D') as document
+                 setweight(to_tsvector(coalesce(convertTVkdau(p.title))), 'A') || 
+                 setweight(to_tsvector(coalesce(convertTVkdau(p.summary))), 'B')|| 
+                 setweight(to_tsvector(coalesce(convertTVkdau(p.content))), 'D') as document
           FROM posts as p GROUP BY p.id) p_search
     WHERE p_search.document @@ to_tsquery('${tt}')
     ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC`;
