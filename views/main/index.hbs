@@ -5,14 +5,14 @@
 	<!-- Home Slider -->
 	<div class="home_slider_container">
 		<div class="owl-carousel owl-theme home_slider">
-			{{#each this.topCat}}
+			{{#each this.topslide}}
 			<!-- Slide -->
 			<div class="owl-item home_slider_item">
 				<div class="background_image" style="background-image:url({{urlthumbnail}})"></div>
 				<div class="bgC home_slider_content text-center">
 					<div class="home_slider_content_inner" data-animation-in="fadeIn"
 						data-animation-out="animate-out fadeOut">
-						<div class="home_category"><a href="/categories">{{category}}</a></div>
+						<div class="home_category"><a href="/categories/{{idcategory}}">{{category}}</a></div>
 						<div class="home_title">{{title}}</div>
 						<div class="home_text">{{summary}}</div>
 						<div class="home_button trans_200"><a href="/posts/{{id}}">Xem thêm</a></div>

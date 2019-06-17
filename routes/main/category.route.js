@@ -18,7 +18,7 @@ router.get("/:idCat", (req, res, next) => {
   var cate = res.locals.lcCategories.find(c => {
     return c.catid == idCat;
   });
-  console.log(res.locals.lcCategories);
+  // console.log(res.locals.lcCategories);
   var page = req.query.page || 1;
   page = page < 1 ? 1 : page;
   var limit = 3;

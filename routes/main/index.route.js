@@ -28,23 +28,11 @@ router.get("/", (req, res, next) => {
       var posts = data.rows;
       var topCat = data3.rows;
       var tags = data2.rows;
+      var data4 = await postmodel.topSlide();
+      var topslide = data4.rows;
 
-<<<<<<< HEAD
-      // var t=await postmodel.loadTag(1);
-      // console.log(t.rows);
-      for (const p of topCat) {
-        p.date = new Date(`${p.publicationdate}`).toLocaleDateString(
-          "vi-VI",
-          {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
-        );
-=======
       if (user) {
-        user = user.rows[0]
+        user = user.rows[0];
         if (user.expirationdate) {
           let date = new Date(user.expirationdate).toLocaleString("vi-VI", {
             timeZone: "Asia/Saigon"
@@ -54,9 +42,8 @@ router.get("/", (req, res, next) => {
         } else {
           user.expirationdate = "Chưa gia hạn";
         }
->>>>>>> 8c5b8b438fd0a6c99da1504156233f82a3958beb
       }
-      console.log(user)
+      // console.log(user);
 
       for (const post of posts) {
         var t;
@@ -92,7 +79,8 @@ router.get("/", (req, res, next) => {
         topView,
         topCat,
         tags,
-        user
+        user,
+        topslide
       });
     })
     .catch(err => {
@@ -175,12 +163,10 @@ router.post("/personal", (req, res) => {
   userModel
     .update(entity)
     .then(
-<<<<<<< HEAD
       userModel
         .single(req.signedCookies.userId)
         .then(users => {
           let user = users.rows[0];
-          console.log(user);
           if (!user.urlavatar) {
             user.urlavatar =
               "https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png";
@@ -194,23 +180,6 @@ router.post("/personal", (req, res) => {
         .catch(err => {
           throw err;
         })
-=======
-      userModel.single(req.signedCookies.userId)
-      .then(users => {
-        let user = users.rows[0]
-        if (!user.urlavatar) {
-          user.urlavatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
-        }
-        res.render("main/personal", {
-          layout: false,
-          user,
-          notices: "Chúc mừng. Bạn đã đổi thông tin thành công!"
-        });
-      })
-      .catch(err => {
-        throw err
-      })
->>>>>>> 8c5b8b438fd0a6c99da1504156233f82a3958beb
     )
     .catch(err => {
       throw err;

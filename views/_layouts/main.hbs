@@ -162,14 +162,16 @@
 									<!-- Search -->
 									<div class="header_search_container ml-auto">
 										<div class="header_search">
-											<form action="javascript:;" id="header_search_form"
+											<form method="POST" id="header_search_form"
 												class="header_search_form d-flex flex-row align-items-center justfy-content-start">
 												<div>
-													<div class="header_search_activation"><i class="fa fa-search"
-															aria-hidden="true"></i></div>
+													<div class="header_search_activation">
+														<i class="fa fa-search" aria-hidden="true"></i>
+													</div>
 												</div>
 												<input type="text" class="header_search_input" placeholder="Search"
-													required="required">
+													required="required" name="q">
+												<input type="submit" formaction="/search" hidden />
 											</form>
 										</div>
 									</div>
