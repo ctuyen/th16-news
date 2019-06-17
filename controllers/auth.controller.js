@@ -9,15 +9,22 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const querystring = require('querystring');
 
+let backURL;
+
 module.exports = {
   auth: (req, res) => {
     res.redirect("/auth/login");
   },
 
   login: (req, res) => {
+    if (req.signedCookies.userId) {
+      res.redirect('/')
+      return
+    }
     res.render("auth/login", {
       layout: false
     });
+    backURL = req.headers.referer || '/';
   },
 
   postLogin: (req, res) => {
@@ -28,7 +35,7 @@ module.exports = {
 
     checkEmail
       .then(users => {
-        if (users.rowCount == 0) {
+        if (users.rowCount == 0 || users.rows[0].isdelete == true) {
           res.render("auth/login", {
             errors: ["Email hoặc mật khẩu sai."],
             values: req.body,
@@ -53,7 +60,7 @@ module.exports = {
               expires: 0,
               httpOnly: true
             });
-            res.redirect("/");
+            res.redirect(backURL);
           })
           .catch(err => {
             throw err
@@ -96,7 +103,7 @@ module.exports = {
         });
         return;
       }
-      
+
       let entity = {}
       entity.email = req.body.email
       entity.fullName = `${req.body.firstName} ${req.body.lastName}`

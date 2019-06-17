@@ -31,7 +31,6 @@ app.set("view engine", "hbs");
 
 app.set("views", "./views");
 
-
 app.use(bodyParser.urlencoded({
   extended: true
 })); // for parsing application/x-www-form-urlencoded
@@ -53,7 +52,7 @@ app.use('/', require('./routes/main/index.route'));
 app.use("/categories", require("./routes/main/category.route"));
 app.use("/posts", require("./routes/main/post.route"));
 app.use("/tags", require("./routes/main/tags.route"));
-app.use('/search',require('./routes/main/search.route'));
+app.use('/search', require('./routes/main/search.route'));
 app.use("/admin", authMiddleware.requireAuth, authMiddleware.requireAdmin, adminRoute);
 app.use("/auth", authRoute);
 app.use('/writer', authMiddleware.requireAuth, authMiddleware.requireWriter, writerRoute);

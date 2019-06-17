@@ -7,7 +7,7 @@ var authModel = require("../../models/auth.model");
 
 var router = express.Router();
 
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   var cats = res.locals.lObjCategories;
   var tasks = [
     postmodel.topDate(10),
@@ -31,19 +31,13 @@ router.get("/", (req, res, next) => {
       var data4 = await postmodel.topSlide();
       var topslide = data4.rows;
 
-      if (user) {
-        user = user.rows[0];
-        if (user.expirationdate) {
-          let date = new Date(user.expirationdate).toLocaleString("vi-VI", {
-            timeZone: "Asia/Saigon"
-          });
-          // date.setTime(date.valueOf());
-          user.expirationdate = date;
-        } else {
-          user.expirationdate = "Chưa gia hạn";
-        }
+      //have user
+      if (user.rowCount > 0) {
+        user = user.rows[0]
       }
-      // console.log(user);
+      else {
+        user = false
+      }
 
       //top view
       topView.forEach((e, key) => {
@@ -69,7 +63,7 @@ router.get("/", (req, res, next) => {
           }
         );
       }
-      // console.log(posts);
+      // console.log(user);
       // console.log(posts);
       // if (user) {
       //   user = user.rows[0];
@@ -145,8 +139,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/personal", authMiddleware.requireAuth, (req, res) => {
-  userModel
-    .single(req.signedCookies.userId)
+  userModel.single(req.signedCookies.userId)
     .then(users => {
       let user = users.rows[0];
       if (!user.urlavatar) {
@@ -171,8 +164,7 @@ router.post("/personal", (req, res) => {
   entity.email = req.body.email;
   entity.urlavatar = req.body.urlavatar;
 
-  userModel
-    .update(entity)
+  userModel.update(entity)
     .then(
       userModel
       .single(req.signedCookies.userId)
