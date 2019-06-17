@@ -34,6 +34,15 @@ router.get("/", (req, res) => {
       //have user
       if (user.rowCount > 0) {
         user = user.rows[0]
+        if (user.position == 'admin') {
+          user.admin = true
+        }
+        if (user.position == 'writer') {
+          user.writer = true
+        }
+        if (user.position == 'editor') {
+          user.editor = true
+        }
       }
       else {
         user = false

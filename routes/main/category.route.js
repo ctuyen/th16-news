@@ -1,18 +1,37 @@
 var express = require("express");
 var postModel = require("../../models/posts.model");
 var router = express.Router();
+var userModel = require("../../models/users.model")
 
-router.get("/", (req, res, next) => {
-  var cats = res.locals.lObjCategories;
-  res.render("main/category", {
-    titlePage: `SaladNews - category`,
-    stylePage: "category",
-    stylePageResponsive: "category_responsive",
-    categories: cats
-  });
+router.get("/", async (req, res, next) => {
+  res.redirect('/categories/1')
 });
 
+
 router.get("/:idCat", (req, res, next) => {
+  var user = userModel.single(req.signedCookies.userId)
+  user
+    .then(user => {
+      //have user
+      if (user.rowCount > 0) {
+        user = user.rows[0]
+        if (user.position == 'admin') {
+          user.admin = true
+        }
+        if (user.position == 'writer') {
+          user.writer = true
+        }
+        if (user.position == 'editor') {
+          user.editor = true
+        }
+      } else {
+        user = false
+      }
+    })
+    .catch(err => {
+      throw err
+    })
+
   var cats = res.locals.lObjCategories;
   var idCat = req.params.idCat;
   var cate = res.locals.lcCategories.find(c => {
@@ -25,9 +44,9 @@ router.get("/:idCat", (req, res, next) => {
   var offset = (page - 1) * limit;
   // console.log("before     OMG");
   Promise.all([
-    postModel.pageByCat(idCat, offset, limit),
-    postModel.numByCat(idCat)
-  ])
+      postModel.pageByCat(idCat, offset, limit),
+      postModel.numByCat(idCat)
+    ])
     .then(async ([data, data1]) => {
       var posts = data.rows;
       // console.log(posts);
@@ -37,8 +56,12 @@ router.get("/:idCat", (req, res, next) => {
       if (count % limit > 0) numpage++;
       var pages = [];
 
-      var previousPage = { value: +page - 1 };
-      var nextPage = { value: +page + 1 };
+      var previousPage = {
+        value: +page - 1
+      };
+      var nextPage = {
+        value: +page + 1
+      };
       if (page == 1 || numpage == 1) {
         previousPage.disabled = true;
       }
@@ -49,7 +72,10 @@ router.get("/:idCat", (req, res, next) => {
       // console.log("trang sau       " + nextPage.disabled);
 
       for (let index = 0; index < numpage; index++) {
-        let obj = { value: index + 1, active: false };
+        let obj = {
+          value: index + 1,
+          active: false
+        };
         if (obj.value == page) {
           obj.active = true;
         }
@@ -67,13 +93,13 @@ router.get("/:idCat", (req, res, next) => {
         post.tags = temp;
 
         post.date = new Date(`${post.publicationdate}`).toLocaleDateString(
-          "vi-VI",
-          {
+          "vi-VI", {
             day: "numeric",
             month: "short",
             year: "numeric"
-          },
-          { timeZone: "Asia/Saigon" }
+          }, {
+            timeZone: "Asia/Saigon"
+          }
         );
       }
       res.render("main/category", {
@@ -85,7 +111,8 @@ router.get("/:idCat", (req, res, next) => {
         pages,
         previousPage,
         nextPage,
-        nameT: cate.name
+        nameT: cate.name,
+        user
       });
     })
     .catch(next);

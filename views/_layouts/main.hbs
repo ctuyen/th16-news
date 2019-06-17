@@ -23,39 +23,8 @@
 <body>
 
 	<div class="super_container">
-
 		<!-- Header -->
-
 		<header class="header">
-
-			<!-- Header bar -->
-			<!-- <div class="header_bar">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="header_bar_content d-flex flex-row align-items-center justify-content-start">
-							<div class="logo_container">
-								<a href="javascript:;">
-									<div class="logo"><span>Tabbage</span>NEWS</div>
-									<div class="logo_sub">Trang báo lá cải & tin tức xàm lông hàng đầu Việt Nam</div>
-								</a>
-							</div> -->
-			<!-- <div class="sub_button text-center" ><a href="javascript:;">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div> -->
-			<!-- <div class="header_social ml-auto">
-								
-								<div class="sub_button text-center" ><a href="javascript:;">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div>
-							 -->
-			<!-- <ul class="d-flex flex-row align-items-center justify-content-start">									
-									<li><a href="javascript:;"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href="javascript:;"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>									
-								</ul> -->
-			<!-- </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-
 			<!-- Header Content -->
 			<div class="header_nav_container" id="header">
 				<div class="header_bar">
@@ -77,14 +46,20 @@
 										<div class="btn-group">
 											<button type="button" class="btn btn-success dropdown-toggle"
 												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-												style="border: none; border-radius: 2; box-shadow: none; background: #0d0d0d">
+												style="border: none; box-shadow: none; background: #0d0d0d">
 												Hi, {{user.fullname}}
 											</button>
 											<div class="dropdown-menu">
 												<a class="dropdown-item" href="/personal">Thông tin cá nhân</a>
-												{{!-- {{#if user.position=='admin'}}
+												{{#if user.admin}}
 												<a class="dropdown-item" href="/admin">Trang Admin</a>
-												{{/if}} --}}
+												{{/if}}
+												{{#if user.writer}}
+												<a class="dropdown-item" href="/writer">Trang Writer</a>
+												{{/if}}
+												{{#if user.editor}}
+												<a class="dropdown-item" href="/editor">Trang Editor</a>
+												{{/if}}
 												<a class="dropdown-item" href="/request-premium">Gia hạn Premium</a>
 												<a class="dropdown-item" href="/auth/forgot-password">Đổi mật khẩu</a>
 												<div class="dropdown-divider"></div>
