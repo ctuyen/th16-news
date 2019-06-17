@@ -80,7 +80,7 @@ router.get("/:idPost", async (req, res) => {
       var [data1, data2, data3] = await Promise.all([
         postmodel.loadTag(post.id),
         postmodel.loadComment(post.id),
-        postmodel.pageByCat(post.id,post.idcategory, 0, 5)
+        postmodel.pageByCats(post.id,post.idcategory, 0, 5)
       ]);
 
       var tags = data1.rows;

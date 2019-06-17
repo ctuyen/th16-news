@@ -180,7 +180,7 @@ module.exports = {
     sql += `) limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
-  pageByCat: async (idpost, idcat, offset, limit) => {
+  pageByCats: async (idpost, idcat, offset, limit) => {
     var d = await categoriesmodel.loadSonCat(idcat);
     // console.log(d.rows);
     var cats = d.rows;
