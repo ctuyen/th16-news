@@ -52,7 +52,7 @@
                                             <i class="fa fa-upload" aria-hidden="true"></i>
                                             Xuất bản
                                         </button>
-                                        <a class="btn btn-danger" href="/admin/post/delete/{{id}}" role="button">
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#deletePost{{id}}">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                             Xoá
                                         </a>
@@ -140,6 +140,33 @@
                                         <i class="fa fa-times" aria-hidden="true"></i>Đóng</button>
                                     <button type="submit" class="btn btn-success">
                                         <i class="fa fa-check" aria-hidden="true"></i>OK</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Delete-->
+                <div class="modal fade" id="deletePost{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form method="POST" action="/admin/post/delete/{{id}}">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã
+                                        chọn?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-item">
+                                        <label for="name">Tên bài viết:</label>
+                                        <input readonly class="form-control" id="name" type="text" value="{{title}}">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
                                 </div>
                             </form>
                         </div>

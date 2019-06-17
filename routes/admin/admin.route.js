@@ -8,7 +8,7 @@ router.get("/", controller.admin);
 router.get("/category", controller.category);
 router.post("/category", controller.postCategory);
 router.post("/category/:id/changeName", controller.changeCatName);
-router.get("/category/:id/delete", controller.deleteCategory);
+router.post("/category/:id/delete", controller.deleteCategory);
 
 router.get("/post", (req, res) => {
   res.redirect("/admin/post/pending");
@@ -22,12 +22,12 @@ router.get("/post/textEditor", controller.textEditor);
 router.post("/post/textEditor", controller.addPost);
 router.get('/post/textEditor/:id', controller.loadEditPost);
 router.post('/post/textEditor/update', controller.editPost);
-router.get('/post/delete/:id', controller.deletePost);
+router.post('/post/delete/:id', controller.deletePost);
 
 router.get("/tag", controller.tag);
 router.post("/tag", controller.postTag);
 router.post("/tag/:id/changeName", controller.changeTagName);
-router.get("/tag/:id/delete", controller.deleteTag);
+router.post("/tag/:id/delete", controller.deleteTag);
 
 router.get("/user", controller.user);
 router.post("/user", controller.postUser);
