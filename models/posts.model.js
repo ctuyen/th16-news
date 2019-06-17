@@ -224,15 +224,17 @@ module.exports = {
   searchPosts: key => {
     var t = change_alias(key);
     var tt= t.replace(/ /g, " & ");
-    var sql = `SELECT pid, ptitle
-    FROM (SELECT p.id as pid,
-                 p.title as ptitle,
-                 setweight(to_tsvector(coalesce(convertTVkdau(p.title))), 'A') || 
-                 setweight(to_tsvector(coalesce(convertTVkdau(p.summary))), 'B')|| 
-                 setweight(to_tsvector(coalesce(convertTVkdau(p.content))), 'D') as document
-          FROM posts as p GROUP BY p.id) p_search
-    WHERE p_search.document @@ to_tsquery('${tt}')
-    ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC`;
+    console.log(tt);
+    var sql = `select p.* from posts as p, (SELECT pid, ptitle
+      FROM (SELECT id as pid,
+                   title as ptitle,
+                   setweight(to_tsvector(coalesce(convertTVkdau(title))), 'A') || 
+                   setweight(to_tsvector(coalesce(convertTVkdau(summary))), 'B')|| 
+                   setweight(to_tsvector(coalesce(convertTVkdau(content))), 'D') as document
+            FROM posts GROUP BY id) p_search
+      WHERE p_search.document @@ to_tsquery('${tt}')
+      ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC) as t
+    where p.id = t.pid`;
     return db.load(sql);
   },
 

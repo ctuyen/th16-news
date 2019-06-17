@@ -1,0 +1,123 @@
+<!-- Home -->
+
+<div class="home">
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="/images/footer.jpg"
+        data-speed="0.8"></div>
+    <div class="home_content_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Kết quả tìm kiếm</div>
+                        <div class="breadcrumbs">
+                            <ul class="d-flex flex-row align-items-start justify-content-start">
+                                <li><a href="/">Trang chủ</a></li>
+                                <li>{{nameT}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Container -->
+
+<div class="content_container">
+
+    <!-- Featured Posts -->
+    <div class="featured_title">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="section_title_container d-flex flex-row align-items-start justify-content-start">
+                        <div>
+                            <div class="section_title">Danh sách bài viết</div>
+                            <div class="section_subtitle">{{check}}</div>
+                        </div>
+                        <div class="section_bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9">
+                    {{#if check}}
+                    <div class="posts">
+                        {{#each posts}}
+                        <!-- Post -->
+                        <div class="post_item post_h_large row">
+                            <div class="col-lg-5">
+                                <div class="post_image"><a href="/posts/{{id}}"><img src="{{urlthumbnail}}"
+                                            alt="ảnh nền"></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="post_content">
+                                    <!-- <div class="post_category cat_technology"><a href="javasript:;">{{category}}</a>
+                                    </div>
+                                    <div
+                                        class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                        {{#each tags}}
+                                        <div class="tag"><a href="/tags/{{id}}">#{{name}}</a></div>
+                                        {{/each}}
+                                    </div> -->
+                                    <div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
+                                    <div class="post_info d-flex flex-row align-items-center justify-content-start">
+                                        {{!-- <div
+                                            class="post_author d-flex flex-row align-items-center justify-content-start">
+                                            <div>
+                                                <div class="post_author_image"><img src="{{urlavatar}}"
+                                                        alt="avatar tác giả"></div>
+                                            </div>
+                                            <div class="post_author_name"><a href="#">{{writer}}</a></div>
+                                        </div> --}}
+                                        <div class="post_date"><a href="#">{{date}}</a></div>
+                                        <div class="post_comments ml-auto"><a href="javascript:;">Lượt xem: {{view}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="post_text">
+                                        <p>{{summary}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{/each}}
+
+                    </div>
+
+                </div>
+                {{else}}
+                    <h1>không tìm thấy</h1>
+                {{/if}}
+
+
+                <!-- Sidebar -->
+
+                <div class="col-lg-3">
+                    <div class="sidebar">
+
+                        <!-- Extra -->
+                        <div class="sidebar_extra">
+                            <a href="#">
+                                <div class="sidebar_title">Tiết mục quảng cáo</div>
+                                <div class="sidebar_extra_container">
+                                    <div class="background_image" style="background-image:url(/images/extra_2.jpg)">
+                                    </div>
+                                    <div class="sidebar_extra_content">
+                                        <div class="sidebar_extra_title">30%</div>
+                                        <div class="sidebar_extra_title">off</div>
+                                        <div class="sidebar_extra_subtitle">Buy online now</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
