@@ -78,9 +78,28 @@
 						</ul>
 					</div>
 
+					<!-- Reply  -->
+					{{#if isLogin}}
+					<div class="reply_form_container">
+						<form method="POST" id="reply_form" class="reply_form">
+							<div class="form-group">
+								<label for="comment">Bình luận:</label>
+								<textarea class="form-control" rows="5" name="content" id="comment"
+									placeholder="Nhập bình luận tại đây"></textarea>
+							</div>
+							<button class="reply_button trans_200">Gửi</button>
+						</form>
+					</div>
+					{{else}}
+					<div class="reply_form_container">
+						<label for="">Để bình luận cho bài viết này vui lòng <a href="/login">đăng
+								nhập</a>!</label>
+					</div>
+					{{/if}}
+					
 					<!-- Comments -->
 					<div class="post_comments">
-
+						<h4 class="mb-4">Tất cả bình luận:</h4>
 						<ul class="post_comments_list">
 							{{#each comments}}
 							<!-- Comment -->
@@ -102,31 +121,9 @@
 								</div>
 							</li>
 							{{/each}}
-
 						</ul>
-
-					</div>
-
-					<!-- Reply  -->
-					<div class="reply_form_container">
-						<div class="reply_form_title">Leave a reply</div>
-						<form action="#" id="reply_form" class="reply_form">
-							<div class="row">
-								<div class="col-md-6">
-									<input type="text" class="reply_input" placeholder="Name" required="required">
-								</div>
-								<div class="col-md-6">
-									<input type="email" class="reply_input" placeholder="E-mail" required="required">
-								</div>
-							</div>
-							<input type="email" class="reply_input" placeholder="E-mail" required="required">
-							<textarea class="reply_input reply_textarea" placeholder="Message"
-								required="required"></textarea>
-							<button class="reply_button trans_200">submit</button>
-						</form>
 					</div>
 				</div>
-
 			</div>
 
 			<!-- Sidebar -->
@@ -142,11 +139,11 @@
 							<!-- Bài viết liên quan -->
 							<div class="latest_post d-flex flex-row align-items-start justify-content-start">
 								<div>
-									<div class="latest_post_image"><img src="{{urlthumbnail}}"
-											alt="ảnh bìa"></div>
+									<div class="latest_post_image"><img src="{{urlthumbnail}}" alt="ảnh bìa"></div>
 								</div>
 								<div class="latest_post_content">
-									<div class="post_category_small cat_video"><a href="/categories/{{idcategory}}">{{category}}</a>
+									<div class="post_category_small cat_video"><a
+											href="/categories/{{idcategory}}">{{category}}</a>
 									</div>
 									<div class="latest_post_title"><a href="/posts/{{id}}">{{title}}</a></div>
 									<div class="latest_post_date">{{date}}</div>

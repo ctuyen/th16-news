@@ -234,5 +234,9 @@ module.exports = {
     WHERE p_search.document @@ to_tsquery('${tt}')
     ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC`;
     return db.load(sql);
-  }
+  },
+
+  addComment: entity => {
+    return db.add('comment', entity);
+  },
 };

@@ -88,13 +88,8 @@ router.get("/:idPost", async (req, res) => {
       var comments = data2.rows;
 
       for (const c of comments) {
-        c.date = new Date(`${post.commentdate}`).toLocaleDateString(
-          "vi-VI",
-          {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          },
+        c.date = new Date(c.commentdate).toLocaleString(
+          "vi-VN",
           { timeZone: "Asia/Saigon" }
         );
       }
@@ -113,6 +108,12 @@ router.get("/:idPost", async (req, res) => {
           { timeZone: "Asia/Saigon" }
         );
       }
+      if(req.signedCookies.userId){
+        var isLogin = true;
+      }else{
+        var isLogin = false;
+      }
+
       res.render("main/post", {
         titlePage: `SaladNews - ${post.title}`,
         stylePage: "single",
@@ -121,7 +122,8 @@ router.get("/:idPost", async (req, res) => {
         tags,
         comments,
         categories: cats,
-        postsCat
+        postsCat,
+        isLogin
       });
     } catch (error) {
       console.log(error);
@@ -131,6 +133,22 @@ router.get("/:idPost", async (req, res) => {
     console.log(error);
     throw error;
   }
+});
+router.post("/:idpost", (req, res, next) => {
+  var entity = {
+    idpost: req.params.idpost,
+    iduser: req.signedCookies.userId,
+    content: req.body.content,
+    commentDate: new Date().toLocaleString(
+      "en-US",
+      { timeZone: "UTC" }
+    )
+  };
+  postmodel.addComment(entity).then(()=>{
+    res.redirect("back");
+  }).catch(err => {
+    next(err);
+  });
 });
 
 module.exports = router;
