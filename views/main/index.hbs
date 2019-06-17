@@ -167,7 +167,8 @@
 											<!-- Post -->
 											<div
 												class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
-												<div class="post_image"><a href="/posts"><img src="{{urlthumbnail}}" onerror="this.onerror=null; this.src='/images/no_image.png'"
+												<div class="post_image"><a href="/posts"><img src="{{urlthumbnail}}"
+															onerror="this.onerror=null; this.src='/images/no_image.png'"
 															alt="ảnh bìa"></a></div>
 												<div class="post_content">
 													<div class="post_category cat_technology"><a
@@ -184,14 +185,14 @@
 														<div
 															class="post_author d-flex flex-row align-items-center justify-content-start">
 															<div>
-																<div class="post_author_image"><img src="{{urlavatar}}" onerror="this.onerror=null; this.src='/images/no_image.png'"
+																<div class="post_author_image"><img src="{{urlavatar}}"
+																		onerror="this.onerror=null; this.src='/images/no_image.png'"
 																		alt="avatar người viết"></div>
 															</div>
 															<div class="post_author_name"><a
 																	href="javascript:;">{{writer}}</a></div>
 														</div>
-														<div class="post_date"><a
-																href="javascript:;">{{date}}</a>
+														<div class="post_date"><a href="javascript:;">{{date}}</a>
 														</div>
 														<div class="post_comments ml-auto"><a href="javascript:;">lượt
 																xem: {{view}}</a></div>
@@ -292,7 +293,7 @@
 									</div>
 									<div class="most_viewed_content">
 										<div class="post_category_small cat_economy"><a
-												href="/categories/{{idcategory}}">video</a>
+												href="/categories/{{idcategory}}">{{this.category}}</a>
 										</div>
 										<div class="most_viewed_title"><a href="/posts/{{id}}">{{title}}</a></div>
 										<div class="most_viewed_date"><a href="javascript:;">view: {{view}}</a></div>
@@ -327,7 +328,9 @@
 								<div class="latest_post d-flex flex-row align-items-start justify-content-start">
 									<div>
 										<div class="latest_post_image"><a href="posts/{{id}}"><img
-													src="{{urlthumbnail}}" onerror="this.onerror=null; this.src='/images/no_image.png'" alt="ảnh bìa"></a>
+													src="{{urlthumbnail}}"
+													onerror="this.onerror=null; this.src='/images/no_image.png'"
+													alt="ảnh bìa"></a>
 										</div>
 									</div>
 									<div class="latest_post_content">

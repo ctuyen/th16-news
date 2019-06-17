@@ -43,8 +43,7 @@ router.get("/", (req, res) => {
         if (user.position == 'editor') {
           user.editor = true
         }
-      }
-      else {
+      } else {
         user = false
       }
 

@@ -43,29 +43,43 @@
 									<!-- <div class="sub_button text-center" ><a href="javascript:;">đăng nhập</a><div class="d-flex flex-row align-items-start justify-content-start"><div></div><div></div><div></div></div></div> -->
 									<div class="header_social ml-auto">
 										{{#if user}}
-										<div class="btn-group">
-											<button type="button" class="btn btn-success dropdown-toggle"
-												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-												style="border: none; box-shadow: none; background: #0d0d0d">
-												Hi, {{user.fullname}}
-											</button>
-											<div class="dropdown-menu">
-												<a class="dropdown-item" href="/personal">Thông tin cá nhân</a>
-												{{#if user.admin}}
-												<a class="dropdown-item" href="/admin">Trang Admin</a>
-												{{/if}}
-												{{#if user.writer}}
-												<a class="dropdown-item" href="/writer">Trang Writer</a>
-												{{/if}}
-												{{#if user.editor}}
-												<a class="dropdown-item" href="/editor">Trang Editor</a>
-												{{/if}}
-												<a class="dropdown-item" href="/request-premium">Gia hạn Premium</a>
-												<a class="dropdown-item" href="/auth/forgot-password">Đổi mật khẩu</a>
-												<div class="dropdown-divider"></div>
-												<a class="dropdown-item" href="/auth/signout">Đăng xuất</a>
-											</div>
-										</div>
+										<ul class="d-flex flex-row align-items-center justify-content-start">
+
+											<li class="nav-item dropdown no-arrow">
+												<a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+													role="button" data-toggle="dropdown" aria-haspopup="true"
+													aria-expanded="false">
+													<span
+														class="mr-2 d-none d-lg-inline text-gray-600 normal">{{user.fullname}}</span>
+													<img class="img-profile rounded-circle" src="{{user.urlavatar}}"
+														style="width: 32px; height: 32px;">
+												</a>
+												<!-- Dropdown - User Information -->
+												<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+													aria-labelledby="userDropdown">
+													<a class="dropdown-item" href="/personal">Xem và sửa thông tin</a>
+													{{#if user.admin}}
+													<a class="dropdown-item" href="/admin"><span
+															style="color: darkblue">Trang Admin</span></a>
+													{{/if}}
+													{{#if user.writer}}
+													<a class="dropdown-item" href="/writer"><span
+															style="color: darkblue">Trang Writer</span></a>
+													{{/if}}
+													{{#if user.editor}}
+													<a class="dropdown-item" href="/editor"><span
+															style="color: darkblue">Trang Editor</span></a>
+													{{/if}}
+													<a class="dropdown-item" href="/request-premium"><span
+															style="color: gold">Gia hạn
+															Premium</span></a>
+													<a class="dropdown-item" href="/auth/forgot-password">Đổi mật
+														khẩu</a>
+													<div class="dropdown-divider"></div>
+													<a class="dropdown-item" href="/auth/signout">Đăng xuất</a>
+												</div>
+											</li>
+										</ul>
 										{{else}}
 										<div class="sub_button text-center">
 											<a href="/auth/login">đăng nhập</a>

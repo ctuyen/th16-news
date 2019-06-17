@@ -24,6 +24,10 @@ module.exports = {
     res.render("auth/login", {
       layout: false
     });
+    if (req.headers.referer === 'http://localhost:3000/auth/register') {
+      backURL = '/'
+      return
+    }
     backURL = req.headers.referer || '/';
   },
 
@@ -108,7 +112,7 @@ module.exports = {
       entity.email = req.body.email
       entity.fullName = `${req.body.firstName} ${req.body.lastName}`
       entity.position = 'user'
-      entity.urlAvatar = '/images/no_image.png'
+      entity.urlAvatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
 
       var checkEmail = authModel.checkEmail(req.body.email);
 
