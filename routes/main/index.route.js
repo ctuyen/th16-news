@@ -45,6 +45,11 @@ router.get("/", (req, res, next) => {
       }
       // console.log(user);
 
+      //top view
+      topView.forEach((e, key) => {
+        e.index = key + 1;
+      });
+
       for (const post of posts) {
         var t;
         try {

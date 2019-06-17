@@ -51,14 +51,16 @@ router.get("/:idTag", (req, res) => {
       }
       pages.push(obj);
     }
-
+    // console.log("sdfsdf tag:    "+idTag);
     for (var post of posts) {
       var t = await postmodel.loadTag(post.id);
       var temp = [];
       t.rows.forEach(i => {
         temp.push(i);
-        if (name != null && idTag == i.id) {
-          name = id.name;
+        // console.log(i.id);
+        if (+idTag === +i.id) {
+          name = i.name;
+          // console.log(name);
         }
       });
       // console.log(temp);
