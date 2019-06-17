@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   <title>Đăng kí</title>
-
 
   <!-- Custom fonts for this template-->
   <link href="/styles/all.min.css" rel="stylesheet" type="text/css">
@@ -82,6 +82,7 @@
               {{/if}}
 
               <form class="user" action="/auth/register" method="POST">
+
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" name="lastName" class="form-control form-control-user" id="exampleFirstName"
@@ -106,6 +107,8 @@
                       class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Nhập lại mật khẩu"
                       onkeyup="check_pass()" required>
                   </div>
+                </div>
+                <div class="g-recaptcha" data-sitekey="6LeZOakUAAAAALn5AUy4PpRgBHK8i5o1UmiDe_Om">
                 </div>
                 <button type="submit" id="submit" class="btn btn-primary btn-user btn-block">Đăng ký tài khoản</button>
 

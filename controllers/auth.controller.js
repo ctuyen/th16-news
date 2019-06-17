@@ -6,7 +6,8 @@ const saltRounds = 10;
 const axios = require('axios');
 const async = require('async');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const querystring = require('querystring');
 
 module.exports = {
   auth: (req, res) => {
@@ -70,39 +71,65 @@ module.exports = {
   },
 
   postRegister: (req, res) => {
-    let entity = {}
-    entity.email = req.body.email
-    entity.fullName = `${req.body.firstName} ${req.body.lastName}`
-    entity.position = 'user'
-    entity.urlAvatar = '/images/no_image.png'
+    let captcha = 'g-recaptcha-response';
+    var checkCaptcha;
+    const data = {
+      secret: '6LeZOakUAAAAALD2tkTC4lv706BkMzw7D1B2iSMQ',
+      response: req.body[captcha]
+    };
 
-    var checkEmail = authModel.checkEmail(req.body.email);
+    axios({
+      // make a POST request
+      method: 'post',
+      data: querystring.stringify(data),
+      // and request token
+      url: `https://www.google.com/recaptcha/api/siteverify`,
+      // Set the content type header, so that we get the response in JSON
+      headers: {
+        accept: 'application/json'
+      }
+    }).then(response => {
+      if (!response.data.success) {
+        res.render('auth/register', {
+          layout: false,
+          errors: ["Captcha không thành công."]
+        });
+        return;
+      }
+      
+      let entity = {}
+      entity.email = req.body.email
+      entity.fullName = `${req.body.firstName} ${req.body.lastName}`
+      entity.position = 'user'
+      entity.urlAvatar = '/images/no_image.png'
 
-    checkEmail
-      .then(users => {
-        if (users.rowCount > 0) {
-          res.render("auth/register", {
-            errors: ["Địa chỉ mail đã tồn tại. Thử đăng nhập!"],
-            layout: false
-          });
-          return;
-        }
+      var checkEmail = authModel.checkEmail(req.body.email);
 
-        entity.password = bcrypt.hashSync(req.body.password, saltRounds);
+      checkEmail
+        .then(users => {
+          if (users.rowCount > 0) {
+            res.render("auth/register", {
+              errors: ["Địa chỉ mail đã tồn tại. Thử đăng nhập!"],
+              layout: false
+            });
+            return;
+          }
 
-        userModel.add(entity)
-          .then(
-            res.redirect("/auth/login")
-          )
-          .catch(err => {
-            res.redirect("/auth/register");
-            throw err
-          })
-      })
-      .catch(err => {
-        throw err
-      });
+          entity.password = bcrypt.hashSync(req.body.password, saltRounds);
 
+          userModel.add(entity)
+            .then(
+              res.redirect("/auth/login")
+            )
+            .catch(err => {
+              res.redirect("/auth/register");
+              throw err
+            })
+        })
+        .catch(err => {
+          throw err
+        });
+    })
   },
 
   forgotpass: (req, res) => {

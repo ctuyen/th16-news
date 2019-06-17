@@ -41,7 +41,6 @@ router.get("/", (req, res, next) => {
           user.expirationdate = "Chưa gia hạn";
         }
       }
-      console.log(user)
 
       res.render("main/index", {
         titlePage: "SaladNews - trang tin hàng đầu Việt Nam",
@@ -78,9 +77,15 @@ router.post("/request-premium", (req, res) => {
       entity.expirationdate = date;
     } else {
       let date = new Date(user.rows[0].expirationdate);
-      date.setTime(date.valueOf() + 604800000);
-      entity.expirationdate = date; // 7 ngay
-      entity.fullname = "da co expire";
+      let dateNow = new Date();
+
+      if (dateNow.valueOf() < date.valueOf()) {
+        date.setTime(date.valueOf() + 604800000);
+      } else {
+        date.setTime(dateNow.valueOf() + 604800000);
+      }
+
+      entity.expirationdate = date;
     }
 
     userModel
