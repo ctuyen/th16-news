@@ -43,14 +43,15 @@
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                             Chỉnh sửa
                                         </a>
-                                        <a class="btn btn-danger" href="/admin/post/delete/{{id}}" role="button">
+                                        <a class="btn btn-danger" data-toggle="modal" data-target="#deletePost{{id}}">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                             Xoá
                                         </a>
                                     </div>
                                     <div class="post_category cat_world"><a href="/categories">{{category}}</a></div>
                                 </div>
-                                <div class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                <div
+                                    class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                                     {{#each tags}}
                                     <div class="tag"><a href="{{id}}">#{{name}}</a></div>
                                     {{/each}}
@@ -59,7 +60,8 @@
                                 <div class="post_info d-flex flex-row align-items-center justify-content-start">
                                     <div class="post_author d-flex flex-row align-items-center justify-content-start">
                                         <div>
-                                            <div class="post_author_image"><img src="{{urlavatar}}" alt="avatar {{writer}}">
+                                            <div class="post_author_image"><img src="{{urlavatar}}"
+                                                    alt="avatar {{writer}}">
                                             </div>
                                         </div>
                                         <div class="post_author_name"><a href="#">{{writer}}</a> </div>
@@ -73,9 +75,35 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal Delete-->
+                <div class="modal fade" id="deletePost{{id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form method="POST" action="/admin/post/delete/{{id}}">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Bạn có chắc chắn muốn XÓA mục đã
+                                        chọn?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-item">
+                                        <label for="name">Tên bài viết:</label>
+                                        <input readonly class="form-control" id="name" type="text" value="{{title}}">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 {{/each}}
             </div>
         </div>
-
     </div>
 </div>

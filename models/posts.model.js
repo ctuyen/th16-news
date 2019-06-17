@@ -1,19 +1,37 @@
 var db = require("../utils/db");
 var categoriesmodel = require("./categories.model");
+
+function change_alias(alias) {
+  var str = alias;
+  str = str.toLowerCase();
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+  str = str.replace(/đ/g,"d");
+  str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+  str = str.replace(/ + /g," ");
+  str = str.trim(); 
+  return str;
+}
+
 module.exports = {
   all: () => {
     return db.load("select * from posts where isDelete = false");
   },
-  topSlide: ()=>{
-    var sql=`select * from posts 
-    where status = 'accept' and isDelete = false 
-    order by publicationDate desc, view desc limit 4`
+  topSlide: () => {
+    var sql = `SELECT p.id, title, summary,urlthumbnail, p.idcategory, c.name category
+    from posts p, categories c
+    where publicationDate between (CURRENT_TIMESTAMP - INTERVAL '7 day') and CURRENT_TIMESTAMP and p.idcategory=c.id
+    order by view desc
+    limit 4`;
     return db.load(sql);
-  }
-  ,
+  },
   topDate: limit => {
     return db.load(
-      `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+      `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
       from posts as p, categories as c, users as u 
       where p.idwriter=u.id and p.idcategory=c.id and p.isDelete = false order by publicationDate desc limit ${limit}`
     );
@@ -23,7 +41,7 @@ module.exports = {
       `select * from posts where isDelete = false order by view desc limit ${limit}`
     );
   },
-  topWithCat: (limit) => {
+  topWithCat: limit => {
     var sql = `select p.id, p.title, p.urlthumbnail, p.idCategory, p.publicationDate , c.name as category  
     from posts p, categories as c,
         (SELECT max(id) as id, idcategory, view
@@ -41,7 +59,7 @@ module.exports = {
   //   return db.load(sql);
   // },
   allWithDetails: () => {
-    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.status = 'draft'
     and p.isDelete = false and c.isDelete = false`;
@@ -64,7 +82,7 @@ module.exports = {
     and p.status = '${status}' and p.isDelete = false and c.isDelete = false`
     );
   },
- 
+
   single: id => {
     return db.load(`select * from posts where id = ${id} and isDelete = false`);
   },
@@ -87,7 +105,9 @@ module.exports = {
   },
 
   deleteByIdCat: idCategory => {
-    return db.updateSQL(`update posts set isDelete = true where idCategory = ${idCategory}`);
+    return db.updateSQL(
+      `update posts set isDelete = true where idCategory = ${idCategory}`
+    );
   },
 
   loadTag: id => {
@@ -131,9 +151,9 @@ module.exports = {
     return db.load(sql);
   },
   // pageByCat: (idcat, offset, limit) => {
-  //   var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
-  //   from posts as p, categories as c, users as u 
-  //   where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat} 
+  //   var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar
+  //   from posts as p, categories as c, users as u
+  //   where p.idwriter=u.id and p.idcategory=c.id and p.idcategory = ${idcat}
   //   limit ${limit} offset ${offset}`; // and p.idcategory=${idcat}
   //   return db.load(sql);
   // },
@@ -149,9 +169,25 @@ module.exports = {
     var d = await categoriesmodel.loadSonCat(idcat);
     // console.log(d.rows);
     var cats = d.rows;
-    var sql = `select p.*, u.fullname as writer, urlavatar, c.name as category, u.urlavatar 
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
         where p.idwriter=u.id and p.idcategory=c.id and (p.idcategory = ${idcat}`;
+    if (cats.length > 0) {
+      cats.forEach(cat => {
+        sql += ` or p.idcategory = ${cat.id} `;
+      });
+    }
+    sql += `) limit ${limit} offset ${offset}`;
+    return db.load(sql);
+  },
+  pageByCats: async (idpost, idcat, offset, limit) => {
+    var d = await categoriesmodel.loadSonCat(idcat);
+    // console.log(d.rows);
+    var cats = d.rows;
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+        from posts as p, categories as c, users as u 
+        where p.idwriter=u.id and p.idcategory=c.id and (p.idcategory = ${idcat}
+          and p.id<>${idpost}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or p.idcategory = ${cat.id} `;
@@ -171,5 +207,36 @@ module.exports = {
     }
     sql += `)`;
     return db.load(sql);
-  }
+  },
+  pageByTag: async (idTag, offset, limit) => {
+    var sql = `select DISTINCT p.*, u.fullname as writer, c.name as category, u.urlavatar
+    from posts p, tagpost as tp, categories as c, users as u 
+    where p.id=tp.idpost and p.idwriter=u.id and p.idcategory=c.id and tp.idtag=${idTag} 
+    limit ${limit} offset ${offset}`;
+    return db.load(sql);
+  },
+
+  numByTag: async idtag => {
+    var sql = `select count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idtag=${idtag}`;
+
+    return db.load(sql);
+  },
+  searchPosts: key => {
+    var t = change_alias(key);
+    var tt= t.replace(/ /g, " & ");
+    var sql = `SELECT pid, ptitle
+    FROM (SELECT p.id as pid,
+                 p.title as ptitle,
+                 setweight(to_tsvector(coalesce(convertTVkdau(p.title))), 'A') || 
+                 setweight(to_tsvector(coalesce(convertTVkdau(p.summary))), 'B')|| 
+                 setweight(to_tsvector(coalesce(convertTVkdau(p.content))), 'D') as document
+          FROM posts as p GROUP BY p.id) p_search
+    WHERE p_search.document @@ to_tsquery('${tt}')
+    ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC`;
+    return db.load(sql);
+  },
+
+  addComment: entity => {
+    return db.add('comment', entity);
+  },
 };

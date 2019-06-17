@@ -5,14 +5,14 @@
 	<!-- Home Slider -->
 	<div class="home_slider_container">
 		<div class="owl-carousel owl-theme home_slider">
-			{{#each this.topCat}}
+			{{#each this.topslide}}
 			<!-- Slide -->
 			<div class="owl-item home_slider_item">
 				<div class="background_image" style="background-image:url({{urlthumbnail}})"></div>
 				<div class="bgC home_slider_content text-center">
 					<div class="home_slider_content_inner" data-animation-in="fadeIn"
 						data-animation-out="animate-out fadeOut">
-						<div class="home_category"><a href="/categories">{{category}}</a></div>
+						<div class="home_category"><a href="/categories/{{idcategory}}">{{category}}</a></div>
 						<div class="home_title">{{title}}</div>
 						<div class="home_text">{{summary}}</div>
 						<div class="home_button trans_200"><a href="/posts/{{id}}">Xem thêm</a></div>
@@ -167,19 +167,16 @@
 											<!-- Post -->
 											<div
 												class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
-												<div class="post_image"><a href="/posts"><img src="{{urlthumbnail}}"
+												<div class="post_image"><a href="/posts"><img src="{{urlthumbnail}}" onerror="this.onerror=null; this.src='/images/no_image.png'"
 															alt="ảnh bìa"></a></div>
 												<div class="post_content">
 													<div class="post_category cat_technology"><a
 															href="/categories/{{idcategory}}">{{category}}</a></div>
 													<div
 														class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-														<div class="tag"><a href="/categories">#công nghệ</a>
-														</div>
-														<div class="tag"><a href="/categories">#design</a></div>
-														<div class="tag"><a href="/categories">#travel</a></div>
-														<div class="tag"><a href="/categories">#video</a></div>
-
+														{{#each this.tags}}
+														<div class="tag"><a href="/tags/{{this.id}}">#{{name}}</a></div>
+														{{/each}}
 													</div>
 													<div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
 													<div
@@ -187,14 +184,14 @@
 														<div
 															class="post_author d-flex flex-row align-items-center justify-content-start">
 															<div>
-																<div class="post_author_image"><img src="{{urlavatar}}"
-																		alt=""></div>
+																<div class="post_author_image"><img src="{{urlavatar}}" onerror="this.onerror=null; this.src='/images/no_image.png'"
+																		alt="avatar người viết"></div>
 															</div>
 															<div class="post_author_name"><a
 																	href="javascript:;">{{writer}}</a></div>
 														</div>
 														<div class="post_date"><a
-																href="javascript:;">{{publicationdate}}</a>
+																href="javascript:;">{{date}}</a>
 														</div>
 														<div class="post_comments ml-auto"><a href="javascript:;">lượt
 																xem: {{view}}</a></div>
@@ -259,12 +256,6 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- Load more button -->
-						<div class="load_more">
-							<div class="load_more_button"><a href="javascript:;">load more</a></div>
-						</div>
-
 					</div>
 				</div>
 
@@ -297,7 +288,7 @@
 								<!-- Most Viewed Item -->
 								<div class="most_viewed_item d-flex flex-row align-items-start justify-content-start">
 									<div>
-										<div class="most_viewed_num">{{@index}}.</div>
+										<div class="most_viewed_num">{{index}}.</div>
 									</div>
 									<div class="most_viewed_content">
 										<div class="post_category_small cat_economy"><a
@@ -336,7 +327,7 @@
 								<div class="latest_post d-flex flex-row align-items-start justify-content-start">
 									<div>
 										<div class="latest_post_image"><a href="posts/{{id}}"><img
-													src="{{urlthumbnail}}" alt="ảnh bìa"></a>
+													src="{{urlthumbnail}}" onerror="this.onerror=null; this.src='/images/no_image.png'" alt="ảnh bìa"></a>
 										</div>
 									</div>
 									<div class="latest_post_content">
@@ -344,7 +335,7 @@
 												href="categories/{{idcategory}}">{{category}}</a>
 										</div>
 										<div class="latest_post_title"><a href="posts/{{id}}">{{title}}</a></div>
-										<div class="latest_post_date">{{publicationdate}}</div>
+										<div class="latest_post_date">{{date}}</div>
 									</div>
 								</div>
 								{{/each}}
@@ -359,7 +350,7 @@
 							<div class="sidebar_title">Tags</div>
 							<div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
 								{{#each tags}}
-								<div class="tag cat_world"><a href="/{{id}}">{{name}}</a></div>
+								<div class="tag cat_world"><a href="tags/{{id}}">{{name}}</a></div>
 								{{/each}}
 								{{!-- <div class="tag cat_world"><a href="/categories">thế giới</a></div> --}}
 

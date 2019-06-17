@@ -162,14 +162,16 @@
 									<!-- Search -->
 									<div class="header_search_container ml-auto">
 										<div class="header_search">
-											<form action="javascript:;" id="header_search_form"
+											<form method="POST" id="header_search_form"
 												class="header_search_form d-flex flex-row align-items-center justfy-content-start">
 												<div>
-													<div class="header_search_activation"><i class="fa fa-search"
-															aria-hidden="true"></i></div>
+													<div class="header_search_activation">
+														<i class="fa fa-search" aria-hidden="true"></i>
+													</div>
 												</div>
 												<input type="text" class="header_search_input" placeholder="Search"
-													required="required">
+													required="required" name="q">
+												<input type="submit" formaction="/search" hidden />
 											</form>
 										</div>
 									</div>
@@ -205,12 +207,27 @@
 			</div>
 			<nav class="menu_nav">
 				<ul class="menu_mm">
-					<li class="menu_mm"><a href="/">thế giới</li>
-					<li class="menu_mm"><a href="javascript:;">kinh doanh</a></li>
-					<li class="menu_mm"><a href="javascript:;">thể thao</a></li>
-					<li class="menu_mm"><a href="javascript:;">sức khỏe</a></li>
-					<li class="menu_mm"><a href="javascript:;">du lịch</a></li>
-					<li class="menu_mm"><a href="contact.html">công nghệ</a></li>
+					{{#each categories}}
+					{{#if isSingle}}
+					<li class="menu_mm"><a href="/categories/{{0.id}}">{{0.name}}</a></li>
+					{{else}}
+					<li class="menu_mm dropdown">
+						<a class="nav-link dropdown-toggle" href="javascript:;" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							{{0.name}}
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/categories/{{0.id}}">{{0.name}}</a>
+							<div class="dropdown-divider"></div>
+							{{#each this}}
+							{{#if @index}}
+							<a class="dropdown-item" href="/categories/{{id}}">{{name}}</a>
+							{{/if}}
+							{{/each}}
+						</div>
+					</li>
+					{{/if}}
+					{{/each}}
 				</ul>
 			</nav>
 			<!-- <div class="menu_subscribe"><a href="javascript:;">Subscribe</a></div>
@@ -271,8 +288,8 @@
 									<ul
 										class="footer_nav_list d-flex flex-md-row flex-column align-items-center justify-content-start">
 										<li><a href="/">Trang chủ</a></li>
-										<li><a href="contact.html">Liên hệ</a></li>
-										<li><a href="about.html">Về chúng tôi</a></li>
+										<li><a href="javascript:;">Liên hệ</a></li>
+										<li><a href="javascript:;">Về chúng tôi</a></li>
 									</ul>
 								</nav>
 							</div>

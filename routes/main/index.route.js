@@ -17,20 +17,22 @@ router.get("/", (req, res, next) => {
   ];
 
   if (req.signedCookies.userId) {
-    tasks.push(userModel.single(req.signedCookies.userId))
+    tasks.push(userModel.single(req.signedCookies.userId));
   } else {
-    tasks.push(Promise.resolve(false))
+    tasks.push(Promise.resolve(false));
   }
 
   Promise.all(tasks)
-    .then(([data, data1, data2, data3, user]) => {
+    .then(async ([data, data1, data2, data3, user]) => {
       var topView = data1.rows;
       var posts = data.rows;
       var topCat = data3.rows;
       var tags = data2.rows;
+      var data4 = await postmodel.topSlide();
+      var topslide = data4.rows;
 
       if (user) {
-        user = user.rows[0]
+        user = user.rows[0];
         if (user.expirationdate) {
           let date = new Date(user.expirationdate).toLocaleString("vi-VI", {
             timeZone: "Asia/Saigon"
@@ -41,6 +43,37 @@ router.get("/", (req, res, next) => {
           user.expirationdate = "Chưa gia hạn";
         }
       }
+      // console.log(user);
+
+      //top view
+      topView.forEach((e, key) => {
+        e.index = key + 1;
+      });
+
+      for (const post of posts) {
+        var t;
+        try {
+          t = await postmodel.loadTag(post.id);
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
+        post.tags = t.rows;
+        post.date = new Date(`${post.publicationdate}`).toLocaleDateString(
+          "vi-VI", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          }, {
+            timeZone: "Asia/Saigon"
+          }
+        );
+      }
+      // console.log(posts);
+      // console.log(posts);
+      // if (user) {
+      //   user = user.rows[0];
+      // }
 
       res.render("main/index", {
         titlePage: "SaladNews - trang tin hàng đầu Việt Nam",
@@ -51,7 +84,8 @@ router.get("/", (req, res, next) => {
         topView,
         topCat,
         tags,
-        user
+        user,
+        topslide
       });
     })
     .catch(err => {
@@ -102,22 +136,23 @@ router.post("/request-premium", (req, res) => {
   });
 });
 
-router.get('/login', (req, res) => {
-  res.redirect('/auth/login')
-})
+router.get("/login", (req, res) => {
+  res.redirect("/auth/login");
+});
 
-router.get('/signup', (req, res) => {
-  res.redirect('/auth/register')
-})
+router.get("/signup", (req, res) => {
+  res.redirect("/auth/register");
+});
 
 router.get("/personal", authMiddleware.requireAuth, (req, res) => {
-  userModel.single(req.signedCookies.userId)
+  userModel
+    .single(req.signedCookies.userId)
     .then(users => {
-      let user = users.rows[0]
+      let user = users.rows[0];
       if (!user.urlavatar) {
-        user.urlavatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
+        user.urlavatar =
+          "https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png";
       }
-
 
       res.render("main/personal", {
         layout: false,
@@ -125,24 +160,27 @@ router.get("/personal", authMiddleware.requireAuth, (req, res) => {
       });
     })
     .catch(err => {
-      throw err
-    })
+      throw err;
+    });
 });
 
 router.post("/personal", (req, res) => {
-  let entity = {}
-  entity.id = req.signedCookies.userId
-  entity.fullname = req.body.fullname
-  entity.email = req.body.email
-  entity.urlavatar = req.body.urlavatar
+  let entity = {};
+  entity.id = req.signedCookies.userId;
+  entity.fullname = req.body.fullname;
+  entity.email = req.body.email;
+  entity.urlavatar = req.body.urlavatar;
 
-  userModel.update(entity)
+  userModel
+    .update(entity)
     .then(
-      userModel.single(req.signedCookies.userId)
+      userModel
+      .single(req.signedCookies.userId)
       .then(users => {
-        let user = users.rows[0]
+        let user = users.rows[0];
         if (!user.urlavatar) {
-          user.urlavatar = 'https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png'
+          user.urlavatar =
+            "https://res.cloudinary.com/ctuyen/image/upload/v1560189834/th16-news/Avatar_Pig-512.png";
         }
         res.render("main/personal", {
           layout: false,
@@ -151,12 +189,12 @@ router.post("/personal", (req, res) => {
         });
       })
       .catch(err => {
-        throw err
+        throw err;
       })
     )
     .catch(err => {
-      throw err
-    })
+      throw err;
+    });
 });
 
 module.exports = router;
