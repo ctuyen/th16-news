@@ -21,7 +21,7 @@ router.get("/", async (req, res, next) => {
   res.redirect('/posts/2')
 });
 
-router.get("/:idPost", postMiddleware.checkPremium, async (req, res) => {
+router.get("/:idPost", postMiddleware.checkPremium, (req, res) => {
   var user = userModel.single(req.signedCookies.userId)
   user
     .then(async user => {
@@ -126,6 +126,7 @@ router.get("/:idPost", postMiddleware.checkPremium, async (req, res) => {
       throw err
     })
 });
+
 router.post("/:idpost", (req, res, next) => {
   var entity = {
     idpost: req.params.idpost,
