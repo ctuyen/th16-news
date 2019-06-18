@@ -24,7 +24,7 @@ module.exports = {
   topSlide: () => {
     var sql = `SELECT p.id, title, summary,urlthumbnail, p.idcategory, c.name category
     from posts p, categories c
-    where publicationDate between (CURRENT_TIMESTAMP - INTERVAL '7 day') and CURRENT_TIMESTAMP and p.idcategory=c.id
+    where publicationDate between (CURRENT_TIMESTAMP - INTERVAL '7 day') and CURRENT_TIMESTAMP and p.idcategory=c.id and p.isDelete = false
     order by view desc
     limit 4`;
     return db.load(sql);
@@ -62,7 +62,8 @@ module.exports = {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.status = 'draft'
-    and p.isDelete = false and c.isDelete = false`;
+    and p.isDelete = false and c.isDelete = false
+    order by publicationDate desc`;
     return db.load(sql);
   },
   allByCat: id => {
@@ -70,7 +71,8 @@ module.exports = {
       `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.idCategory = ${id} 
-    and p.status = 'draft' and p.isDelete = false and c.isDelete = false`
+    and p.status = 'draft' and p.isDelete = false and c.isDelete = false
+    order by writingDate desc`
     );
   },
 
@@ -79,7 +81,8 @@ module.exports = {
       `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.idEditor = ${id} 
-    and p.status = '${status}' and p.isDelete = false and c.isDelete = false`
+    and p.status = '${status}' and p.isDelete = false and c.isDelete = false
+    order by writingDate desc`
     );
   },
 
@@ -122,7 +125,8 @@ module.exports = {
   loadComment: id => {
     var sql = `select fullname, urlavatar, commentdate, content 
     from comment as cm, users as u 
-    where cm.iduser = u.id and cm.idpost = ${id}`;
+    where cm.iduser = u.id and cm.idpost = ${id}
+    order by commentDate desc`;
     return db.load(sql);
   },
 
@@ -130,7 +134,8 @@ module.exports = {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
                 from posts as p, categories as c, users as u 
                 where p.idwriter=u.id and p.idcategory=c.id and p.status = '${status}' 
-                and p.isDelete = false and c.isDelete = false`;
+                and p.isDelete = false and c.isDelete = false
+                order by writingDate desc`;
     return db.load(sql);
   },
 
@@ -139,7 +144,8 @@ module.exports = {
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id
     and p.isDelete = false and c.isDelete = false 
-    and p.status = 'accept' and p.publicationDate ${compare} current_timestamp`;
+    and p.status = 'accept' and p.publicationDate ${compare} current_timestamp
+    order by publicationDate desc`;
     return db.load(sql);
   },
 
@@ -175,13 +181,13 @@ module.exports = {
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
-        where p.idwriter=u.id and p.idcategory=c.id and (p.idcategory = ${idcat}`;
+        where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and (p.idcategory = ${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or p.idcategory = ${cat.id} `;
       });
     }
-    sql += `) limit ${limit} offset ${offset}`;
+    sql += `)order by publicationDate desc limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
   pageByCats: async (idpost, idcat, offset, limit) => {
@@ -190,20 +196,21 @@ module.exports = {
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
-        where p.idwriter=u.id and p.idcategory=c.id and (p.idcategory = ${idcat}
-          and p.id<>${idpost}`;
+        where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and (p.idcategory = ${idcat}
+          and p.id<>${idpost}
+          `;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or p.idcategory = ${cat.id} `;
       });
     }
-    sql += `) limit ${limit} offset ${offset}`;
+    sql += `)order by publicationDate desc limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
   numByCat: async idcat => {
     var d = await categoriesmodel.loadSonCat(idcat);
     var cats = d.rows;
-    var sql = `select count(*) as total from posts where (idcategory=${idcat}`;
+    var sql = `select count(*) as total from posts where isdelete = false and (idcategory=${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or idcategory = ${cat.id} `;
@@ -215,13 +222,14 @@ module.exports = {
   pageByTag: async (idTag, offset, limit) => {
     var sql = `select DISTINCT p.*, u.fullname as writer, c.name as category, u.urlavatar
     from posts p, tagpost as tp, categories as c, users as u 
-    where p.id=tp.idpost and p.idwriter=u.id and p.idcategory=c.id and tp.idtag=${idTag} 
+    where p.id=tp.idpost and p.idwriter=u.id and p.idcategory=c.id and tp.idtag=${idTag} and p.isdelete = false
+    order by publicationDate desc
     limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
 
   numByTag: async idtag => {
-    var sql = `select count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idtag=${idtag}`;
+    var sql = `select count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idtag=${idtag} and p.isdelete = false`;
 
     return db.load(sql);
   },
@@ -238,7 +246,7 @@ module.exports = {
             FROM posts GROUP BY id) p_search
       WHERE p_search.document @@ to_tsquery('${tt}')
       ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC) as t
-    where p.id = t.pid`;
+    where p.id = t.pid p.idelete = false`;
     return db.load(sql);
   },
 
