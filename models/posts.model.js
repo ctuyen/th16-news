@@ -11,7 +11,10 @@ function change_alias(alias) {
   str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
   str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
   str = str.replace(/đ/g, "d");
-  str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+  str = str.replace(
+    /!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g,
+    " "
+  );
   str = str.replace(/ + /g, " ");
   str = str.trim();
   return str;
@@ -87,7 +90,9 @@ module.exports = {
   },
 
   checkPremium: id => {
-    return db.load(`select ispremium from posts where id = ${id} and isDelete = false`);
+    return db.load(
+      `select ispremium from posts where id = ${id} and isDelete = false`
+    );
   },
 
   single: id => {
@@ -246,11 +251,19 @@ module.exports = {
             FROM posts GROUP BY id) p_search
       WHERE p_search.document @@ to_tsquery('${tt}')
       ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC) as t
-    where p.id = t.pid p.idelete = false`;
+    where p.id = t.pid and p.isdelete = false`;
     return db.load(sql);
   },
 
   addComment: entity => {
-    return db.add('comment', entity);
+    return db.add("comment", entity);
   },
+  load3pre: () => {
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and ispremium=true and status ='accept'
+    order by publicationDate desc
+    limit 3`;
+    return db.load(sql);
+  }
 };
