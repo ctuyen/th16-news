@@ -71,11 +71,6 @@ router.get("/", (req, res) => {
           }
         );
       }
-      // console.log(user);
-      // console.log(posts);
-      // if (user) {
-      //   user = user.rows[0];
-      // }
 
       res.render("main/index", {
         titlePage: "SaladNews - trang tin hàng đầu Việt Nam",

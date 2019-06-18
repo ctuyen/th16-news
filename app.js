@@ -14,6 +14,9 @@ const writerRoute = require('./routes/writer/writer.route');
 const editerRoute = require('./routes/editor/editor.route');
 const postRoute = require("./routes/main/post.route");
 const categoryRoute = require("./routes/main/category.route");
+const tagRoute = require("./routes/main/tags.route");
+const indexRoute = require("./routes/main/index.route");
+const searchRoute = require("./routes/main/search.route");
 
 const authMiddleware = require("./middlewares/auth.middleware");
 
@@ -48,11 +51,11 @@ app.use(require('./middlewares/NumberOfPosts/postsPublished.mdw'));
 app.use(require('./middlewares/NumberOfPosts/postsApproved.mdw'));
 
 //MAIN----------------------------------------------------
-app.use('/', require('./routes/main/index.route'));
-app.use("/categories", require("./routes/main/category.route"));
-app.use("/posts", require("./routes/main/post.route"));
-app.use("/tags", require("./routes/main/tags.route"));
-app.use('/search', require('./routes/main/search.route'));
+app.use('/', indexRoute);
+app.use("/categories", categoryRoute);
+app.use("/posts", postRoute);
+app.use("/tags", tagRoute);
+app.use('/search', searchRoute);
 app.use("/admin", authMiddleware.requireAuth, authMiddleware.requireAdmin, adminRoute);
 app.use("/auth", authRoute);
 app.use('/writer', authMiddleware.requireAuth, authMiddleware.requireWriter, writerRoute);

@@ -83,6 +83,10 @@ module.exports = {
     );
   },
 
+  checkPremium: id => {
+    return db.load(`select ispremium from posts where id = ${id} and isDelete = false`);
+  },
+
   single: id => {
     return db.load(`select * from posts where id = ${id} and isDelete = false`);
   },

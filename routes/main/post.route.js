@@ -1,6 +1,7 @@
 var express = require("express");
 var postmodel = require("../../models/posts.model");
-var userModel = require("../../models/users.model")
+var userModel = require("../../models/users.model");
+var postMiddleware = require('../../middlewares/post.middleware')
 
 var router = express.Router();
 
@@ -20,7 +21,7 @@ router.get("/", async (req, res, next) => {
   res.redirect('/posts/2')
 });
 
-router.get("/:idPost", async (req, res) => {
+router.get("/:idPost", postMiddleware.checkPremium, async (req, res) => {
   var user = userModel.single(req.signedCookies.userId)
   user
     .then(async user => {
