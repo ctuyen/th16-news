@@ -53,17 +53,19 @@ router.get("/:idPost", postMiddleware.checkPremium, async (req, res) => {
         timeZone: "Asia/Saigon"
       }
     );
-    // console.log(post.idcategory);
+
     try {
-      var [data1, data2, data3] = await Promise.all([
+      var [data1, data2, data3, ispremium] = await Promise.all([
         postmodel.loadTag(post.id),
         postmodel.loadComment(post.id),
-        postmodel.pageByCats(post.id, post.idcategory, 0, 5)
+        postmodel.pageByCats(post.id, post.idcategory, 0, 5),
+        postmodel.checkPremium(req.params.idPost)
       ]);
 
       var tags = data1.rows;
 
       var comments = data2.rows;
+      var ispremium = ispremium.rows[0].ispremium;
 
       for (const c of comments) {
         c.date = new Date(c.commentdate).toLocaleString("vi-VN", {
@@ -101,7 +103,8 @@ router.get("/:idPost", postMiddleware.checkPremium, async (req, res) => {
         categories: cats,
         postsCat,
         isLogin,
-        user
+        user,
+        ispremium
       });
     } catch (error) {
       console.log(error);

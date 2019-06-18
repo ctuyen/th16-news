@@ -55,7 +55,14 @@
 								<div class="post_author_name"><a href="#">{{post.writer}}</a></div>
 							</div>
 							<div class="post_date"><a href="#">{{post.date}}</a></div>
-							<div class="post_comments_num ml-auto"><a href="#">số lượt xem: {{post.view}}</a></div>
+							<div class="post_comments_num ml-auto">
+								{{#if ispremium}}
+								<span style="margin-right: 8px;"><img style="height: 42px; width: 42px;"
+										src="https://res.cloudinary.com/ctuyen/image/upload/v1560873066/th16-news/premium.png"
+										alt="premium"></span>
+								{{/if}}
+								<a href="#">số lượt xem: {{post.view}}</a>
+							</div>
 						</div>
 						<div class="post_text">
 							<p class="font-weight-bold">{{post.summary}}</p>
