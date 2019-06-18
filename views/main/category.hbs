@@ -55,10 +55,16 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="post_content">
+                                        {{#if ispremium}}
                                         <div class="post_category cat_technology"><a
-                                                href="/categories/{{posts.0.idcategory}}">{{posts.0.category}}</a>
-                                        </div>
-                                        <!--tabs-->
+                                                href="/categories/{{posts.0.idcategory}}">{{posts.0.category}}</a></div>
+                                        <span style="float: right"><img
+                                                src="https://img.icons8.com/color/48/000000/best-seller.png"></span>
+
+                                        {{else}}
+                                        <div class="post_category cat_technology"><a
+                                                href="/categories/{{posts.0.idcategory}}">{{posts.0.category}}</a></div>
+                                        {{/if}}
                                         <div
                                             class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                                             {{#each posts.0.tags}}
@@ -108,8 +114,16 @@
                             </div>
                             <div class="col-lg-7">
                                 <div class="post_content">
-                                    <div class="post_category cat_technology"><a href="javasript:;">{{category}}</a>
+                                    {{#if ispremium}}
+                                    <div class="post_category cat_technology"><a href="/categories/{{idcategory}}">{{category}}</a>
                                     </div>
+                                    <span style="float: right"><img
+                                            src="https://img.icons8.com/color/48/000000/best-seller.png"></span>
+
+                                    {{else}}
+                                    <div class="post_category cat_technology"><a href="/categories/{{idcategory}}">{{category}}</a>
+                                    </div>
+                                    {{/if}}
                                     <div
                                         class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
                                         {{#each tags}}

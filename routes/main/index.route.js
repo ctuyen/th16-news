@@ -29,7 +29,9 @@ router.get("/", (req, res) => {
       var topCat = data3.rows;
       var tags = data2.rows;
       var data4 = await postmodel.topSlide();
+      var data5 = await postmodel.load3pre();
       var topslide = data4.rows;
+      var l3Pre = data5.rows;
 
       //have user
       if (user.rowCount > 0) {
@@ -53,20 +55,15 @@ router.get("/", (req, res) => {
       });
 
       for (const post of posts) {
-        var t;
-        try {
-          t = await postmodel.loadTag(post.id);
-        } catch (error) {
-          console.log(error);
-          throw error;
-        }
-        post.tags = t.rows;
         post.date = new Date(`${post.publicationdate}`).toLocaleDateString(
           "vi-VI", {
-            day: "numeric",
-            month: "short",
-            year: "numeric"
-          }, {
+            timeZone: "Asia/Saigon"
+          }
+        );
+      }
+      for (const p of l3Pre) {
+        p.date = new Date(`${p.publicationdate}`).toLocaleDateString(
+          "vi-VI", {
             timeZone: "Asia/Saigon"
           }
         );
@@ -82,7 +79,8 @@ router.get("/", (req, res) => {
         topCat,
         tags,
         user,
-        topslide
+        topslide,
+        l3Pre
       });
     })
     .catch(err => {

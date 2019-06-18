@@ -124,25 +124,74 @@
 									<!-- Post -->
 									<div
 										class="post_item post_v_large d-flex flex-column align-items-start justify-content-start">
-										<div class="post01"></div>
+
+										<div class="post_image"><a href="/posts/{{l3Pre.0.id}}"><img
+													src="{{l3Pre.0.urlthumbnail}}" alt="ảnh nền"></a></div>
+										<div class="post_content">
+											<div class="post_category cat_technology"><a
+													href="categories/{{l3Pre.0.idcategory}}">{{l3Pre.0.category}}</a>
+											</div> <span style="float: right"><img
+													src="https://img.icons8.com/color/48/000000/best-seller.png"
+													alt=""></span>
+
+											<div class="post_title"><a href="posts/{{l3Pre.0.id}}">{{l3Pre.0.title}}</a>
+											</div>
+											<div
+												class="post_info d-flex flex-row align-items-center justify-content-start">
+												<div
+													class="post_author d-flex flex-row align-items-center justify-content-start">
+													<div>
+														<div class="post_author_image"><img src="{{l3Pre.0.urlavatar}}"
+																alt="">
+														</div>
+													</div>
+													<div class="post_author_name"><a href="#">{{l3Pre.0.writer}}</a>
+													</div>
+												</div>
+												<div class="post_date"><a href="#">{{l3Pre.0.date}}</a></div>
+												<div class="post_comments ml-auto"><a href="#">view: {{l3Pre.0.view}}
+													</a></div>
+											</div>
+											<div class="post_text">
+												<p>{{l3Pre.0.summary}}</p>
+											</div>
+										</div>
 									</div>
 
 								</div>
 								<div class="col-lg-4">
 
-									<!-- Post -->
+									{{#each l3Pre}}
+									{{#if @index}}
 									<div
 										class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
-										<div class="post02"></div>
+
+										<div class="post_image"><a href="/posts/{{id}}"><img src="{{urlthumbnail}}"
+													alt="ảnh nền"></a></div>
+										<div class="post_content">
+											<div class="post_category cat_technology"><a
+													href="/categories/{{idcategory}}">{{category}}</a></div>
+											<span style="float: right"><img
+													src="https://img.icons8.com/color/48/000000/best-seller.png"></span>
+
+											<div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
+											<div
+												class="post_info d-flex flex-row align-items-center justify-content-start">
+												<div
+													class="post_author d-flex flex-row align-items-center justify-content-start">
+													<div>
+														<div class="post_author_image"><img src="{{urlavatar}}"
+																alt="avatar"></div>
+													</div>
+													<div class="post_author_name"><a href="#">{{writer}}</a></div>
+												</div>
+												<div class="post_date"><a href="#">{{date}}</a></div>
+											</div>
+										</div>
 									</div>
+									{{/if}}
+									{{/each}}
 
-
-
-									<!-- Post -->
-									<div
-										class="post_item post_v_small d-flex flex-column align-items-start justify-content-start">
-										<div class="post02"></div>
-									</div>
 
 								</div>
 							</div>
@@ -165,20 +214,25 @@
 										{{#each posts}}
 										<div class="col-lg-6">
 											<!-- Post -->
+
 											<div
 												class="post_item post_v_med d-flex flex-column align-items-start justify-content-start">
 												<div class="post_image"><a href="/posts"><img src="{{urlthumbnail}}"
 															onerror="this.onerror=null; this.src='/images/no_image.png'"
 															alt="ảnh bìa"></a></div>
 												<div class="post_content">
+													{{#if ispremium}}
 													<div class="post_category cat_technology"><a
 															href="/categories/{{idcategory}}">{{category}}</a></div>
-													<div
-														class="myA tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-														{{#each this.tags}}
-														<div class="tag"><a href="/tags/{{this.id}}">#{{name}}</a></div>
-														{{/each}}
-													</div>
+													<span style="float: right"><img
+															src="https://img.icons8.com/color/48/000000/best-seller.png"></span>
+
+													{{else}}
+													<div class="post_category cat_technology"><a
+															href="/categories/{{idcategory}}">{{category}}</a></div>
+													{{/if}}
+
+
 													<div class="post_title"><a href="/posts/{{id}}">{{title}}</a></div>
 													<div
 														class="post_info d-flex flex-row align-items-center justify-content-start">
@@ -347,18 +401,7 @@
 
 
 
-						<!-- Tags -->
 
-						<div class="tags">
-							<div class="sidebar_title">Tags</div>
-							<div class="tags_content d-flex flex-row align-items-start justify-content-start flex-wrap">
-								{{#each tags}}
-								<div class="tag cat_world"><a href="tags/{{id}}">{{name}}</a></div>
-								{{/each}}
-								{{!-- <div class="tag cat_world"><a href="/categories">thế giới</a></div> --}}
-
-							</div>
-						</div>
 
 						<!-- Extra -->
 						<div class="sidebar_extra">
