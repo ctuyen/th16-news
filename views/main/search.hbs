@@ -33,8 +33,11 @@
                 <div class="col">
                     <div class="section_title_container d-flex flex-row align-items-start justify-content-start">
                         <div>
-                            <div class="section_title">Danh sách bài viết</div>
-                            <div class="section_subtitle">{{check}}</div>
+                            {{#if check}}
+                            <div class="section_title">Danh sách bài viết cho từ khoá "{{key}}"</div>
+                            {{else}}
+                            <div class="section_title">Không tìm thấy bài viết nào cho từ khoá "{{key}}"</div>
+                            {{/if}}
                         </div>
                         <div class="section_bar"></div>
                     </div>
@@ -89,8 +92,6 @@
                     </div>
 
                 </div>
-                {{else}}
-                    <h1>không tìm thấy</h1>
                 {{/if}}
 
 
