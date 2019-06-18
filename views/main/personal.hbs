@@ -33,6 +33,9 @@
     <div class="label">Thông tin cá nhân</div>
 
     <div class="container">
+        {{#if notices}}
+        <div class="alert alert-success">{{notices}}</div>
+        {{/if}}
         <div class="avatar">
             <img src="{{user.urlavatar}}" alt="avatar" width="128" height="128">
             <span class="name">Xin chào, {{user.fullname}} !!</span>

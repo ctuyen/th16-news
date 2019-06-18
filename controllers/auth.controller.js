@@ -24,7 +24,8 @@ module.exports = {
     res.render("auth/login", {
       layout: false
     });
-    if (req.headers.referer === 'http://localhost:3000/auth/register') {
+    let referer = req.headers.referer
+    if (referer === 'http://localhost:3000/auth/register' || referer === 'http://localhost:3000/search') {
       backURL = '/'
       return
     }
@@ -65,6 +66,7 @@ module.exports = {
               httpOnly: true
             });
             res.redirect(backURL);
+            console.log(backURL)
           })
           .catch(err => {
             throw err
@@ -83,7 +85,7 @@ module.exports = {
 
   postRegister: (req, res) => {
     let captcha = 'g-recaptcha-response';
-    var checkCaptcha;
+
     const data = {
       secret: '6LeZOakUAAAAALD2tkTC4lv706BkMzw7D1B2iSMQ',
       response: req.body[captcha]
@@ -93,7 +95,6 @@ module.exports = {
       // make a POST request
       method: 'post',
       data: querystring.stringify(data),
-      // and request token
       url: `https://www.google.com/recaptcha/api/siteverify`,
       // Set the content type header, so that we get the response in JSON
       headers: {
@@ -117,13 +118,16 @@ module.exports = {
       var checkEmail = authModel.checkEmail(req.body.email);
 
       checkEmail
-        .then(users => {
-          if (users.rowCount > 0) {
+        .then(async users => {
+          if (users.rowCount > 0 && !users.rows[0].isdelete) {
             res.render("auth/register", {
               errors: ["Địa chỉ mail đã tồn tại. Thử đăng nhập!"],
               layout: false
             });
             return;
+          }
+          if (users.rowCount > 0 && users.rows[0].isdelete) {
+            await userModel.delete(users.rows[0].id)
           }
 
           entity.password = bcrypt.hashSync(req.body.password, saltRounds);

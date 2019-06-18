@@ -23,7 +23,7 @@ module.exports = {
 
 
   delete: id => {
-    return db.delete("users", id);
+    return db.delete("users", "id", id);
   },
 
   allStaff: () => {
