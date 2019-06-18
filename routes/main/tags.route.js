@@ -9,26 +9,32 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/:idTag", async (req, res) => {
-  var user = userModel.single(req.signedCookies.userId)
-  user
-    .then(user => {
-      //have user
-      if (user.rowCount > 0) {
-        user = user.rows[0]
-        if (user.position == 'admin') {
-          user.admin = true
+  var user;
+  if (req.signedCookies.userId) {
+    userModel
+      .single(req.signedCookies.userId)
+      .then(data => {
+        if (data.rowCount > 0) {
+          user = data.rows[0];
+          if (user.position == "admin") {
+            user.admin = true;
+          }
+          if (user.position == "writer") {
+            user.writer = true;
+          }
+          if (user.position == "editor") {
+            user.editor = true;
+          }
+        } else {
+          user = false;
         }
-        if (user.position == 'writer') {
-          user.writer = true
-        }
-        if (user.position == 'editor') {
-          user.editor = true
-        }
-      } else {
-        user = false
-      }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
-      var cats = res.locals.lObjCategories;
+  var cats = res.locals.lObjCategories;
       var idTag = req.params.idTag;
       var page = req.query.page || 1;
       page = page < 1 ? 1 : page;
@@ -111,10 +117,6 @@ router.get("/:idTag", async (req, res) => {
           user
         });
       });
-    })
-    .catch(err => {
-      throw err
-    })
 });
 
 module.exports = router;
