@@ -81,8 +81,7 @@ module.exports = {
       `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.idEditor = ${id} 
-    and p.status = '${status}' and p.isDelete = false and c.isDelete = false
-    order by writingDate desc`
+    and p.status = '${status}' and p.isDelete = false and c.isDelete = false`
     );
   },
 
@@ -130,34 +129,34 @@ module.exports = {
     return db.load(sql);
   },
 
-  allWithStatus: status => {
+  allWithStatus: (idwriter,status) => {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
                 from posts as p, categories as c, users as u 
-                where p.idwriter=u.id and p.idcategory=c.id and p.status = '${status}' 
+                where p.idwriter=u.id and p.idcategory=c.id and p.status = '${status}' and idwriter = ${idwriter}
                 and p.isDelete = false and c.isDelete = false
                 order by writingDate desc`;
     return db.load(sql);
   },
 
-  allWithStatusTime: compare => {
+  allWithStatusTime: (idwriter,compare) => {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id
-    and p.isDelete = false and c.isDelete = false 
+    and p.isDelete = false and c.isDelete = false and idwriter = ${idwriter}
     and p.status = 'accept' and p.publicationDate ${compare} current_timestamp
     order by publicationDate desc`;
     return db.load(sql);
   },
 
-  numberByStatus: status => {
-    var sql = `select count(*) as num from posts where status = '${status}' and isDelete = false`;
+  numberByStatus:(idWriter, status) => {
+    var sql = `select count(*) as num from posts where  isDelete = false and status = '${status}' and idwriter = ${idWriter}`;
     return db.load(sql);
   },
 
-  numberByStatusTime: compare => {
+  numberByStatusTime: (idWriter,compare) => {
     var sql = `select count(*) as num 
     from posts 
-    where status = 'accept' and isDelete = false and publicationDate ${compare} current_timestamp`;
+    where status = 'accept' and isDelete = false and idwriter = ${idWriter} and publicationDate ${compare} current_timestamp`;
     return db.load(sql);
   },
   // pageByCat: (idcat, offset, limit) => {
