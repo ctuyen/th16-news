@@ -327,32 +327,32 @@ module.exports = {
   },
 
   changePremiumDate: (req, res, next) => {
-    console.log(req.body);
-
-    if (Date.parse(req.body.expirationdate)) {
-      var date = new Date(req.body.expirationdate).toLocaleString("en-US", {
-        timeZone: "UTC"
-      });
-      var currentdate = new Date().toLocaleString("en-US", {
-        timeZone: "UTC"
-      });
-      if (date < currentdate) {
-        date = currentdate;
+    userModel.single(req.body.id).then(data => {
+      if (Date.parse(data.rows[0].expirationdate)) {
+        var date = new Date(data.rows[0].expirationdate).toLocaleString("en-US", {
+          timeZone: "UTC"
+        });
+        var currentdate = new Date().toLocaleString("en-US", {
+          timeZone: "UTC"
+        });
+        if (date < currentdate) {
+          date = currentdate;
+        }
+      } else {
+        var date = new Date().toLocaleString("en-US", {
+          timeZone: "UTC"
+        });
       }
-    } else {
-      var date = new Date().toLocaleString("en-US", {
-        timeZone: "UTC"
-      });
-    }
-    // console.log(date);
-    userModel
-      .updateTimePremium(req.body.id, date)
-      .then(Post => {
-        res.redirect("back");
-      })
-      .catch(err => {
-        next(err);
-      });
+
+      userModel
+        .updateTimePremium(req.body.id, date)
+        .then(Post => {
+          res.redirect("back");
+        })
+        .catch(err => {
+          next(err);
+        });
+    });
   },
 
   deleteCategory: async (req, res, next) => {
