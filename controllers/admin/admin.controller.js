@@ -8,7 +8,6 @@ var userModel = require("../../models/users.model");
 var editorModel = require("../../models/editor.model");
 var tagPostModel = require("../../models/tagPost.model");
 
-
 module.exports = {
   admin: (req, res) => {
     res.redirect("/admin/category");
@@ -77,7 +76,7 @@ module.exports = {
       if (idCategory.rowCount > 0) {
         for (id of idCategory.rows) {
           let cate = await categoryModel.single(id.idcategory);
-          category.push(cate.rows[0].name);
+          if (cate.rows.length > 0) category.push(cate.rows[0].name);
         }
       }
 
@@ -136,11 +135,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -500,11 +501,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -534,11 +537,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -568,11 +573,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );
@@ -602,11 +609,13 @@ module.exports = {
         post.tags = temp;
 
         post.date = new Date(`${post.writingdate}`).toLocaleDateString(
-          "vi-VI", {
+          "vi-VI",
+          {
             day: "numeric",
             month: "short",
             year: "numeric"
-          }, {
+          },
+          {
             timeZone: "Asia/Saigon"
           }
         );

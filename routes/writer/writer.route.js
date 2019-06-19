@@ -3,7 +3,9 @@ const express = require('express')
 const controller = require('../../controllers/writer/writer.controller')
 const router = express.Router()
 
-
+router.get('/', (req,res)=>{
+    res.redirect('/writer/textEditor');
+});
 router.get('/textEditor', controller.textEditor);
 router.post('/textEditor', controller.addPost);
 

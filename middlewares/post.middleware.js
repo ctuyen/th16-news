@@ -11,7 +11,6 @@ module.exports.checkPremium = async (req, res, next) => {
       res.redirect("/auth/login");
       return;
     }
-
     var user = await authModel.checkId(req.signedCookies.userId);
     if (!user.rows[0].expirationdate) {
       res.redirect("/request-premium");

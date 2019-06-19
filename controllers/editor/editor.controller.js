@@ -169,9 +169,9 @@ module.exports = {
         postModel
           .allByIdEditor(req.signedCookies.userId, "accept")
           .then(async data => {
+            // console.log(data);
             var posts = data.rows;
             if (posts.length > 0) {
-              // console.log(data);
               for (var post of posts) {
                 var t = await postModel.loadTag(post.id);
                 var temp = [];
@@ -190,14 +190,15 @@ module.exports = {
                   { timeZone: "Asia/Saigon" }
                 );
               }
-              res.render("editor/list", {
-                posts,
-                lcCat,
-                isAccept: true,
-                titlePage: "Bài đã duyệt",
-                layout: "editor.hbs"
-              });
+              
             }
+            res.render("editor/list", {
+              posts,
+              lcCat,
+              isAccept: true,
+              titlePage: "Bài đã duyệt",
+              layout: "editor.hbs"
+            });
           })
           .catch(err => {
             console.log(err);

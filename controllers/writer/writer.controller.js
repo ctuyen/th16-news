@@ -9,7 +9,7 @@ module.exports = {
   },
 
   pending: (req, res) => {
-    var p = postModel.allWithStatus("draft");
+    var p = postModel.allWithStatus(req.signedCookies.userId,"draft");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
@@ -43,7 +43,7 @@ module.exports = {
   },
 
   denied: (req, res) => {
-    var p = postModel.allWithStatus("deny");
+    var p = postModel.allWithStatus(req.signedCookies.userId,"deny");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
@@ -77,7 +77,7 @@ module.exports = {
   },
 
   approved: (req, res) => {
-    var p = postModel.allWithStatusTime(">");
+    var p = postModel.allWithStatusTime(req.signedCookies.userId,">");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
@@ -111,7 +111,7 @@ module.exports = {
   },
 
   published: (req, res) => {
-    var p = postModel.allWithStatusTime("<=");
+    var p = postModel.allWithStatusTime(req.signedCookies.userId,"<=");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {

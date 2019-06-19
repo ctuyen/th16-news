@@ -27,7 +27,7 @@ module.exports = {
   topSlide: () => {
     var sql = `SELECT p.id, title, summary,urlthumbnail, p.idcategory, c.name category
     from posts p, categories c
-    where publicationDate between (CURRENT_TIMESTAMP - INTERVAL '7 day') and CURRENT_TIMESTAMP and p.idcategory=c.id and p.isDelete = false
+    where publicationDate between (CURRENT_TIMESTAMP - INTERVAL '7 day') and CURRENT_TIMESTAMP and p.idcategory=c.id and p.isDelete = false  and p.status='accept' and publicationDate < current_timestamp
     order by view desc
     limit 4`;
     return db.load(sql);
@@ -36,12 +36,12 @@ module.exports = {
     return db.load(
       `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
       from posts as p, categories as c, users as u 
-      where p.idwriter=u.id and p.idcategory=c.id and p.isDelete = false order by publicationDate desc limit ${limit}`
+      where p.idwriter=u.id and p.idcategory=c.id and p.isDelete = false  and p.status='accept' and publicationDate < current_timestamp order by publicationDate desc limit ${limit}`
     );
   },
   topView: limit => {
     return db.load(
-      `select p.*, c.name as category from posts as p, categories as c where p.idcategory = c.id and p.isDelete = false order by view desc limit ${limit}`
+      `select p.*, c.name as category from posts as p, categories as c where p.idcategory = c.id and p.isDelete = false  and p.status='accept' and publicationDate < current_timestamp order by view desc limit ${limit}`
     );
   },
   topWithCat: limit => {
@@ -51,7 +51,7 @@ module.exports = {
       FROM posts
         WHERE (idcategory, view) IN 
       (SELECT idcategory, max(view) as view FROM posts 
-      where status = 'accept' and isDelete = false
+      where status = 'accept' and isDelete = false and publicationDate < current_timestamp
         GROUP BY idcategory limit ${limit})
       group by idcategory, view) as t 
     where p.id=t.id and p.idcategory=c.id`;
@@ -64,8 +64,8 @@ module.exports = {
   allWithDetails: () => {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
-    where p.idwriter=u.id and p.idcategory=c.id and p.status = 'draft'
-    and p.isDelete = false and c.isDelete = false
+    where p.idwriter=u.id and p.idcategory=c.id and p.status = 'accept'
+    and p.isDelete = false and c.isDelete = false and publicationDate < current_timestamp
     order by publicationDate desc`;
     return db.load(sql);
   },
@@ -74,8 +74,8 @@ module.exports = {
       `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id and p.idCategory = ${id} 
-    and p.status = 'draft' and p.isDelete = false and c.isDelete = false
-    order by writingDate desc`
+    and p.status = 'draft' and p.isDelete = false and c.isDelete = false and publicationDate < current_timestamp
+    order by publicationDate desc`
     );
   },
 
@@ -186,7 +186,7 @@ module.exports = {
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
-        where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and (p.idcategory = ${idcat}`;
+        where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and status='accept' and publicationDate < current_timestamp and (p.idcategory = ${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or p.idcategory = ${cat.id} `;
@@ -201,7 +201,7 @@ module.exports = {
     var cats = d.rows;
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
         from posts as p, categories as c, users as u 
-        where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and (p.idcategory = ${idcat}
+        where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and status='accept' and publicationDate < current_timestamp and (p.idcategory = ${idcat}
           and p.id<>${idpost}
           `;
     if (cats.length > 0) {
@@ -215,7 +215,7 @@ module.exports = {
   numByCat: async idcat => {
     var d = await categoriesmodel.loadSonCat(idcat);
     var cats = d.rows;
-    var sql = `select count(*) as total from posts where isdelete = false and (idcategory=${idcat}`;
+    var sql = `select count(*) as total from posts where isdelete = false and status='accept' and publicationDate < current_timestamp and (idcategory=${idcat}`;
     if (cats.length > 0) {
       cats.forEach(cat => {
         sql += ` or idcategory = ${cat.id} `;
@@ -227,14 +227,14 @@ module.exports = {
   pageByTag: async (idTag, offset, limit) => {
     var sql = `select DISTINCT p.*, u.fullname as writer, c.name as category, u.urlavatar
     from posts p, tagpost as tp, categories as c, users as u 
-    where p.id=tp.idpost and p.idwriter=u.id and p.idcategory=c.id and tp.idtag=${idTag} and p.isdelete = false
+    where p.id=tp.idpost and p.idwriter=u.id and p.idcategory=c.id and tp.idtag=${idTag} and publicationDate < current_timestamp and p.isdelete = false and status='accept'
     order by publicationDate desc
     limit ${limit} offset ${offset}`;
     return db.load(sql);
   },
 
   numByTag: async idtag => {
-    var sql = `select count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idtag=${idtag} and p.isdelete = false`;
+    var sql = `select count(*) as total from posts p, tagpost tp where p.id=tp.idpost and idtag=${idtag} and p.isdelete = false and status='accept' and publicationDate < current_timestamp`;
 
     return db.load(sql);
   },
@@ -251,7 +251,7 @@ module.exports = {
             FROM posts GROUP BY id) p_search
       WHERE p_search.document @@ to_tsquery('${tt}')
       ORDER BY ts_rank(p_search.document, to_tsquery('${tt}')) DESC) as t
-    where p.id = t.pid and p.isdelete = false`;
+    where p.id = t.pid and p.isdelete = false and p.status='accept' and p.publicationDate < current_timestamp`;
     return db.load(sql);
   },
 
@@ -261,7 +261,7 @@ module.exports = {
   load3pre: () => {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
-    where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and ispremium=true and status ='accept'
+    where p.idwriter=u.id and p.idcategory=c.id and p.isdelete = false and ispremium=true and status ='accept' and publicationDate < current_timestamp
     order by publicationDate desc
     limit 3`;
     return db.load(sql);
