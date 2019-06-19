@@ -36,10 +36,8 @@ Danh sách sinh viên:
 - Hệ thống menu
 - Xem danh sách bài viết
 - Xem chi tiết bài viết
-- Tìm kiếm bài viết
-+ Full-text search
-- Đăng nhập
-+ Sử dụng SignedCookie, mã hóa bcrypt
+- Tìm kiếm bài viết: full-text search
+- Đăng nhập: sử dụng signedCookie, mã hóa bcrypt
 - Đăng kí
 
 ##### Phân hệ độc giả (subscriber)
@@ -83,5 +81,5 @@ Danh sách sinh viên:
 </details>
 
 
-link github: https://github.com/ctuyen/th16-news
-link heroku: http://saladnews.herokuapp.com/
+- link github: https://github.com/ctuyen/th16-news
+- link heroku: http://saladnews.herokuapp.com/
