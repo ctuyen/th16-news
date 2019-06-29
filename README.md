@@ -76,6 +76,7 @@ Danh sách sinh viên:
 - Quên mật khẩu, có mail OTP
 
 ##### Note: This app using MVC Web App (Server-Render).
+Cần sửa lại file .env với thông tin email, password để app có thể gửi mail OTP
 
 </p>
 </details>
