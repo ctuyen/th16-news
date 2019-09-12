@@ -143,11 +143,30 @@ module.exports = {
     return db.load(sql);
   },
 
+  allWithStatus2: (status) => {
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+                from posts as p, categories as c, users as u 
+                where p.idwriter=u.id and p.idcategory=c.id and p.status = '${status}'
+                and p.isDelete = false and c.isDelete = false
+                order by writingDate desc`;
+    return db.load(sql);
+  },
+
   allWithStatusTime: (idwriter,compare) => {
     var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
     from posts as p, categories as c, users as u 
     where p.idwriter=u.id and p.idcategory=c.id
     and p.isDelete = false and c.isDelete = false and idwriter = ${idwriter}
+    and p.status = 'accept' and p.publicationDate ${compare} current_timestamp
+    order by publicationDate desc`;
+    return db.load(sql);
+  },
+
+  allWithStatusTime2: (compare) => {
+    var sql = `select p.*, u.fullname as writer, c.name as category, u.urlavatar 
+    from posts as p, categories as c, users as u 
+    where p.idwriter=u.id and p.idcategory=c.id
+    and p.isDelete = false and c.isDelete = false
     and p.status = 'accept' and p.publicationDate ${compare} current_timestamp
     order by publicationDate desc`;
     return db.load(sql);

@@ -487,7 +487,7 @@ module.exports = {
   },
 
   pending: (req, res, next) => {
-    var p = postModel.allWithStatus("draft");
+    var p = postModel.allWithStatus2("draft");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
@@ -523,7 +523,7 @@ module.exports = {
   },
 
   denied: (req, res, next) => {
-    var p = postModel.allWithStatus("deny");
+    var p = postModel.allWithStatus2("deny");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
@@ -559,7 +559,7 @@ module.exports = {
   },
 
   approved: (req, res, next) => {
-    var p = postModel.allWithStatusTime(">");
+    var p = postModel.allWithStatusTime2(">");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
@@ -595,7 +595,7 @@ module.exports = {
   },
 
   published: (req, res, next) => {
-    var p = postModel.allWithStatusTime("<=");
+    var p = postModel.allWithStatusTime2("<=");
     p.then(async data => {
       var posts = data.rows;
       for (var post of posts) {
