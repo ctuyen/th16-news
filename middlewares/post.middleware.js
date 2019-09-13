@@ -12,19 +12,23 @@ module.exports.checkPremium = async (req, res, next) => {
       return;
     }
     var user = await authModel.checkId(req.signedCookies.userId);
-    if (!user.rows[0].expirationdate) {
-      res.redirect("/request-premium");
-      return;
-    } else {
-      let date = new Date(user.rows[0].expirationdate);
-      let dateNow = new Date();
-
-      if (dateNow.valueOf() >= date.valueOf()) {
+    if(user.rows[0].position == "user"){
+      if (!user.rows[0].expirationdate) {
         res.redirect("/request-premium");
         return;
+      } else {
+        let date = new Date(user.rows[0].expirationdate);
+        let dateNow = new Date();
+  
+        if (dateNow.valueOf() >= date.valueOf()) {
+          res.redirect("/request-premium");
+          return;
+        }
+        next();
       }
-
+    }else{
       next();
     }
+    
   }
 };
