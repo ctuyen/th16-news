@@ -75,12 +75,11 @@ Danh sách sinh viên:
 - Upload lên host (heroku)
 - Quên mật khẩu, có mail OTP
 
-##### Note: This app using MVC Web App (Server-Render).
-Cần sửa lại file .env với thông tin email, password để app có thể gửi mail OTP
-
 </p>
 </details>
 
+##### Note: This app using MVC Web App (Server-Render).
+Cần sửa lại file .env với thông tin email, password để app có thể gửi mail OTP
 
 - link github: https://github.com/ctuyen/th16-news
 - link heroku: http://saladnews.herokuapp.com/
